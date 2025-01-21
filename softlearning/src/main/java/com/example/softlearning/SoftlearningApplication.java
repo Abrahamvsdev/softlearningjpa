@@ -12,7 +12,7 @@ public class SoftlearningApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(SoftlearningApplication.class, args);
-
+        ///Iniciar Spring → Obtener repositorio → Operaciones CRUD → Mostrar resultados
         System.out.println("Printing all books with BookRepository");
 		
         var repo = context.getBean(JpaBookRepository.class);

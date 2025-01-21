@@ -17,10 +17,10 @@ public interface JpaBookRepository extends JpaRepository<BooksDTO, String> {
 
     public List<BooksDTO> findByName(String title);
 
-    @Query(value="SELECT b FROM BookDTO b WHERE b.name LIKE %:title%")
+    @Query(value="SELECT b FROM BooksDTO b WHERE b.name LIKE %:title%")
     public List<BooksDTO> findByPartialTitle(String title);
 
-    @Query(value="SELECT count(*) FROM BookDTO b WHERE b.name LIKE %:title%")
+    @Query(value="SELECT count(*) FROM BooksDTO b WHERE b.name LIKE %:title%")
     public Integer countByPartialTitle(String title);
 
     @Transactional
