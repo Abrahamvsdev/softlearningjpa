@@ -30,6 +30,7 @@ public class BooksTest {
             10.0,
             false,
             10.0
+            //TODO aqui deberia ir volumen, arreglar cuando tenga tiempo
         );
         System.out.println(b.getDetails());
 

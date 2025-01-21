@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 public class BooksDTO {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ident")
+    @Column(name = "id")
     private final String ident;
     @Column(name = "type") 
     private final String type;
