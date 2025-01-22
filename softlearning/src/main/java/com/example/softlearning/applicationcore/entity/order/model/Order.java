@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.core.entity.sharedkernel.model.exceptions.BuildException;
 import com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.Check;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions.Dimensions;
+import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.operations.Operation;
 
