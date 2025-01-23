@@ -4,7 +4,7 @@ Gestión de la persistencia a traves de Spring JPA.
 
 Para este proyecto utilizamos un DTO.
 
-En este proyecto trataremos::
+En este proyecto trataremos:
 
 * Separación de código para aportar una arquitectura limpia dividida en capas y entidades principales de negocio
 
