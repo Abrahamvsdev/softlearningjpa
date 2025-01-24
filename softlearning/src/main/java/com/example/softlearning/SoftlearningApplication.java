@@ -76,9 +76,6 @@ public class SoftlearningApplication {
         System.out.println("\n *****   Delete a Book  ***** \n");
 		repo.deleteById("1234");
 
-        System.out.println("\n *****   Books by id    ***** \n");
-		repo.findById("1234").ifPresent(System.out::println);
-
 		System.out.println("\n *****    Java Books avaliables: " + repo.countByPartialTitle("Java"));
 		
 	}
