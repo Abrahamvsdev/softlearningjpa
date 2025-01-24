@@ -11,10 +11,11 @@ import com.example.softlearning.infrastruture.persistence.jpa.JpaBookRepository;
 public class SoftlearningApplication {
 
 	public static void main(String[] args) {
+        //El run de abajo es el que inicia Spring, que entra en el contexto de la aplicación
 		ApplicationContext context = SpringApplication.run(SoftlearningApplication.class, args);
         ///Iniciar Spring → Obtener repositorio → Operaciones CRUD → Mostrar resultados
         System.out.println("Printing all books with BookRepository");
-		
+		//Obtener el repositorio de libros, que es un bean de Spring(como una semilla) y se obtiene del contexto, para meter en la variable repo
         var repo = context.getBean(JpaBookRepository.class);
 
         System.out.println("\n *****   Books in the repository   ***** \n");
