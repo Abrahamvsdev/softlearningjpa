@@ -1,8 +1,9 @@
 // Version: 1.0
 package com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions;
 
-import com.core.entity.sharedkernel.model.exceptions.BuildException;
+
 import com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.Check;
+import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 
 public class Dimensions {
     protected double weight = 0.0;

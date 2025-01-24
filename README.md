@@ -1,14 +1,14 @@
-# Spring_JPA_Intro
+# Spring_JPA
 
-Introduccion a la gestión de la persistencia a traves de Spring JPA.
+Gestión de la persistencia a traves de Spring JPA.
 
-Para este ejemplo utilizamos un DTO muy similar al que se utilizará en el proyecto final.
+Para este proyecto utilizamos un DTO.
 
-Se presenta en esta introducción:
+En este proyecto trataremos:
 
 * Separación de código para aportar una arquitectura limpia dividida en capas y entidades principales de negocio
 
-* Creación de un proyecto SpringWeb con las dependencias mínimas necesarias para una gestión básica
+* Creación de un proyecto SpringWeb con las dependencias necesarias para una gestión eficiente
 
 * Conexión a la capa de persistencia a través de application.properties en /resources
 
@@ -16,6 +16,6 @@ Se presenta en esta introducción:
 
 * Casos particulares donde los nombres de los atributos de las entidades Java no coincidan con los campos de las tablas en la persistencia (en este caso particular, MySQL)
 
-* Ejemplos en /resources/static de unos fragmentos de código sql para la creación y consultas de tablas básicas
+* Ejemplos en /resources/static de unos fragmentos de código sql para la creación y consultas de tablas
 
-Queda aun pendiente, el desacoplamiento con la capa JPA y la integración completa en el proyecto, con la gestión de los DTO's y los servicios Rest
+Queda aun pendiente, el desacoplamiento con la capa JPA, con la gestión de los DTO's y los servicios Rest

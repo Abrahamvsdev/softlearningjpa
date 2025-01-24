@@ -3,8 +3,8 @@ package com.example.softlearning.applicationcore.entity.sharedkernel.model.opera
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import com.core.entity.sharedkernel.model.exceptions.BuildException;
 import com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.Check;
+import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 
 
 public abstract class Operation {

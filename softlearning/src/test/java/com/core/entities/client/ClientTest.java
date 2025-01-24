@@ -1,9 +1,10 @@
 package com.core.entities.client;
 
-import com.core.entity.sharedkernel.model.exceptions.BuildException;
+
 import com.example.softlearning.applicationcore.entity.client.dtos.ClientDTO;
 import com.example.softlearning.applicationcore.entity.client.mappers.ClientMapper;
 import com.example.softlearning.applicationcore.entity.client.model.Client;
+import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 
 public class ClientTest {
     public static void main(String[]args) throws Exception{

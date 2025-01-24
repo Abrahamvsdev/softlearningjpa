@@ -1,9 +1,10 @@
 package com.core.entities.books;
 
-import com.core.entity.sharedkernel.model.exceptions.BuildException;
+
 import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
 import com.example.softlearning.applicationcore.entity.book.mappers.BooksMapper;
 import com.example.softlearning.applicationcore.entity.book.model.Books;
+import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
 
 public class BooksTest {

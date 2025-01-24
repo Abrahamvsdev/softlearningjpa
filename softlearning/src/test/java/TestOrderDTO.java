@@ -1,9 +1,9 @@
-import com.core.entity.sharedkernel.model.exceptions.BuildException;
 import com.example.softlearning.applicationcore.entity.order.dtos.OrderDTO;
 import com.example.softlearning.applicationcore.entity.order.mappers.OrderMapper;
 import com.example.softlearning.applicationcore.entity.order.model.Order;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
 
+import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 public class TestOrderDTO {
     public static void main(String[] args) throws Exception, BuildException, ServiceException {
 
