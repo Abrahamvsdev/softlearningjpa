@@ -11,7 +11,7 @@ import com.example.softlearning.applicationcore.entity.client.dtos.ClientDTO;
 import jakarta.transaction.Transactional;
 
 @Repository
-public class JpaClientRepository extends JpaRepository<ClientDTO, String> {
+public interface JpaClientRepository extends JpaRepository<ClientDTO, String> {
     public Optional<ClientDTO> findById(String id);
 
     public List<ClientDTO> findByName(String name);
