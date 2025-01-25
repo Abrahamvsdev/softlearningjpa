@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
 import com.example.softlearning.applicationcore.entity.client.dtos.ClientDTO;
 import com.example.softlearning.infrastruture.persistence.jpa.JpaClientRepository;
 
@@ -27,13 +26,33 @@ public class SoftlearningApplicationClient {
 		
         System.out.println("\n *****   Add a new Client  ***** \n");
         repo.save(new ClientDTO(
+            "Jose", 
+            "Perez", 
+            "email@gmail.com", 
+            "Calle falsa 123", 
+            "12345678A", 
+            "123456789", 
+            12, 
+            "Targeta", 
+            "asd", 
+            "02-03-1990"
         ));
 	
         System.out.println("\n *****   Client by partial name  ***** \n"); 
-		repo.findByPartialTitle("Cli").forEach(System.out::println);
+		repo.findByPartialName("Cli").forEach(System.out::println);
 		
         System.out.println("\n *****   Update a Java Book  ***** \n");
         repo.save(new ClientDTO(
+            "Jose", 
+            "Perez", 
+            "email@gmail.com", 
+            "Calle falsa 123", 
+            "12345678A", 
+            "123456789", 
+            12, 
+            "Targeta", 
+            "asd", 
+            "02-03-1990"
             ));
 
         System.out.println("\n *****   Client by id   ***** \n");
@@ -42,7 +61,7 @@ public class SoftlearningApplicationClient {
         System.out.println("\n *****   Delete a Client  ***** \n");
 		repo.deleteById("1234");
 
-		System.out.println("\n *****    Clients in our DB: " + repo.countByPartialTitle("Cli"));
+		System.out.println("\n *****    Clients in our DB: " + repo.countByPartialName("Cli"));
 		
 	}
 
