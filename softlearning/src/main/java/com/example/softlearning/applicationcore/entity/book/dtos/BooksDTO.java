@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 public class BooksDTO {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ident")
     private final String ident;
     @Column(name = "type") 
     private final String type;
@@ -52,8 +52,8 @@ public class BooksDTO {
 
 
     public BooksDTO(String ident,double price ,boolean delayPay,double discount, String type, String payMethod, String date,
-                String author, String isbn, String cover, int page, 
-                String genre, String editorial, double weight, double height, double width, boolean fragile, double length, double volume) {
+                String author, String isbn, String cover, int page, String genre, String editorial, 
+                double weight, double height, double width, boolean fragile, double length, double volume) {
 
                     this.ident = ident;
                     this.price = price;
