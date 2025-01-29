@@ -1,13 +1,11 @@
 package com.example.softlearning;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import com.example.softlearning.applicationcore.entity.client.dtos.ClientDTO;
 import com.example.softlearning.infrastruture.persistence.jpa.JpaClientRepository;
 
-@SpringBootApplication
 public class SoftlearningApplicationClient {
 
 	public static void main(String[] args) {

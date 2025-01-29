@@ -1,0 +1,8 @@
+TestSerializerOrder.class
+TestSerializerBook.class
+TestOrder.class
+TestOrderDTO.class
+TestOrderGrande.class
+com\core\entities\books\BooksTest.class
+com\core\entities\client\ClientTest.class
+TestSerializerClient.class
