@@ -8,7 +8,7 @@ import com.example.softlearning.applicationcore.entity.client.dtos.ClientDTO;
 import com.example.softlearning.infrastruture.persistence.jpa.JpaClientRepository;
 
 @SpringBootApplication
-public class SoftlearningApplicationClient {
+public class SoftlearningApplicationClient extends ServletInitializer {
 
 	public static void main(String[] args) {
         //El run de abajo es el que inicia Spring, que entra en el contexto de la aplicación
