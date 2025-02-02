@@ -1,4 +1,4 @@
-create database softlearningtest;
+create database softlearning;
 
 create table softlearningtest.clients (
         code int not null,
