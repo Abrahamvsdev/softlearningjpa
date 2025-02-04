@@ -11,45 +11,46 @@ public class BooksDTO {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ident")
-    private final String ident;
+    private String ident;
     @Column(name = "type") 
-    private final String type;
+    private String type;
     @Column(name = "paymethod") 
-    private final String payMethod; 
+    private String payMethod; 
     @Column(name = "date") 
-    private final String date; 
+    private String date; 
     @Column(name = "author") 
-    private final String author; 
+    private String author; 
     @Column(name = "isbn") 
-    private final String isbn;
+    private String isbn;
     @Column(name = "cover")  
-    private final String cover;
+    private String cover;
     @Column(name = "genre")  
-    private final String genre; 
+    private String genre; 
     @Column(name = "editorial") 
-    private final String editorial;
+    private String editorial;
     @Column(name = "price") 
-    private final double price;
+    private double price;
     @Column(name = "discount") 
-    private final double discount;
+    private double discount;
     @Column(name = "weight") 
-    private final double weight;
+    private double weight;
     @Column(name = "height") 
-    private final double height;
+    private double height;
     @Column(name = "width") 
-    private final double width;
+    private double width;
     @Column(name = "length") 
-    private final double length;
+    private double length;
     @Column(name = "volume") 
-    private final double volume;
+    private double volume;
     @Column(name = "delaypay") 
-    private final boolean delayPay;
+    private boolean delayPay;
     @Column(name = "fragile")
-    private final boolean fragile;
+    private boolean fragile;
     @Column(name = "page")
-    private final int page;
+    private int page;
 
-
+    protected BooksDTO() {
+    }
 
     public BooksDTO(String ident,double price ,boolean delayPay,double discount, String type, String payMethod, String date,
                 String author, String isbn, String cover, int page, String genre, String editorial, 
