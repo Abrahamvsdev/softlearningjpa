@@ -1,7 +1,7 @@
-package com.example.softlearning.applicationcore.entity.client.appservices;
+// package com.example.softlearning.applicationcore.entity.client.appservices;
 
-public class getClientByIdController {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
-    }
-}
+// public class getClientByIdController {
+//     public static void main(String[] args) {
+//         System.out.println("Hello world!");
+//     }
+// }

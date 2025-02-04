@@ -82,6 +82,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <start-class>com.example.softlearning.SoftlearningApplication</start-class>
+                </configuration>
             </plugin>
         </plugins>
     </build>

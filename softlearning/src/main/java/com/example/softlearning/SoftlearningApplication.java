@@ -24,7 +24,7 @@ public class SoftlearningApplication {
         repo.findAll().forEach(System.out::println);
 	
         System.out.println("\n *****   Java Books by tittle  ***** \n");
-		repo.findByName("java").forEach(System.out::println); 
+		repo.findByIdent("1234").forEach(System.out::println); 
 		
         System.out.println("\n *****   Add a new Java Book  ***** \n");
         repo.save(new BooksDTO(
@@ -49,7 +49,7 @@ public class SoftlearningApplication {
             0));
 	
         System.out.println("\n *****   Java Books by partial tittle  ***** \n"); 
-		repo.findByPartialTitle("java").forEach(System.out::println);
+		repo.findByPartialIdent("12").forEach(System.out::println);
 		
         System.out.println("\n *****   Update a Java Book  ***** \n");
         repo.save(new BooksDTO(

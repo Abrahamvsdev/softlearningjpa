@@ -15,14 +15,14 @@ import jakarta.transaction.Transactional;
 public interface JpaBookRepository extends JpaRepository<BooksDTO, String> {
     public Optional<BooksDTO> findById(String id);
 
-    public List<BooksDTO> findByName(String title);
+    public List<BooksDTO> findByIdent(String title);
 
     //la anotación @Query permite hacer consultas personalizadas
     //Se puede hacer consultas con JPQL (Java Persistence Query Language)
-    @Query(value="SELECT b FROM BooksDTO b WHERE b.name LIKE %:title%")
-    public List<BooksDTO> findByPartialTitle(String title);
+    @Query(value="SELECT b FROM BooksDTO b WHERE b.ident LIKE %:title%")
+    public List<BooksDTO> findByPartialIdent(String title);
 
-    @Query(value="SELECT count(*) FROM BooksDTO b WHERE b.name LIKE %:title%")
+    @Query(value="SELECT count(*) FROM BooksDTO b WHERE b.ident LIKE %:title%")
     //devuelve Integer con I mayúscula, preguntar, y 
     public Integer countByPartialTitle(String title);
 
