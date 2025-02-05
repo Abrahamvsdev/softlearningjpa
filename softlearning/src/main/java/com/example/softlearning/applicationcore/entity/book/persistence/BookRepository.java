@@ -13,18 +13,17 @@ public interface BookRepository {
 
     public List<BooksDTO> findByIdent(String title);
 
-    
     public List<BooksDTO> findByPartialIdent(String title);
 
-    
     public Integer countByPartialTitle(String title);
 
     public BooksDTO save(BooksDTO book);
 
     public void deleteById(String id);
 
-	
-		
+    public List<BooksDTO> findAll();
+
+    
 	}
 
 

@@ -16,5 +16,6 @@ public interface ClientRepository {
     public Integer countByPartialName(String name);
 
     public ClientDTO save(ClientDTO client);
+    
     public void deleteById(String id);
 }

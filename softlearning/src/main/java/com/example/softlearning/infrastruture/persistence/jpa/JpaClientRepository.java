@@ -13,17 +13,27 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface JpaClientRepository extends JpaRepository<ClientDTO, String>, ClientRepository {
+
+    @Override
+    public List<ClientDTO> findAll();
+
+    @Override
     public Optional<ClientDTO> findById(String id);
 
+    @Override
     public List<ClientDTO> findByName(String name);
 
+    @Override
     @Query(value="SELECT c FROM ClientDTO c WHERE c.name LIKE %:name%")
     public List<ClientDTO> findByPartialName(String name);
 
+    @Override
     @Query(value="SELECT count(*) FROM ClientDTO c WHERE c.name LIKE %:name%")
     public Integer countByPartialName(String name);
-
+    
     @Transactional
+    @Override
     public ClientDTO save(ClientDTO client);
+    @Override
     public void deleteById(String id);
 }
