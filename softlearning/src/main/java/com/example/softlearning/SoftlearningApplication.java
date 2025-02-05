@@ -2,16 +2,15 @@ package com.example.softlearning;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class SoftlearningApplication {
 
     public static void main(String[] args) {
         //El run de abajo es el que inicia Spring, que entra en el contexto de la aplicación
-        ApplicationContext context = SpringApplication.run(SoftlearningApplication.class, args);
+        SpringApplication.run(SoftlearningApplication.class, args);
         ///Iniciar Spring → Obtener repositorio → Operaciones CRUD → Mostrar resultados
-        System.out.println("** SPRINGBOOT INICIADO **");
+        System.out.println("** SPRING INICIADO **");
 
         //     System.out.println("Printing all books with BookRepository");
         // 	//Obtener el repositorio de libros, que es un bean de Spring(como una semilla) y se obtiene del contexto, para meter en la variable repo
