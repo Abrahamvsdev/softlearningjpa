@@ -7,11 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.softlearning.applicationcore.entity.client.dtos.ClientDTO;
+import com.example.softlearning.applicationcore.entity.client.persistence.ClientRepository;
 
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface JpaClientRepository extends JpaRepository<ClientDTO, String> {
+public interface JpaClientRepository extends JpaRepository<ClientDTO, String>, ClientRepository {
     public Optional<ClientDTO> findById(String id);
 
     public List<ClientDTO> findByName(String name);

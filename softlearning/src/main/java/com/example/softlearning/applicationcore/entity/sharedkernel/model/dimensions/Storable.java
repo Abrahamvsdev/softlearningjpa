@@ -1,4 +1,4 @@
-package com.example.softlearning.applicationcore.entity.sharedkernel.storable;
+package com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions;
 
 public interface Storable {
     

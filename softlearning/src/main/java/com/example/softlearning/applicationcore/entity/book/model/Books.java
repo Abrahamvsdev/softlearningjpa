@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 
 import com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.Check;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions.Dimensions;
+import com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions.Storable;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.products.Product;
-import com.example.softlearning.applicationcore.entity.sharedkernel.storable.Storable;
 
 
 public class Books extends Product implements Storable {

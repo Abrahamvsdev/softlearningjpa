@@ -8,11 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
+import com.example.softlearning.applicationcore.entity.book.persistence.BookRepository;
 
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface JpaBookRepository extends JpaRepository<BooksDTO, String> {
+public interface JpaBookRepository extends JpaRepository<BooksDTO, String>, BookRepository {
     public Optional<BooksDTO> findById(String id);
 
     public List<BooksDTO> findByIdent(String title);
