@@ -9,9 +9,9 @@ import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
 
 public interface BookRepository {
 
-    public Optional<BooksDTO> findById(String id);
+    public Optional<BooksDTO> findByIdent(String ident);
 
-    public List<BooksDTO> findByIdent(String title);
+    public List<BooksDTO> findByTitle(String title);
 
     public List<BooksDTO> findByPartialIdent(String title);
 
@@ -19,7 +19,7 @@ public interface BookRepository {
 
     public BooksDTO save(BooksDTO book);
 
-    public void deleteById(String id);
+    public void deleteByIdent(String ident);
 
     public List<BooksDTO> findAll();
 

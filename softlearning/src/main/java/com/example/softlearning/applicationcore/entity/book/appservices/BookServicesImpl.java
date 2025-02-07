@@ -1,7 +1,9 @@
 package com.example.softlearning.applicationcore.entity.book.appservices;
 
+import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import com.example.softlearning.applicationcore.entity.book.persistence.BookRepository;
 import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
 import com.example.softlearning.applicationcore.entity.book.mappers.BooksMapper;
@@ -20,9 +22,23 @@ public class BookServicesImpl implements BookServices {
 
     // ****** Implementing the business logic methods and common featues (clean code design) ******
 
+    // public Optional<BooksDTO> findByIdent(String ident);
+
+    // public List<BooksDTO> findByTitle(String title);
+
+    // public List<BooksDTO> findByPartialIdent(String title);
+
+    // public Integer countByPartialTitle(String title);
+
+    // public BooksDTO save(BooksDTO book);
+
+    // public void deleteByIdent(String ident);
+
+    // public List<BooksDTO> findAll();
+
     //Esta parece que está dentor de las demás, como yo hacia con los checks, reusando código
-    protected BooksDTO getDTO(String title)  {
-        return BookRepository.findByIdent("title").orElse(null);
+    protected Optional BooksDTO getDTO(String ident) { 
+        return BookRepository.findByIdent(ident);
     }
 
 
@@ -73,41 +89,41 @@ public class BookServicesImpl implements BookServices {
 
     @Override
     public String getByIdToJson(int id) throws ServiceException {
-        return SerializersCatalog.getInstance(Serializers.BOOK_JSON)
+        return SerializersCatalog.getInstance(Serializers.JSON_BOOK)
                 .serialize(this.getById(id));
     }
 
 
     @Override
     public String getByIdToXml(int id) throws ServiceException {
-        return SerializersCatalog.getInstance(Serializers.BOOK_XML)
-                .serialize(this.getById(id));
+        return SerializersCatalog.getInstance(Serializers.XML_BOOK)
+                .serialize(this.getById("id"));
     }
 
     
     @Override
     public String addFromJson(String book) throws ServiceException {
-        this.serializer = SerializersCatalog.getInstance(Serializers.BOOK_JSON);
+        this.serializer = SerializersCatalog.getInstance(Serializers.JSON_BOOK);
         return serializer.serialize(this.newBook(book));
     }
 
 
     @Override
     public String addFromXml(String book) throws ServiceException {
-        this.serializer = SerializersCatalog.getInstance(Serializers.BOOK_XML);
+        this.serializer = SerializersCatalog.getInstance(Serializers.XML_BOOK);
         return serializer.serialize(this.newBook(book));
     }
 
     @Override
     public String updateOneFromJson(String book) throws ServiceException {
-        this.serializer = SerializersCatalog.getInstance(Serializers.BOOK_JSON);
+        this.serializer = SerializersCatalog.getInstance(Serializers.JSON_BOOK);
         return serializer.serialize(this.updateBook(book));
     }
 
 
     @Override
     public String updateOneFromXml(String book) throws ServiceException {
-        this.serializer = SerializersCatalog.getInstance(Serializers.BOOK_XML);
+        this.serializer = SerializersCatalog.getInstance(Serializers.XML_BOOK);
         return serializer.serialize(this.updateBook(book));
     }
 

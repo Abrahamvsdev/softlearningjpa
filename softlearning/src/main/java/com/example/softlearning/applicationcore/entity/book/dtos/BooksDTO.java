@@ -12,7 +12,7 @@ public class BooksDTO {
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ident")
     private String ident;
-    @Column(name = "type") 
+    @Column(name = "title") //el type será el title
     private String type;
     @Column(name = "paymethod") 
     private String payMethod; 
