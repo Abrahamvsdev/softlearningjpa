@@ -6,11 +6,11 @@ import com.example.softlearning.applicationcore.entity.sharedkernel.model.except
 
 @Service
 public interface BookServices {
-    public String getByIdToJson (int id) throws ServiceException;
-    public String getByIdToXml (int id) throws ServiceException;
+    public String getByIdentToJson (String ident) throws ServiceException;
+    public String getByIdentToXml (String ident) throws ServiceException;
     public String addFromJson (String book) throws ServiceException;
     public String addFromXml (String book) throws ServiceException;
     public String updateOneFromJson(String book) throws ServiceException;
     public String updateOneFromXml(String book) throws ServiceException;
-    public void deleteById(int id) throws ServiceException;
+    public void deleteByIdent(String ident) throws ServiceException;
 }

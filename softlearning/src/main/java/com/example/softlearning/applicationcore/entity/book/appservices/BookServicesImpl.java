@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import com.example.softlearning.applicationcore.entity.book.persistence.BookRepository;
 import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
 import com.example.softlearning.applicationcore.entity.book.mappers.BooksMapper;
+import com.example.softlearning.applicationcore.entity.book.model.Books;
 import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.Serializer;
 import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.Serializers;
 import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.SerializersCatalog;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
+
 
 @Controller
 public class BookServicesImpl implements BookServices {
@@ -20,7 +22,6 @@ public class BookServicesImpl implements BookServices {
     private BookRepository bookRepository;
     private Serializer<BooksDTO> serializer;
 
-    // ****** Implementing the business logic methods and common featues (clean code design) ******
 
     // public Optional<BooksDTO> findByIdent(String ident);
 
@@ -36,17 +37,17 @@ public class BookServicesImpl implements BookServices {
 
     // public List<BooksDTO> findAll();
 
-    //Esta parece que está dentor de las demás, como yo hacia con los checks, reusando código
-    protected Optional BooksDTO getDTO(String ident) { 
-        return BookRepository.findByIdent(ident);
+    
+    protected BooksDTO getDTO(String ident) { 
+        return bookRepository.findByIdent(ident).orElse(null); // El Optional está definido en el "BookRepository", que está instanciado arriba
     }
 
 
-    protected BooksDTO getByIdent(String title) throws ServiceException {
-        BooksDTO bdto = this.getDTO("title");
+    protected BooksDTO getByIdent(String ident) throws ServiceException {
+        BooksDTO bdto = this.getDTO("ident");
 
         if ( bdto == null ) {
-            throw new ServiceException("book " + "title" + " not found");
+            throw new ServiceException("book " + ident + " not found");
         }
         return bdto;
     }
@@ -87,17 +88,17 @@ public class BookServicesImpl implements BookServices {
 
     // ****** Implementing the interface methods ******
 
-    @Override
-    public String getByIdToJson(int id) throws ServiceException {
+    
+    public String getByIdentToJson(String ident) throws ServiceException {
         return SerializersCatalog.getInstance(Serializers.JSON_BOOK)
-                .serialize(this.getById(id));
+                .serialize(this.getByIdent(ident));
     }
 
 
     @Override
-    public String getByIdToXml(int id) throws ServiceException {
+    public String getByIdentToXml(String ident) throws ServiceException {
         return SerializersCatalog.getInstance(Serializers.XML_BOOK)
-                .serialize(this.getById("id"));
+                .serialize(this.getByIdent(ident));
     }
 
     
@@ -126,15 +127,22 @@ public class BookServicesImpl implements BookServices {
         this.serializer = SerializersCatalog.getInstance(Serializers.XML_BOOK);
         return serializer.serialize(this.updateBook(book));
     }
+    
+    @Override
+    public String getByIdentToXml(String ident) throws ServiceException {
+        return SerializersCatalog.getInstance(Serializers.XML_BOOK).serialize(this.getByIdent(ident));
+    }
 
 
     @Override
-    public void deleteById(int id) throws ServiceException {
+    public void deleteByIdent(String ident) throws ServiceException {
         try {
-            this.getById(id);
-            bookRepository.deleteById(id);
+            this.getByIdent("ident");
+            bookRepository.deleteByIdent("ident");
         } catch (ServiceException e) {
             throw e;
         }
     }
+
+    
 }
