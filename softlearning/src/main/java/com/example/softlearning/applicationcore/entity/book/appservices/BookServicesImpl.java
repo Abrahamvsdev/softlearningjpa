@@ -64,13 +64,13 @@ public class BookServicesImpl implements BookServices {
     }
 
 
-    protected BooksDTO newBook(String book) throws ServiceException, BuildException {
+    protected BooksDTO newBook(String book) throws ServiceException {
         BooksDTO bdto = this.checkInputData(book);
         
         if (this.getDTO(bdto.getIdent()) == null) {
             return bookRepository.save(bdto);
         } 
-        throw new BuildException ("book " + bdto.getIdent() + " already exists");
+        throw new ServiceException ("book " + bdto.getIdent() + " already exists");
     }
 
 
@@ -94,15 +94,7 @@ public class BookServicesImpl implements BookServices {
                 .serialize(this.getByIdent(ident));
     }
 
-
-    @Override
-    public String getByIdentToXml(String ident) throws ServiceException {
-        return SerializersCatalog.getInstance(Serializers.XML_BOOK)
-                .serialize(this.getByIdent(ident));
-    }
-
     
-    @Override
     public String addFromJson(String book) throws ServiceException {
         this.serializer = SerializersCatalog.getInstance(Serializers.JSON_BOOK);
         return serializer.serialize(this.newBook(book));
