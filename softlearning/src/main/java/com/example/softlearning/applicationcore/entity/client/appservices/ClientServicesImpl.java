@@ -64,17 +64,17 @@ public class ClientServicesImpl implements ClientServices {
     protected ClientDTO newClient(String client) throws ServiceException {
         ClientDTO cdto = this.checkInputData(client);
         
-        if (this.getDTO(cdto.getId()) == null) {
+        if (this.getDTO(cdto.getDni()) == null) { 
             return clientRepository.save(cdto);
         } 
-        throw new ServiceException ("client " + cdto.getId() + " already exists");
+        throw new ServiceException ("client " + cdto.getDni() + " already exists");
     }
 
 
     protected ClientDTO updateClient(String client) throws ServiceException {
         try {
             ClientDTO cdto = this.checkInputData(client);
-            this.getById(cdto.getIdent());
+            this.getById(cdto.getDni()); //ptrguntar a Jose si lo que estamos haciendo aquí es correcto, creo que en la variable del DTO del cliente le indico al this que lo pille por Dni
             return clientRepository.save(cdto);
         } catch (ServiceException e) {
             throw e;
@@ -118,8 +118,8 @@ public class ClientServicesImpl implements ClientServices {
     }
     
     @Override
-    public String getByIdToXml(String ident) throws ServiceException {
-        return SerializersCatalog.getInstance(Serializers.XML_CLIENT).serialize(this.getById(client));
+    public String getByIdToXml(String id) throws ServiceException {
+        return SerializersCatalog.getInstance(Serializers.XML_CLIENT).serialize(this.getById(id));
     }
 
 

@@ -9,9 +9,9 @@ import com.example.softlearning.applicationcore.entity.sharedkernel.model.except
 public interface ClientServices {
     public String getByIdToJson (String id) throws ServiceException;
     public String getByIdToXml (String id) throws ServiceException;
-    public String addFromJson (String book) throws ServiceException;
-    public String addFromXml (String book) throws ServiceException;
-    public String updateOneFromJson(String book) throws ServiceException;
-    public String updateOneFromXml(String book) throws ServiceException;
+    public String addFromJson (String client) throws ServiceException;
+    public String addFromXml (String client) throws ServiceException;
+    public String updateOneFromJson(String client) throws ServiceException;
+    public String updateOneFromXml(String client) throws ServiceException;
     public void deleteById(String id) throws ServiceException;
 }
