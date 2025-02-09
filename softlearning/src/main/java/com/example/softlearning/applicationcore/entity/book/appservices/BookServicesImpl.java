@@ -1,17 +1,14 @@
 package com.example.softlearning.applicationcore.entity.book.appservices;
 
-import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.example.softlearning.applicationcore.entity.book.persistence.BookRepository;
 import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
 import com.example.softlearning.applicationcore.entity.book.mappers.BooksMapper;
-import com.example.softlearning.applicationcore.entity.book.model.Books;
+import com.example.softlearning.applicationcore.entity.book.persistence.BookRepository;
 import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.Serializer;
 import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.Serializers;
 import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.SerializersCatalog;
-import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
 
 

@@ -11,11 +11,11 @@ public interface BookRepository {
 
     public Optional<BooksDTO> findByIdent(String ident);
 
-    public List<BooksDTO> findByTitle(String title);
+    public List<BooksDTO> findByType(String type);
 
-    public List<BooksDTO> findByPartialIdent(String title);
+    public List<BooksDTO> findByPartialType(String ttype);
 
-    public Integer countByPartialTitle(String title);
+    public Integer countByPartialType(String type);
 
     public BooksDTO save(BooksDTO book);
 

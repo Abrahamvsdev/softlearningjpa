@@ -7,7 +7,7 @@ import com.example.softlearning.applicationcore.entity.client.dtos.ClientDTO;
 
 public interface ClientRepository {
 
-    public Optional<ClientDTO> findById(String id); //Esto en teoría debería ser el Dni según la anotación
+    public Optional<ClientDTO> findByDni(String dni); 
 
     public List<ClientDTO> findByName(String name);
 

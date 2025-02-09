@@ -36,7 +36,7 @@ public class ClientServicesImpl implements ClientServices {
 
     
     protected ClientDTO getDTO(String id) { 
-        return clientRepository.findById(id).orElse(null); // El Optional está definido en el "ClientRepository", que está instanciado arriba
+        return clientRepository.findByDni(id).orElse(null); // El Optional está definido en el "ClientRepository", que está instanciado arriba
     }
 
 

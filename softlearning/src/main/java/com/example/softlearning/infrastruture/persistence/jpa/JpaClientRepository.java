@@ -17,8 +17,8 @@ public interface JpaClientRepository extends JpaRepository<ClientDTO, String>, C
     @Override
     public List<ClientDTO> findAll();
 
-    @Override
-    public Optional<ClientDTO> findById(String id);
+    
+    public Optional<ClientDTO> findByDni(String dni);
 
     @Override
     public List<ClientDTO> findByName(String name);
