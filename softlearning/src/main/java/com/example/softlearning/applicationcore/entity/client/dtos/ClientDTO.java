@@ -9,7 +9,6 @@ import jakarta.persistence.Table;
 @Table(name = "clients")
 public class ClientDTO {
 
-    @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "name")
     private final String name;
@@ -19,7 +18,8 @@ public class ClientDTO {
     private final String email;
     @Column(name = "address")
     private final String address;
-    @Column(name = "dni")
+    @Id
+    @Column(name = "dni") //El dni será mi ID
     private final String dni;
     @Column(name = "number")
     private final String number;
