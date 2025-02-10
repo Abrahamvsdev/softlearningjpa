@@ -11,26 +11,29 @@ public class ClientDTO {
 
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "name")
-    private final String name;
+    private String name;
     @Column(name = "surname")
-    private final String surname;
+    private String surname;
     @Column(name = "email")
-    private final String email;
+    private String email;
     @Column(name = "address")
-    private final String address;
+    private String address;
     @Id
     @Column(name = "dni") //El dni será mi ID
-    private final String dni;
+    private String dni;
     @Column(name = "number")
-    private final String number;
+    private String number;
     @Column(name = "paymentMode")
-    private final String paymentMode;
+    private String paymentMode;
     @Column(name = "membershipLevel")
-    private final String membershipLevel;
+    private String membershipLevel;
     @Column(name = "registrationDate")
-    private final String registrationDate;
+    private String registrationDate;
     @Column(name = "antiquity")
-    private final int antiquity;
+    private int antiquity;
+
+    protected ClientDTO() {
+    }
 
     public ClientDTO(String name, String surname, String email, String address, String dni, String number, int antiquity,
             String paymentMode, String membershipLevel, String registrationDate) {
