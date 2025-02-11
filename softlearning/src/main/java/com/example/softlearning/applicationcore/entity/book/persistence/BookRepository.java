@@ -19,9 +19,9 @@ public interface BookRepository {
 
     public BooksDTO save(BooksDTO book);
 
-    public void deleteByIdent(String ident);
+    public void deleteById(String id);
 
-    public List<BooksDTO> findAll();
+    //public List<BooksDTO> findAll();
 
     
 	}

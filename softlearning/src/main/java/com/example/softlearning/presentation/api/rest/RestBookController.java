@@ -1,5 +1,6 @@
 package com.example.softlearning.presentation.api.rest;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.softlearning.applicationcore.entity.book.appservices.BookServices;
+import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
+import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.Serializers;
+import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.SerializersCatalog;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
 
 @RestController
@@ -29,18 +33,18 @@ public class RestBookController {
     BookServices bookServices;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getJsonBookById(@PathVariable(value = "id") Integer id) {
+    public ResponseEntity<String> getJsonBookById(@PathVariable(value = "id") String id) {
         try {
-            return ResponseEntity.ok(bookServices.getByIdentToJson("ident"));
+            return ResponseEntity.ok(bookServices.getByIdentToJson(id));
         } catch (ServiceException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<String> getXmlBookById(@PathVariable(value = "id") Integer id) {
+    public ResponseEntity<String> getXmlBookById(@PathVariable(value = "id") String id) {
         try {
-            return ResponseEntity.ok(bookServices.getByIdentToXml("ident"));
+            return ResponseEntity.ok(bookServices.getByIdentToXml(id));
         } catch (ServiceException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
@@ -65,7 +69,7 @@ public class RestBookController {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateBookFromJson(@PathVariable(value = "id") Integer id,
+    public ResponseEntity<String> updateBookFromJson(@PathVariable(value = "id") String id,
             @RequestBody String bookdata) {
         try {
             return ResponseEntity.ok(bookServices.updateOneFromJson(bookdata));
@@ -75,7 +79,7 @@ public class RestBookController {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<String> updateBookFromXml(@PathVariable(value = "id") Integer id,
+    public ResponseEntity<String> updateBookFromXml(@PathVariable(value = "id") String id,
             @RequestBody String bookdata) {
         try {
             return ResponseEntity.ok(bookServices.updateOneFromXml(bookdata));
@@ -86,12 +90,23 @@ public class RestBookController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteByID(@PathVariable(value = "id") Integer id) {
+    public ResponseEntity<String> deleteById(@PathVariable(value = "id") String id) {
         try {
-            bookServices.deleteByIdent("ident");
+            bookServices.deleteByIdent(id);//Que no será ID, si no ident
             return ResponseEntity.ok().build();
         } catch (ServiceException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
     }
+
+//     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+// public ResponseEntity<String> findAll() { ///No se si es necesario el try catch, no busco algo en concreto, sino una lista, puede fallar si está vacia
+//     try {
+//         List<BooksDTO> books = bookServices.findAll();
+//         String json = SerializersCatalog.getInstance(Serializers.JSON_BOOK).serialize(books);
+//         return ResponseEntity.ok(json);
+//     } catch (ServiceException e) {
+//         return ResponseEntity.status(400).body(e.getMessage());
+//     }
+// }
 }

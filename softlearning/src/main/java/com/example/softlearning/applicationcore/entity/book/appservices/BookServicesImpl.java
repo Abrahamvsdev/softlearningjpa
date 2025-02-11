@@ -41,7 +41,7 @@ public class BookServicesImpl implements BookServices {
 
 
     protected BooksDTO getByIdent(String ident) throws ServiceException {
-        BooksDTO bdto = this.getDTO("ident");
+        BooksDTO bdto = this.getDTO(ident);
 
         if ( bdto == null ) {
             throw new ServiceException("book " + ident + " not found");
@@ -126,12 +126,21 @@ public class BookServicesImpl implements BookServices {
     @Override
     public void deleteByIdent(String ident) throws ServiceException {
         try {
-            this.getByIdent("ident");
-            bookRepository.deleteByIdent("ident");
+            this.getByIdent(ident);
+            bookRepository.deleteById(ident);
         } catch (ServiceException e) {
             throw e;
         }
     }
+
+    // @Override
+    // public List<BooksDTO> findAll() throws ServiceException {
+    //     try {
+    //         return bookRepository.findAll();
+    //     } catch (Exception e) {
+    //         throw new ServiceException("Error obtaining the book list " + e.getMessage());
+    //     }
+    // }
 
     
 }

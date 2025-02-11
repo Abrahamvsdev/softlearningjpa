@@ -35,5 +35,5 @@ public interface JpaClientRepository extends JpaRepository<ClientDTO, String>, C
     @Override
     public ClientDTO save(ClientDTO client);
     @Override
-    public void deleteById(String id);
+    public void deleteById(String dni);
 }

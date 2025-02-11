@@ -2,6 +2,7 @@ package com.example.softlearning.applicationcore.entity.client.appservices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import com.example.softlearning.applicationcore.entity.client.dtos.ClientDTO;
 import com.example.softlearning.applicationcore.entity.client.mappers.ClientMapper;
@@ -12,7 +13,7 @@ import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
 
 
-@Controller
+@Service
 public class ClientServicesImpl implements ClientServices {
 
     @Autowired
@@ -35,16 +36,16 @@ public class ClientServicesImpl implements ClientServices {
     // public List<ClientDTO> findAll();
 
     
-    protected ClientDTO getDTO(String id) { 
-        return clientRepository.findByDni(id).orElse(null); // El Optional está definido en el "ClientRepository", que está instanciado arriba
+    protected ClientDTO getDTO(String dni) { 
+        return clientRepository.findByDni(dni).orElse(null); // El Optional está definido en el "ClientRepository", que está instanciado arriba
     }
 
 
-    protected ClientDTO getById(String id) throws ServiceException {
-        ClientDTO cdto = this.getDTO(id);
+    protected ClientDTO getById(String dni) throws ServiceException {
+        ClientDTO cdto = this.getDTO(dni);
 
         if ( cdto == null ) {
-            throw new ServiceException("client " + id + " not found");
+            throw new ServiceException("client " + dni + " not found");
         }
         return cdto;
     }
@@ -52,7 +53,7 @@ public class ClientServicesImpl implements ClientServices {
     
     protected ClientDTO checkInputData(String client) throws ServiceException {
         try {
-            ClientDTO cdto = (ClientDTO) this.serializer.deserialize(client, ClientDTO.class);
+            ClientDTO cdto = this.serializer.deserialize(client, ClientDTO.class);
             ClientMapper.clientFromDTO(cdto); 
             return cdto;
         } catch (Exception e) {

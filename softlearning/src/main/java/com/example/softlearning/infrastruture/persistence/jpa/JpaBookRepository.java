@@ -29,6 +29,8 @@ public interface JpaBookRepository extends JpaRepository<BooksDTO, String>, Book
     //devuelve Integer con I mayúscula, preguntar, y 
     public Integer countByPartialType(String title);
 
+    //public List<BooksDTO> findAll(); //Devuelve todos los libros
+
     //La anotación transaccional es para que Spring se encargue de abrir y cerrar la transacción
     //Si se apaga o se cae la aplicación, Spring se encarga de cerrar la transacción
     //y mantener la integridad de los datos
