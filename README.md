@@ -11,17 +11,18 @@ Este proyecto demuestra el uso de **Spring JPA** para gestionar la persistencia 
 - [Endpoints Principales](#-endpoints-principales)
   - [Añadir un Libro](#-añadir-un-libro)
   - [Borrar un Libro](#-borrar-un-libro)
-  - [Obtener un Libro](#%EF%B8%8F-actualizar-un-libro)
+  - [Obtener un Libro](#-actualizar-un-libro)
   - [Actualizar un Libro](#-actualizar-un-libro)
 - [Requisitos Previos](#-requisitos-previos)
 - [Instalación y Ejecución](#-instalación-y-ejecución)
 - [Contacto](#-contacto)
 
-✅ **Arquitectura modular** con separación por entidades y capas.  
-✅ **Conexión sencilla** a MySQL mediante `application.properties`.  
-✅ **Consultas eficientes**: nativas, personalizadas y de modificación.  
-✅ **Mapeo flexible** entre entidades Java y tablas de la base de datos.   
-✅ **Soporte para JSON y XML** en los servicios REST.
+- ✅ **Arquitectura modular** con separación por entidades y capas.
+- ✅ **Conexión sencilla** a MySQL mediante `application.properties`.
+- ✅ **Consultas eficientes**: nativas, personalizadas y de modificación.
+- ✅ **Mapeo flexible** entre entidades Java y tablas de la base de datos.
+- ✅ Ejemplos **SQL en `/resources/static`** para facilitar la creación de tablas.
+- ✅ **Soporte para JSON y XML** en los servicios REST.
 
 ---
 
@@ -151,7 +152,7 @@ example/
 }
 ```
 
-<<<<<<< HEAD
+
 ```XML
 <book>
     <ident>B003</ident>
@@ -177,42 +178,8 @@ example/
 ```
 ---
 
-## 🔧 Requisitos Previos
-=======
----
 
 ## 🔧 Requisitos Previos
-
-- Java 17+
-- Spring Boot 3+
-- MySQL
-- Maven
-
----
-
-## 🛠 Instalación y Ejecución
-
-```sh
-# Clonar el repositorio
-git clone https://github.com/Abrahamvsdev/softlearningjpa.git
-
-# Acceder al proyecto
-cd ./softlearning/
-
-# Construir el proyecto
-mvn clean install
-
-# Ejecutar la aplicación
-mvn spring-boot:run
-```
-
----
-
-## 🎯 Contacto
-Si tienes preguntas o sugerencias, no dudes en contactarme en www.linkedin.com/in/abrahamvsdev.
-
-📌 **Este proyecto está diseñado para demostrar buenas prácticas en el uso de Spring JPA.**
->>>>>>> d88b09ea9981b1d1f4bb51aadccff837c36b97e5
 
 - Java 17+
 - Spring Boot 3+
