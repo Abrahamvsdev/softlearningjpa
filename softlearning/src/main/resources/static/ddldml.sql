@@ -1,44 +1,124 @@
-create database softlearning;
+-- Crear la base de datos (si no existe) y usarla
+CREATE DATABASE IF NOT EXISTS softlearning;
 
-create table softlearningtest.clients (
-        code int not null,
-        name VARCHAR(45), 
-        address VARCHAR(45), 
-        phone VARCHAR(45), 
-        creditcard VARCHAR(45), 
-        ident VARCHAR(45) unique, 
-        birthday timestamp, 
-        password VARCHAR(45),
-        since timestamp,
-        premium boolean, 
-        primary key (code)
+USE softlearning;
+
+-- ========================================================
+-- TABLA CLIENTS
+-- ========================================================
+CREATE TABLE IF NOT EXISTS clients (
+    dni VARCHAR(20) NOT NULL,
+    name VARCHAR(45),
+    surname VARCHAR(45),
+    email VARCHAR(100),
+    address VARCHAR(100),
+    number VARCHAR(20),
+    paymentMode VARCHAR(45),
+    membershipLevel VARCHAR(45),
+    registrationDate VARCHAR(20),
+    antiquity INT,
+    PRIMARY KEY (dni)
 );
 
-insert into clients values (1001, "Alex Garcia", "carrer kalea 1", "611111111","11112222333344445555","33101123-F", "2000-07-01","1234","2022-02-01", false), 
-                           (1002, "Victor Ruiz", "carrer kalea 3", "622222222","22223333444455556666","38101123-X", "2003-01-21","4321","2024-03-21", false),
-                           (1003, "Joan Martinez", "carrer kalea 5", "633333333","33334444555566667777","23101123-B", "2001-11-27","3214","2023-11-01", false);
-select * from clients;
+-- Insertar datos de ejemplo en la tabla clients (según XML)
+INSERT INTO
+    clients (
+        dni,
+        name,
+        surname,
+        email,
+        address,
+        number,
+        paymentMode,
+        membershipLevel,
+        registrationDate,
+        antiquity
+    )
+VALUES (
+        '12345678D',
+        'Juan',
+        'Pérez',
+        'juan.D.perez@example.com',
+        'Calle Falsa 123',
+        '600123456',
+        'Credit Card',
+        'Gold',
+        '15-12-2025',
+        2
+    );
 
-create table softlearningtest.books (
-        ident int not null,
-        tittle VARCHAR(45), 
-        writer VARCHAR(45), 
-        type VARCHAR(45), 
-        description VARCHAR(45), 
-        price double, 
-        isbn VARCHAR(45) unique, 
-        edition integer,
-        release_date timestamp, 
-        heigth double, 
-        width double, 
-        depth double, 
-        weigth double, 
-        fragile boolean, 
-        available boolean,
-        primary key (ident)
+-- ========================================================
+-- TABLA BOOKS
+-- ========================================================
+CREATE TABLE IF NOT EXISTS books (
+    ident VARCHAR(10) NOT NULL,
+    title VARCHAR(45), -- Nota: este campo almacena el atributo "type" del JSON
+    paymethod VARCHAR(45),
+    date VARCHAR(20),
+    author VARCHAR(45),
+    isbn VARCHAR(45) UNIQUE,
+    cover VARCHAR(45),
+    genre VARCHAR(45),
+    editorial VARCHAR(45),
+    price DOUBLE,
+    discount DOUBLE,
+    weight DOUBLE,
+    height DOUBLE,
+    width DOUBLE,
+    length DOUBLE,
+    volume DOUBLE,
+    delaypay BOOLEAN,
+    fragile BOOLEAN,
+    page INT,
+    PRIMARY KEY (ident)
 );
 
-insert into books values (121,"PHP basics","Marcombo","Programmers",null,22.50,"isbnproves1",3,"2022-06-30",20.0,12.0,1.5,250.0,false,true),
-                        (131,"Java basics","Princeton","Programmers",null, 29.99,"isbnproves2",1,"2023-04-26",21.0,14.0,2.5,450.0,true,true),
-                        (141,"Java EE","Oracle","Programmers",null,52.00,"isbnproves3",2,"2024-01-30",22.5,14.0,3.0,500.0,true,false);
-select * from books;
+-- Insertar datos de ejemplo en la tabla books (según JSON)
+INSERT INTO
+    books (
+        ident,
+        title,
+        paymethod,
+        date,
+        author,
+        isbn,
+        cover,
+        genre,
+        editorial,
+        price,
+        discount,
+        weight,
+        height,
+        width,
+        length,
+        volume,
+        delaypay,
+        fragile,
+        page
+    )
+VALUES (
+        'B003',
+        'Novel',
+        'Credit Card',
+        '10-10-2025',
+        'Dan Brown',
+        '978-3-16-148410-0',
+        'Hardcover',
+        'Fiction',
+        'Editorial Ejemplo',
+        25.99,
+        5.0,
+        1.2,
+        20.0,
+        15.0,
+        2.5,
+        0.5,
+        FALSE,
+        FALSE,
+        300
+    );
+
+-- Consultar los registros insertados
+SELECT * FROM clients;
+
+SELECT * FROM books;
