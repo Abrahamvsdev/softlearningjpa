@@ -151,6 +151,7 @@ example/
 }
 ```
 
+<<<<<<< HEAD
 ```XML
 <book>
     <ident>B003</ident>
@@ -177,6 +178,41 @@ example/
 ---
 
 ## 🔧 Requisitos Previos
+=======
+---
+
+## 🔧 Requisitos Previos
+
+- Java 17+
+- Spring Boot 3+
+- MySQL
+- Maven
+
+---
+
+## 🛠 Instalación y Ejecución
+
+```sh
+# Clonar el repositorio
+git clone https://github.com/Abrahamvsdev/softlearningjpa.git
+
+# Acceder al proyecto
+cd ./softlearning/
+
+# Construir el proyecto
+mvn clean install
+
+# Ejecutar la aplicación
+mvn spring-boot:run
+```
+
+---
+
+## 🎯 Contacto
+Si tienes preguntas o sugerencias, no dudes en contactarme en www.linkedin.com/in/abrahamvsdev.
+
+📌 **Este proyecto está diseñado para demostrar buenas prácticas en el uso de Spring JPA.**
+>>>>>>> d88b09ea9981b1d1f4bb51aadccff837c36b97e5
 
 - Java 17+
 - Spring Boot 3+
