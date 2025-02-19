@@ -6,6 +6,17 @@ Este proyecto demuestra el uso de **Spring JPA** para gestionar la persistencia 
 
 ## 📌 Características Principales
 
+- [Características Principales](#-características-principales)
+- [Estructura del Proyecto](#-estructura-del-proyecto)
+- [Endpoints Principales](#-endpoints-principales)
+  - [Añadir un Libro](#-añadir-un-libro)
+  - [Borrar un Libro](#-borrar-un-libro)
+  - [Obtener un Libro](#%EF%B8%8F-actualizar-un-libro)
+  - [Actualizar un Libro](#-actualizar-un-libro)
+- [Requisitos Previos](#-requisitos-previos)
+- [Instalación y Ejecución](#-instalación-y-ejecución)
+- [Contacto](#-contacto)
+
 ✅ **Arquitectura modular** con separación por entidades y capas.  
 ✅ **Conexión sencilla** a MySQL mediante `application.properties`.  
 ✅ **Consultas eficientes**: nativas, personalizadas y de modificación.  
