@@ -9,8 +9,8 @@ Este proyecto demuestra el uso de **Spring JPA** para gestionar la persistencia 
 ✅ **Arquitectura modular** con separación por entidades y capas.  
 ✅ **Conexión sencilla** a MySQL mediante `application.properties`.  
 ✅ **Consultas eficientes**: nativas, personalizadas y de modificación.  
-✅ **Mapeo flexible** entre entidades Java y tablas de la base de datos.  
-✅ **Ejemplos SQL** en `/resources/static` para facilitar la creación de tablas.  
+✅ **Mapeo flexible** entre entidades Java y tablas de la base de datos.   
+✅ **Soporte para JSON y XML** en los servicios REST.
 
 ---
 
@@ -51,7 +51,7 @@ example/
 ### 📖 Añadir un Libro
 - **Método**: `POST`
 - **URL**: `/softlearning/books`
-- **Formato**: `application/json`
+- **Formato**: `application/json` o `application/xml`
 - **Ejemplo de Body:**
 
 ```json
@@ -76,6 +76,30 @@ example/
   "length": 2.5,
   "volume": 0.5
 }
+```
+
+```XML
+<book>
+    <ident>B003</ident>
+    <price>25.99</price>
+    <delayPay>false</delayPay>
+    <discount>5.0</discount>
+    <type>Novel</type>
+    <payMethod>Credit Card</payMethod>
+    <date>10-10-2025</date>
+    <author>Dan Brown</author>
+    <isbn>978-3-16-148410-0</isbn>
+    <cover>Hardcover</cover>
+    <page>300</page>
+    <genre>Fiction</genre>
+    <editorial>Editorial Ejemplo</editorial>
+    <weight>1.2</weight>
+    <height>20.0</height>
+    <width>15.0</width>
+    <fragile>false</fragile>
+    <length>2.5</length>
+    <volume>0.5</volume>
+</book>
 ```
 
 ### 🗑️ Borrar un Libro
