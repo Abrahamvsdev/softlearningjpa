@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.Check;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions.Dimensions;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions.Storable;
+import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.products.Product;
 
 
@@ -44,22 +45,22 @@ public class Books extends Product implements Storable {
         double height, 
         double width, 
         boolean fragile, 
-        double length) throws Exception {
+        double length) throws BuildException {
         
         StringBuilder errors = new StringBuilder();
         int errorCode;
         Books libro1 = new Books();
         try {
             libro1.dim = Dimensions.getInstanceDimensions(weight, height, width, fragile, length); 
-        } catch (Exception e) {
-            throw new Exception("Error en las dimensiones: " + e.getMessage()); 
+        } catch (BuildException e) {
+            throw new BuildException("Error en las dimensiones: " + e.getMessage()); 
         }
         
         try {
             libro1.product(ident, price, delayPay, discount, type, payMethod);
             
-        } catch (Exception ex) {
-            throw new Exception("Error en product: " + ex.getMessage());
+        } catch (BuildException ex) {
+            throw new BuildException("Error en product: " + ex.getMessage());
         }
 
         
@@ -87,7 +88,7 @@ public class Books extends Product implements Storable {
 
         
         if (errors.length() > 0) {
-            throw new Exception("No es posible crear el libro: \n" + errors.toString());
+            throw new BuildException("No es posible crear el libro: \n" + errors.toString());
 
         }
         return libro1;

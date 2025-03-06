@@ -2,6 +2,7 @@ package com.example.softlearning.applicationcore.entity.sharedkernel.model.produ
 
 import com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.Check;
 import com.example.softlearning.applicationcore.entity.sharedkernel.marketable.Marketable;
+import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 
 public abstract class Product implements Marketable {  
 
@@ -19,7 +20,7 @@ public abstract class Product implements Marketable {
 
     }
         //Las clases abstractas no pueden ser static, esta es la que se usa para chekear cuando se crea el libro
-        public void product(String ident, double price, boolean delayPay, double discount, String type, String payMethod) throws Exception {
+        public void product(String ident, double price, boolean delayPay, double discount, String type, String payMethod) throws BuildException {
         StringBuilder errors = new StringBuilder();
         int errorCode;
         
@@ -55,7 +56,7 @@ public abstract class Product implements Marketable {
         
         
         if (errors.length() > 0) {
-            throw new Exception("Not possible to create the product: \n" + errors.toString());
+            throw new BuildException("Not possible to create the product: \n" + errors.toString());
         }
     }
 

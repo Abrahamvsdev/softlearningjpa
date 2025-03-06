@@ -3,12 +3,13 @@ package com.example.softlearning.applicationcore.entity.book.mappers;
 
 import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
 import com.example.softlearning.applicationcore.entity.book.model.Books;
+import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 
 
 
 
 public class BooksMapper {
-    public static Books booksFromDTO(BooksDTO bdto) throws Exception{
+    public static Books booksFromDTO(BooksDTO bdto) throws BuildException{
         return Books.getInstance(bdto.getIdent(),
                                 bdto.getPrice(),
                                 bdto.getDelayPay(),
