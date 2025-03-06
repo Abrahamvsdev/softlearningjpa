@@ -1,37 +1,82 @@
-# Spring_JPA
+# 🌱 Spring JPA - Gestión de Persistencia
 
-Gestión de la persistencia a traves de Spring JPA.
+Este proyecto demuestra el uso de **Spring JPA** para gestionar la persistencia de datos con una arquitectura limpia y modular.
 
-Para este proyecto utilizamos un DTO.
+---
 
-En este proyecto trataremos:
+## 📌 Características Principales
 
-* Separación de código para aportar una arquitectura limpia dividida en capas y entidades principales de negocio
+- [Características Principales](#-características-principales)
+- [Estructura del Proyecto](#-estructura-del-proyecto)
+- [Endpoints Principales](#-endpoints-principales)
+  - [Añadir un Libro](#-añadir-un-libro)
+  - [Borrar un Libro](#-borrar-un-libro)
+  - [Obtener un Libro](#-actualizar-un-libro)
+  - [Actualizar un Libro](#-actualizar-un-libro)
+- [Requisitos Previos](#-requisitos-previos)
+- [Instalación y Ejecución](#-instalación-y-ejecución)
+- [Contacto](#-contacto)
 
-* Creación de un proyecto SpringWeb con las dependencias necesarias para una gestión eficiente
+- ✅ **Arquitectura modular** con separación por entidades y capas.
+- ✅ **Conexión sencilla** a MySQL mediante `application.properties`.
+- ✅ **Consultas eficientes**: nativas, personalizadas y de modificación.
+- ✅ **Mapeo flexible** entre entidades Java y tablas de la base de datos.
+- ✅ Ejemplos **SQL en `/resources/static`** para facilitar la creación de tablas.
+- ✅ **Soporte para JSON y XML** en los servicios REST.
 
-* Conexión a la capa de persistencia a través de application.properties en /resources
+---
 
-* Uso de consultas existentes por defecto, consultas de modificacion y consultas personalizadas
+## 📂 Estructura del Proyecto
 
-* Casos particulares donde los nombres de los atributos de las entidades Java no coincidan con los campos de las tablas en la persistencia (en este caso particular, MySQL)
+```
+example/
+└── softlearning/
+    ├── applicationcore/
+    │   ├── entity/
+    │   │   ├── book/
+    │   │   │   ├── appservices/
+    │   │   │   ├── dtos/
+    │   │   │   ├── mappers/
+    │   │   │   ├── model/
+    │   │   │   └── persistence/
+    │   │   ├── client/
+    │   │   ├── employee/
+    │   │   ├── order/
+    │   │   └── sharedkernel/
+    │   │       ├── appservices/serializers/
+    │   │       ├── domainservices/validations/
+    │   │       ├── marketable/
+    │   │       └── model/
+    │   │           ├── dimensions/
+    │   │           ├── exceptions/
+    │   │           ├── operations/
+    │   │           ├── products/
+    │   │           └── stakeholders/
+    ├── infrastruture/persistence/jpa/
+    └── presentation/api/rest/
+```
 
-* Ejemplos en /resources/static de unos fragmentos de código sql para la creación y consultas de tablas
+---
 
-Queda aun pendiente, el desacoplamiento con la capa JPA, con la gestión de los DTO's y los servicios Rest
+## 🚀 Endpoints Principales
 
-*** Añadir un libro ***
-metodo POST, aplication/json, response en json también, body->raw->
+### 📖 Añadir un Libro
+- **Método**: `POST`
+- **URL**: `/softlearning/books`
+- **Formato**: `application/json` o `application/xml`
+- **Ejemplo de Body:**
+
+```json
 {
-  "ident": "B003", ***Es la PK***
+  "ident": "B003",
   "price": 25.99,
   "delayPay": false,
   "discount": 5.0,
-  "type": "Novel", //que sera el title
+  "type": "Novel",
   "payMethod": "Credit Card",
-  "date": "10-10-2025", //Importante el formato de la fecha así, si no, la validación permitirá añadirlo, y arrojará su correspondiente mensaje de error.
+  "date": "10-10-2025",
   "author": "Dan Brown",
-  "isbn": "978-3-16-148410-0" // ***Es UNIQUE***
+  "isbn": "978-3-16-148410-0",
   "cover": "Hardcover",
   "page": 300,
   "genre": "Fiction",
@@ -43,26 +88,57 @@ metodo POST, aplication/json, response en json también, body->raw->
   "length": 2.5,
   "volume": 0.5
 }
-*** Borrar libro ***
-Como no es necesario enviar body, será neceario el metodo DELETE, y la URL http://localhost:8080/softlearning/books/B003
+```
 
-*** GetBook ***
+```XML
+<book>
+    <ident>B003</ident>
+    <price>25.99</price>
+    <delayPay>false</delayPay>
+    <discount>5.0</discount>
+    <type>Novel</type>
+    <payMethod>Credit Card</payMethod>
+    <date>10-10-2025</date>
+    <author>Dan Brown</author>
+    <isbn>978-3-16-148410-0</isbn>
+    <cover>Hardcover</cover>
+    <page>300</page>
+    <genre>Fiction</genre>
+    <editorial>Editorial Ejemplo</editorial>
+    <weight>1.2</weight>
+    <height>20.0</height>
+    <width>15.0</width>
+    <fragile>false</fragile>
+    <length>2.5</length>
+    <volume>0.5</volume>
+</book>
+```
 
-En este caso, tampoco es necesario enviar body, solo la url como este ejemplo http://localhost:8080/softlearning/books/B003 a través del medtodo GET, devuelve un json con sus cosas de json
+### 🗑️ Borrar un Libro
+- **Método**: `DELETE`
+- **URL**: `http://localhost:8080/softlearning/books/B003`
 
-*** Update ***
-A través del método PUT, en la URL http://localhost:8080/softlearning/books/B003
-En este caso si será necesario body->raw->JSON
+### 🔍 Obtener un Libro
+- **Método**: `GET`
+- **URL**: `http://localhost:8080/softlearning/books/B003`
+- **Respuesta**: JSON con los detalles del libro.
+
+### ✏️ Actualizar un Libro
+- **Método**: `PUT`
+- **URL**: `http://localhost:8080/softlearning/books/B003`
+- **Ejemplo de Body:**
+
+```json
 {
-  "ident": "B010",                       <Asegurarse que estos campos coinciden>
+  "ident": "B010",
   "price": 30.50,
   "delayPay": true,
   "discount": 10.0,
   "type": "Novel Updated",
   "payMethod": "Debit Card",
-  "date": "01-01-2025",                  <La fecha en este formato>
+  "date": "01-01-2025",
   "author": "Dan Brown",
-  "isbn": "9783161484100",               <Asegurarse que estos campos coinciden>
+  "isbn": "9783161484100",
   "cover": "Paperback",
   "page": 320,
   "genre": "Fiction",
@@ -74,8 +150,63 @@ En este caso si será necesario body->raw->JSON
   "length": 2.5,
   "volume": 0.6
 }
+```
 
-*********************************************
 
-***Añadir Un Cliente***
+```XML
+<book>
+    <ident>B003</ident>
+    <price>25.99</price>
+    <delayPay>false</delayPay>
+    <discount>5.0</discount>
+    <type>Novel</type>
+    <payMethod>Credit Card</payMethod>
+    <date>10-10-2025</date>
+    <author>Dan Brown</author>
+    <isbn>978-3-16-148410-0</isbn>
+    <cover>Hardcover</cover>
+    <page>300</page>
+    <genre>Fiction</genre>
+    <editorial>Editorial Ejemplo</editorial>
+    <weight>1.2</weight>
+    <height>20.0</height>
+    <width>15.0</width>
+    <fragile>false</fragile>
+    <length>2.5</length>
+    <volume>0.5</volume>
+</book>
+```
+---
 
+
+## 🔧 Requisitos Previos
+
+- Java 17+
+- Spring Boot 3+
+- MySQL
+- Maven
+
+---
+
+## 🛠 Instalación y Ejecución
+
+```sh
+# Clonar el repositorio
+git clone https://github.com/Abrahamvsdev/softlearningjpa.git
+
+# Acceder al proyecto
+cd ./softlearning/
+
+# Construir el proyecto
+mvn clean install
+
+# Ejecutar la aplicación
+mvn spring-boot:run
+```
+
+---
+
+## 🎯 Contacto
+Si tienes preguntas o sugerencias, no dudes en contactarme en www.linkedin.com/in/abrahamvsdev.
+
+📌 **Este proyecto está diseñado para demostrar buenas prácticas en el uso de Spring JPA.**
