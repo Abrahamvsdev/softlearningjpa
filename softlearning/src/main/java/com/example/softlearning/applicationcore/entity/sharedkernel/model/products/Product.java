@@ -127,7 +127,7 @@ public abstract class Product implements Marketable {
     }
 
     public int setIdent(String ident) {
-        int errorIdent = Check.minLenght(ident);
+        int errorIdent = Check.minLength(ident);
         if (errorIdent == 0) {
             this.ident = ident;
         }

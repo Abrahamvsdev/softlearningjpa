@@ -48,7 +48,7 @@ public class Check {
         }
     }
     
-    public static int minLenght(String s){
+    public static int minLength(String s){
         //esta funcion comprueba si el string no esta vacio
         // y si ademas es mas largo que 3 caracteres
 
@@ -75,9 +75,9 @@ public class Check {
         return 0;
     }
 
-    public static int maxLenght(String s){
+    public static int maxLength(String s){
         //esta funcion comprueba si el string no esta vacio
-        // y si ademas es mas largo que 10 caracteres
+        // y si ademas es mas largo que 15 caracteres
         //en java no hace falta poner los "::", si quiero llamar a un metodo seria
         if(Check.isNull(s)==0){
             
@@ -96,15 +96,15 @@ public class Check {
 
     public static int minMaxLength(String s){
         //esta funcion comprueba si el length es mayor de 3 y menos de 15
-
-        if(Check.isNull(s)==0){
+        int resultado = Check.isNull(s);
+        if(resultado==0){
             if(s.length()<3){
                 return -3;
             } else if (s.length()>15){
                 return -7;
             } 
         }
-        return 0;
+        return resultado;
 
     }
 
@@ -165,7 +165,7 @@ public static int isValidDateComplete(String date) {
                 return -14;  // Formato correcto pero fecha inválida
             }
         } else {
-            return 4;  // Formato incorrecto
+            return -4;  // Formato incorrecto
         }
     }
     return 0;  // Fecha nula

@@ -212,7 +212,7 @@ public class Books extends Product implements Storable {
     }
 
     public int setGenre(String genre) {
-        int errorGenre = Check.minLenght(genre);
+        int errorGenre = Check.minLength(genre);
         if (errorGenre == 0) {
             this.genre = genre;
         }
@@ -220,7 +220,7 @@ public class Books extends Product implements Storable {
     }
 
     public int setEditorial(String editorial) {
-        int errorEditorial = Check.minLenght(editorial);
+        int errorEditorial = Check.minLength(editorial);
         if (errorEditorial == 0) {
             this.editorial = editorial;
         }
