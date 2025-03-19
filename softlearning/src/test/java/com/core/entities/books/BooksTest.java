@@ -19,7 +19,7 @@ public class BooksTest {
             0.0,
             "type",
             "true",
-            "02-11-2023",
+            "31-04-2023",
             "author",
             "1234567891234",
             "cover",

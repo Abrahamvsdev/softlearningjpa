@@ -98,14 +98,12 @@ public class Check {
         //esta funcion comprueba si el length es mayor de 3 y menos de 15
         int resultado = Check.isNull(s);
         if(resultado==0){
-            if(s.length()<3){
+            if(s.length()<3)
                 return -3;
-            } else if (s.length()>15){
+            if (s.length()>15)
                 return -7;
-            } 
         }
         return resultado;
-
     }
 
     // a pasos:

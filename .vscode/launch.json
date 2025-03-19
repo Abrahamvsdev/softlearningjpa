@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BooksTest<softlearning>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.core.entities.books.BooksTest",
+            "projectName": "softlearning",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
