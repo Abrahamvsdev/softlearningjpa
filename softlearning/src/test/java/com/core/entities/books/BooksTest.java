@@ -1,6 +1,6 @@
 package com.core.entities.books;
 
-
+import com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.Check;
 import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
 import com.example.softlearning.applicationcore.entity.book.mappers.BooksMapper;
 import com.example.softlearning.applicationcore.entity.book.model.Books;
@@ -17,12 +17,12 @@ public class BooksTest {
             10.0,
             false,
             0.0,
-            "type",
+            "titulo tal",
             "true",
-            "31-04-2023",
+            "28-02-2023",
             "author",
             "1234567891234",
-            "cover",
+            "cover1",
             10,
             "genre",
             "editorial",
@@ -31,7 +31,7 @@ public class BooksTest {
             10.0,
             false,
             10.0
-            //TODO aqui deberia ir volumen, arreglar cuando tenga tiempo
+             // TODO esto es el volumen, que lo estoy dejando así hardcodeado para pruebas
         );
         System.out.println(b.getDetails());
 

@@ -106,6 +106,20 @@ public class Check {
         return resultado;
     }
 
+    
+    public static int minMaxLength(String s, int min, int max){  
+        // Esto se llama parametrizar, hacerlas reusables entrando por parametro de donde a donde quiero medir
+        int resultado = Check.isNull(s);
+        s = s.trim();
+        if(resultado==0){
+            if(s.length()<min)
+                return -3;
+            if (s.length()>max)
+                return -7;
+        }
+        return resultado;
+    }
+
     // a pasos:
     //se declara el patron
     // se compila
@@ -116,9 +130,9 @@ public class Check {
     public static int isValidDate(String date) {
 
         // Expresión regular para validar el formato de la fecha (dd-MM-yyyy)
-        if (date == null) {
-            return 0;  // Código de error para una fecha null
-        }
+        if (date == null) 
+            return -1;  // Código de error para null
+        
         String datePattern = "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-(19|20)\\d\\d$";
         
         // Compila
@@ -151,7 +165,10 @@ public class Check {
 
 
 public static int isValidDateComplete(String date) {
-    if (date != null) {
+    if (date == null) 
+        return -1;
+    
+    if (date.length() >0) {
         Pattern pattern = Pattern.compile("^(\\d{4})/(\\d{2})/(\\d{2})-(\\d{2}):(\\d{2}):(\\d{2})$");
         Matcher matcher = pattern.matcher(date);
         if (matcher.matches()) {

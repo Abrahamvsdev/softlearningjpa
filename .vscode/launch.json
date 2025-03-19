@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ClientTest",
+            "request": "launch",
+            "mainClass": "com.core.entities.client.ClientTest",
+            "projectName": "softlearning"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-BooksTest<softlearning>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
