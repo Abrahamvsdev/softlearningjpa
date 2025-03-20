@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Check {
-
+    // SI no es null da 0
     public static int isNull(String s) {
         // Esta función comprueba si el string es nulo o vacío
         if (s == null) { // Verificamos primero si s es null, porque 
@@ -269,7 +269,7 @@ public static int isValidDateComplete(String date) {
     }
 
     public static int checkISBN(String isbn) {
-
+        // SI no es nulo ni vacio retornará un 0
         int resultado = Check.isNull(isbn);
         if (resultado != 0) {
             return resultado;
@@ -282,13 +282,14 @@ public static int isValidDateComplete(String date) {
         if (cleanIsbn.length() > 13) {
             return -8;
         }
-        if(!isbn.matches(isbn)) return -22;
+        if(!cleanIsbn.matches("^(?:\\\\d{9}X|\\\\d{10})$")) return -22;
+        if(!cleanIsbn.matches("^(?:\\d{9}X|\\d{10})$")) return -22;
 
-        if (cleanIsbn.length() == 13 && cleanIsbn.matches("^97[89]-?\\d{1,5}-?\\d{1,7}-?\\d{1,7}-?\\d$")) {
-            return -0;
+        if (cleanIsbn.length() == 13 && cleanIsbn.matches("^97[89]\\d{10}$")) {
+            return 0;
         }
         if (cleanIsbn.length() == 10 && cleanIsbn.matches("^(?:\\d{9}X|\\d{10})$")) {
-            return -0;
+            return 0;
         }
         return resultado;
     }

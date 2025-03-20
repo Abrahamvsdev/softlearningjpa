@@ -20,7 +20,7 @@ public class BooksTest {
             "true",
             "30-04-2025",
             "willingli",
-            "1234567891234",
+            "123456789X",
             "cover1",
             10,
             "genre",
