@@ -270,7 +270,7 @@ public static int isValidDateComplete(String date) {
     public static int checkISBN(String isbn) {
 
         int resultado = Check.isNull(isbn);
-    if(resultado == 0) 
+    if(resultado == 0) return resultado;
         String cleanIsbn = isbn.replaceAll("-", "");
 
         if (cleanIsbn.length() != 10){
@@ -289,7 +289,7 @@ public static int isValidDateComplete(String date) {
             }
         }
 
-        return 22;
+        return resultado;
     }
 
     public static int checkMobilePhone(String n) {
