@@ -34,12 +34,12 @@ public class BooksTest {
         );
         System.out.println(b.getDetails());
 
-        // //Mapper
-        // BooksDTO bdto = BooksMapper.dtoFromBooks(b);
-        // System.out.println("Autor: " + bdto.getAuthor());
+        //Mapper
+        BooksDTO bdto = BooksMapper.dtoFromBooks(b);
+        System.out.println("Autor: " + bdto.getAuthor());
 
-        // Books bcopy = BooksMapper.booksFromDTO(bdto);
-        // System.out.println("Mapper Book: " + bcopy.getDetails());
+        Books bcopy = BooksMapper.booksFromDTO(bdto);
+        System.out.println("Mapper Book: " + bcopy.getDetails());
     
 
 
