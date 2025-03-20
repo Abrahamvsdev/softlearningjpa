@@ -1,6 +1,5 @@
 package com.core.entities.books;
 
-import com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.Check;
 import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
 import com.example.softlearning.applicationcore.entity.book.mappers.BooksMapper;
 import com.example.softlearning.applicationcore.entity.book.model.Books;
@@ -19,7 +18,7 @@ public class BooksTest {
             0.0,
             "titulo tal",
             "true",
-            "31-02-2024",
+            "15-08-2023",
             "willingli",
             "1234567891234",
             "cover1",

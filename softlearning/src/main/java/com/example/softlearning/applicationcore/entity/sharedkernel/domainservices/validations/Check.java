@@ -7,7 +7,6 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.time.format.ResolverStyle;
 
 public class Check {
 
@@ -242,7 +241,7 @@ public static int isValidDateComplete(String date) {
     public static int checkDNI(String dni) {
         // Patron para un DNI: 8 digitos seguidos de 1 letra mayuscula
         String pattern = "^\\d{8}[A-Z]$";
-        
+
         // Compila
         Pattern r = Pattern.compile(pattern);
 
@@ -270,32 +269,32 @@ public static int isValidDateComplete(String date) {
     public static int checkISBN(String isbn) {
 
         int resultado = Check.isNull(isbn);
-    if(resultado == 0) return resultado;
+        if (resultado != 0) {
+            return resultado;
+        }
         String cleanIsbn = isbn.replaceAll("-", "");
 
-        if (cleanIsbn.length() != 10){
-            
-        } return -3;
-        if (cleanIsbn.length() != 13) return -8;
-        if (cleanIsbn.length() == 13) {
-            if (cleanIsbn.matches("\\d{13}")) {
-                return -0;
-            }
+        if (cleanIsbn.length() < 10) {
+            return -3;
         }
-
-        if (cleanIsbn.length() == 10) {
-            if (cleanIsbn.matches("\\d{10}")) {
-                return -0;
-            }
+        if (cleanIsbn.length() > 13) {
+            return -8;
         }
+        if(!isbn.matches(isbn)) return -22;
 
+        if (cleanIsbn.length() == 13 && cleanIsbn.matches("^97[89]-?\\d{1,5}-?\\d{1,7}-?\\d{1,7}-?\\d$")) {
+            return -0;
+        }
+        if (cleanIsbn.length() == 10 && cleanIsbn.matches("^(?:\\d{9}X|\\d{10})$")) {
+            return -0;
+        }
         return resultado;
     }
 
     public static int checkMobilePhone(String n) {
         //esta funcion comprueba si el string es un numero valido de 9 cifras
         if (Check.isNull(n) == 0) {
-            if (n.length() > 9) {
+            if (n.length() != 9 && !n.matches("^[67]\\d{8}$")) {
                 return -17;
             }
         }
@@ -349,7 +348,7 @@ public static int isValidDateComplete(String date) {
             case -21 ->
                 "No hay detalle";
             case -22 ->
-            ""
+                "El ISBN no esta formado correctamente";
             default ->
                 "No reconocible";
         };
