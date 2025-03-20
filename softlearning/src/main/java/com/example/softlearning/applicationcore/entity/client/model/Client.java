@@ -1,4 +1,3 @@
-// Java version: 8
 package com.example.softlearning.applicationcore.entity.client.model;
 
 import java.time.LocalDate;
