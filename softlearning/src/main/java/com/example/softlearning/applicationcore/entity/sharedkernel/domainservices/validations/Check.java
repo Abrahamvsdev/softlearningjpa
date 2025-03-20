@@ -1,4 +1,5 @@
 package com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,9 +7,8 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-
 public class Check {
+
     public static int isNull(String s) {
         // Esta función comprueba si el string es nulo o vacío
         if (s == null) { // Verificamos primero si s es null, porque 
@@ -37,112 +37,113 @@ public class Check {
         if (email == null) {
             return -1;
         }
-        
+
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(email);
-        
+
         if (m.matches()) {
             return 0;
         } else {
             return -10;
         }
     }
-    
-    public static int minLength(String s){
+
+    public static int minLength(String s) {
         //esta funcion comprueba si el string no esta vacio
         // y si ademas es mas largo que 3 caracteres
 
         //en java no hace falta poner los "::", si quiero llamar a un metodo seria 
         //Check.isnull(s)
-        
-        if(Check.isNull(s)==0){
-            if(s.length()<3){
+        if (Check.isNull(s) == 0) {
+            if (s.length() < 3) {
                 return -3;
             } else {
                 return 0;
             }
-        }else{
-            return-1;
+        } else {
+            return -1;
         }
 
     }
 
-        //esto checkea si es verdadero -12 que si, 0 que no
-    public static int checkBoolean(boolean b){
-        if(b==true){
+    //esto checkea si es verdadero -12 que si, 0 que no
+    public static int checkBoolean(boolean b) {
+        if (b == true) {
             return -12;
         }
         return 0;
     }
 
-    public static int maxLength(String s){
+    public static int maxLength(String s) {
         //esta funcion comprueba si el string no esta vacio
         // y si ademas es mas largo que 15 caracteres
         //en java no hace falta poner los "::", si quiero llamar a un metodo seria
-        if(Check.isNull(s)==0){
-            
-            
-            if(s.length()>15){
+        if (Check.isNull(s) == 0) {
+
+            if (s.length() > 15) {
                 return -7;
             } else {
                 return 0;
             }
-        }else{
+        } else {
             return -1;
         }
-        
-    }
-    
 
-    public static int minMaxLength(String s){
+    }
+
+    public static int minMaxLength(String s) {
         //esta funcion comprueba si el length es mayor de 3 y menos de 15
         int resultado = Check.isNull(s);
-        if(resultado==0){
-            if(s.length()<3)
+        if (resultado == 0) {
+            if (s.length() < 3) {
                 return -3;
-            if (s.length()>15)
+            }
+            if (s.length() > 15) {
                 return -7;
+            }
         }
         return resultado;
     }
 
-    
-    public static int minMaxLength(String s, int min, int max){  
-        // Esto se llama parametrizar, hacerlas reusables entrando por parametro de donde a donde quiero medir
-        int resultado = Check.isNull(s);
-        s = s.trim();
-        if(resultado==0){
-            if(s.length()<min)
-                return -3;
-            if (s.length()>max)
-                return -7;
-        }
-        return resultado;
-    }
-
+    // public static int minMaxLength(String s, int min, int max){  
+    //     // Esto se llama parametrizar, hacerlas reusables entrando por parametro de donde a donde quiero medir
+    //     int resultado = Check.isNull(s);
+    //     s = s.trim();
+    //     if(resultado==0){
+    //         if(s.length()<min)
+    //             return -3;
+    //         if (s.length()>max)
+    //             return -7;
+    //     }
+    //     return resultado;
+    // }
     // a pasos:
     //se declara el patron
     // se compila
-    
     //se usa el matcher
     // si es correcto local date con el "formatter of pattern"
     //
+    /**
+     * Valida si una cadena representa una fecha válida en formato dd-MM-yyyy.
+     *
+     * @param date La cadena a validar
+     * @return 0 si la fecha es válida, código de error negativo en caso
+     * contrario
+     */
     public static int isValidDate(String date) {
-
         // Expresión regular para validar el formato de la fecha (dd-MM-yyyy)
-        if (date == null) 
+
+        if (date == null) {
             return -1;  // Código de error para null
-        
+        }
         String datePattern = "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-(19|20)\\d\\d$";
-        
+
         // Compila
         Pattern pattern = Pattern.compile(datePattern);
-    
-        // es null
-        
+
         // matcher
         Matcher matcher = pattern.matcher(date);
-        
+
         if (matcher.matches()) {
             // si es correcto, formatter pattern
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -160,52 +161,43 @@ public class Check {
         }
     }
 
-
-///////////////
+    ///////////////
 
 
 public static int isValidDateComplete(String date) {
-    if (date == null) 
-        return -1;
-    
-    if (date.length() >0) {
-        Pattern pattern = Pattern.compile("^(\\d{4})/(\\d{2})/(\\d{2})-(\\d{2}):(\\d{2}):(\\d{2})$");
-        Matcher matcher = pattern.matcher(date);
-        if (matcher.matches()) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm:ss");
-            try {
-                LocalDateTime.parse(date, formatter);
-                return 0;  
-            } catch (DateTimeParseException e) {
-                return -14;  // Formato correcto pero fecha inválida
-            }
-        } else {
-            return -4;  // Formato incorrecto
+        if (date == null) {
+            return -1;
         }
+
+        if (date.length() > 0) {
+            Pattern pattern = Pattern.compile("^(\\d{4})/(\\d{2})/(\\d{2})-(\\d{2}):(\\d{2}):(\\d{2})$");
+            Matcher matcher = pattern.matcher(date);
+            if (matcher.matches()) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm:ss");
+                try {
+                    LocalDateTime.parse(date, formatter);
+                    return 0;
+                } catch (DateTimeParseException e) {
+                    return -14;  // Formato correcto pero fecha inválida
+                }
+            } else {
+                return -4;  // Formato incorrecto
+            }
+        }
+        return 0;  // Fecha nula
     }
-    return 0;  // Fecha nula
-}
-
-
-
-
-
 
     // public static int isValidDate(String stringdate) {
     //     // string del chat gpt que no me convence
     //     String datePattern = "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-(19|20)\\d\\d$";
-        
     //     // se compila
     //     Pattern pattern = Pattern.compile(datePattern);
-        
     //     // comprobamos si es un null, pero al comenzar por mayus es un objeto y no se si puede ser null, preguntar jose
     //     if (isNull(stringdate) != 0) {
     //         return -1;
     //     }
-        
     //     // el matcher
     //     Matcher matcher = pattern.matcher(stringdate);
-        
     //     // y si hace match
     //     if(matcher.matches()){
     //         return 0;
@@ -213,25 +205,22 @@ public static int isValidDateComplete(String date) {
     //         return -4;
     //     }
     // }
-
-
-
     //RANGE PARA DOBLE
-    public static int range(double e){
+    public static int range(double e) {
         //esta funcion coprueba si el double es nulo o positivo
-        if(e<0){
+        if (e < 0) {
             return -6;
-        }else {
-                return 0;
-            }
+        } else {
+            return 0;
+        }
     }
 
     //RANGE PARA DESCUENTO
-    public static int rangeDiscount(double e){
+    public static int rangeDiscount(double e) {
         //esta funcion coprueba si el descuento en double esta correcto, y no puede ser mayor que 50
-        if(e < 0.00) {
+        if (e < 0.00) {
             return -6;
-        } else if(e > 50.00) {
+        } else if (e > 50.00) {
             return -20;
         } else {
             return 0;
@@ -239,19 +228,19 @@ public static int isValidDateComplete(String date) {
     }
 
     //RANGE PARA INT
-    public static int range(int e){
+    public static int range(int e) {
         //esta funcion coprueba si el int es nulo o positivo
-        if(e<0){
+        if (e < 0) {
             return -6;
-        }else {
-                return 0;
-            }
+        } else {
+            return 0;
+        }
     }
 
     public static int checkDNI(String dni) {
         // Patron para un DNI: 8 digitos seguidos de 1 letra mayuscula
         String pattern = "^\\d{8}[A-Z]$";
-
+        
         // Compila
         Pattern r = Pattern.compile(pattern);
 
@@ -266,76 +255,105 @@ public static int isValidDateComplete(String date) {
         }
     }
 
-
-
     //este validate para double
-    public static int validate(double price){
+    public static int validate(double price) {
         //esta funcion comprueba si el double es negativo o positivo
-        if(price<0){
+        if (price < 0) {
             return -6;
-        }else {
+        } else {
             return 0;
         }
     }
 
-    
-    
-    public static int checkISBN(String isbn){
-//aqui pasamos los numeros del isbn cmo strings i los comprobamos que, si reemplazando los guion medio no hay 13
-// el isbn esta mal introducido, esto es chapuzero, podria intentarlo con un enum 
-//si no me deja y quiere la opcion del de 13 y el de 8 con diferentes separadores preguntar
+    public static int checkISBN(String isbn) {
+
         if (isNull(isbn) != 0) {
             return -1;
         }
-        isbn = isbn.replaceAll("-", "");
-        if (isbn.length() != 13) {
-            return -8;
+
+
+        String cleanIsbn = isbn.replaceAll("-", "");
+
+        if (cleanIsbn.length() != 10){
+            
+        } return -3;
+        if (cleanIsbn.length() != 13) return -8;
+        if (cleanIsbn.length() == 13) {
+            if (cleanIsbn.matches("\\d{13}")) {
+                return -0;
+            }
         }
 
-        return 0;
+        if (cleanIsbn.length() == 10) {
+            if (cleanIsbn.matches("\\d{10}")) {
+                return -0;
+            }
+        }
+
+        return 22;
     }
 
-    public static int checkMobilePhone(String n){
+    public static int checkMobilePhone(String n) {
         //esta funcion comprueba si el string es un numero valido de 9 cifras
         if (Check.isNull(n) == 0) {
-            if (n.length() >9 ) {
+            if (n.length() > 9) {
                 return -17;
             }
         }
         return 0;
     }
 
-
-
-
-    
-    
-    public static String getErrorMessage(int  e){
+    public static String getErrorMessage(int e) {
         return switch (e) {
-            case 0->"";
-            case -1 -> "No puede ser null";
-            case -2 -> "No puede estar vacio";
-            case -3 -> "Has introducido pocos caracteres";
-            case -4 -> "Formato de fecha incorrecto";
-            case -5 -> "El campo introducido es demasiado corto";
-            case -6 -> "Has introducido un numero negativo";
-            case -7 -> "Has introducido demasiados caracteres";
-            case -8 -> "Isbn no valido, introduce una cifra de 13 dígitos válido";
-            case -9 -> "DNI no válido";
-            case -10 -> "Formato de email incorrecto";
-            case -11 -> "Formato de Software incorrecto";
-            case -12 -> "El pago está atrasado";
-            case -13 -> "El pago está correctamente";
-            case -14 -> "Formato correcto pero no válida";
-            case -15 -> "La referencia introducida no es válida, debe ser mayor a 1000";
-            case -16 -> "La referencia introducida no es válida, debe ser menor a 10000";
-            case -17 -> "el numero de teléfono debe ser un numero valido de 9 cifras";
-            case -18 -> "Por favor, introduce correctamente la fragilidad del paquete";
-            case -19 -> "el Id del Orden no ha sido seteado";
-            case -20 -> "El descuento no puede ser mayor al 50% ";
-            case -21 -> "No hay detalle";
-            default -> "No reconocible";
-        }; 
-        
+            case 0 ->
+                "";
+            case -1 ->
+                "No puede ser null";
+            case -2 ->
+                "No puede estar vacio";
+            case -3 ->
+                "Has introducido pocos caracteres";
+            case -4 ->
+                "Formato de fecha incorrecto";
+            case -5 ->
+                "El campo introducido es demasiado corto";
+            case -6 ->
+                "Has introducido un numero negativo";
+            case -7 ->
+                "Has introducido demasiados caracteres";
+            case -8 ->
+                "Isbn no valido, introduce una cifra de 13 dígitos válido";
+            case -9 ->
+                "DNI no válido";
+            case -10 ->
+                "Formato de email incorrecto";
+            case -11 ->
+                "Formato de Software incorrecto";
+            case -12 ->
+                "El pago está atrasado";
+            case -13 ->
+                "El pago está correctamente";
+            case -14 ->
+                "Formato correcto pero no válida";
+            case -15 ->
+                "La referencia introducida no es válida, debe ser mayor a 1000";
+            case -16 ->
+                "La referencia introducida no es válida, debe ser menor a 10000";
+            case -17 ->
+                "el numero de teléfono debe ser un numero valido de 9 cifras";
+            case -18 ->
+                "Por favor, introduce correctamente la fragilidad del paquete";
+            case -19 ->
+                "el Id del Orden no ha sido seteado";
+            case -20 ->
+                "El descuento no puede ser mayor al 50% ";
+            case -21 ->
+                "No hay detalle";
+            case -22 ->
+            ""
+            default ->
+                "No reconocible";
+        };
+
     }
 }
