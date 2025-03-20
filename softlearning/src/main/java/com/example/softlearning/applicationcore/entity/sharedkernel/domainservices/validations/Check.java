@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.time.format.ResolverStyle;
 
 public class Check {
 
@@ -146,7 +148,7 @@ public class Check {
 
         if (matcher.matches()) {
             // si es correcto, formatter pattern
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy").withResolverStyle(ResolverStyle.STRICT);
             try {
                 // si la fecha es valida, no hay errores
                 LocalDate.parse(date, formatter);
@@ -173,7 +175,7 @@ public static int isValidDateComplete(String date) {
             Pattern pattern = Pattern.compile("^(\\d{4})/(\\d{2})/(\\d{2})-(\\d{2}):(\\d{2}):(\\d{2})$");
             Matcher matcher = pattern.matcher(date);
             if (matcher.matches()) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm:ss");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm:ss").withResolverStyle(ResolverStyle.STRICT);
                 try {
                     LocalDateTime.parse(date, formatter);
                     return 0;
@@ -267,11 +269,8 @@ public static int isValidDateComplete(String date) {
 
     public static int checkISBN(String isbn) {
 
-        if (isNull(isbn) != 0) {
-            return -1;
-        }
-
-
+        int resultado = Check.isNull(isbn);
+    if(resultado == 0) 
         String cleanIsbn = isbn.replaceAll("-", "");
 
         if (cleanIsbn.length() != 10){
