@@ -1,12 +1,11 @@
 package com.core.entities.client;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +26,7 @@ public class ClientTestJunit {
     private String validMembershipLevel;
     private String validRegistrationDate;
     
-    @BeforeEach //es beforeeach como dice el jose
+    @BeforeEach // Is BeforeEach as Jose does said
     public void setUp() {
         // Initialize the formatter and valid test data
         formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

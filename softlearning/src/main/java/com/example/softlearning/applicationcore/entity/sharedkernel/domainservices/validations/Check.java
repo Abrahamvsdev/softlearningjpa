@@ -242,6 +242,10 @@ public static int isValidDateComplete(String date) {
 
     public static int checkDNI(String dni) {
         // Patron para un DNI: 8 digitos seguidos de 1 letra mayuscula
+        if(dni == null){
+            return -1;
+        }
+
         String pattern = "^\\d{8}[A-Z]$";
 
         // Compila
@@ -308,7 +312,7 @@ public static int isValidDateComplete(String date) {
     public static int checkMobilePhone(String n) {
         //esta funcion comprueba si el string es un numero valido de 9 cifras
         if (Check.isNull(n) == 0) {
-            if (n.length() != 9 && !n.matches("^[67]\\d{8}$")) {
+            if (n.length() != 9 || !n.matches("^[67]\\d{8}$")) {
                 return -17;
             }
         }

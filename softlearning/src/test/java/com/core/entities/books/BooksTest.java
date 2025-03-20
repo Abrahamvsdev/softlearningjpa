@@ -20,7 +20,7 @@ public class BooksTest {
             "true",
             "30-04-2025",
             "willingli",
-            "9784567890",
+            "9783161484100123",
             "cover1",
             10,
             "genre",
