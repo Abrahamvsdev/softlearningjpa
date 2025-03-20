@@ -17,9 +17,10 @@ public class Check {
             return -1;
         }
         s = s.trim(); // Ahora aplicamos trim() solo si s no es null para que no de el error
-        if (s.length() == 0) { // Luego verificamos si está vacío
+        if (s.length() == 0 ) { // Luego verificamos si está vacío
             return -1;
         } else {
+            // Si no es nulo ni vacío, devolvemos 0
             return 0;
         }
     }
@@ -137,17 +138,18 @@ public class Check {
         if (date == null) {
             return -1;  // Código de error para null
         }
-        String datePattern = "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-(19|20)\\d\\d$";
+        // String datePattern = "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-(19|20)\\d\\d$";
 
-        // Compila
-        Pattern pattern = Pattern.compile(datePattern);
+        // // Compila
+        // Pattern pattern = Pattern.compile(datePattern);
 
-        // matcher
-        Matcher matcher = pattern.matcher(date);
+        // // matcher
+        // Matcher matcher = pattern.matcher(date);
 
-        if (matcher.matches()) {
+        // if (matcher.matches()) {
             // si es correcto, formatter pattern
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy").withResolverStyle(ResolverStyle.STRICT);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
+            
             try {
                 // si la fecha es valida, no hay errores
                 LocalDate.parse(date, formatter);
@@ -156,10 +158,10 @@ public class Check {
                 // Si ocurre un error al intentar parsear la fecha, significa que no es válida
                 return -14;  //formato correcto pero no valida
             }
-        } else {
+        // } else {
             // Si no coincide con el patrón de formato
-            return -4;  // Código de error para un formato incorrecto
-        }
+            //return -4;  // Código de error para un formato incorrecto
+       // }
     }
 
     ///////////////
@@ -174,7 +176,7 @@ public static int isValidDateComplete(String date) {
             Pattern pattern = Pattern.compile("^(\\d{4})/(\\d{2})/(\\d{2})-(\\d{2}):(\\d{2}):(\\d{2})$");
             Matcher matcher = pattern.matcher(date);
             if (matcher.matches()) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm:ss").withResolverStyle(ResolverStyle.STRICT);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm:ss");//.withResolverStyle(ResolverStyle.STRICT);
                 try {
                     LocalDateTime.parse(date, formatter);
                     return 0;

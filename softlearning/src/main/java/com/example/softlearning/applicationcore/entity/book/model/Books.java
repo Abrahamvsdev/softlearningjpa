@@ -2,6 +2,7 @@ package com.example.softlearning.applicationcore.entity.book.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 
 import com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.Check;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions.Dimensions;
@@ -13,7 +14,9 @@ import com.example.softlearning.applicationcore.entity.sharedkernel.model.produc
 public class Books extends Product implements Storable {
     
     protected LocalDate date;
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    //protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
     protected String author;
     protected String isbn;
     protected String cover;
