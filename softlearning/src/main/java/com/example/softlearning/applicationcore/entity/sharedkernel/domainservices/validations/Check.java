@@ -269,29 +269,40 @@ public static int isValidDateComplete(String date) {
     }
 
     public static int checkISBN(String isbn) {
-        // SI no es nulo ni vacio retornará un 0
-        int resultado = Check.isNull(isbn);
-        if (resultado != 0) {
-            return resultado;
+        if (isbn == null || isbn.isEmpty()) {
+            return -1;  // Código de error para null o vacío
         }
+
+        // Eliminar guiones
         String cleanIsbn = isbn.replaceAll("-", "");
 
+        // Verificar longitud mínima y máxima
         if (cleanIsbn.length() < 10) {
             return -3;
         }
         if (cleanIsbn.length() > 13) {
             return -8;
         }
-        if(!cleanIsbn.matches("^(?:\\\\d{9}X|\\\\d{10})$")) return -22;
-        if(!cleanIsbn.matches("^(?:\\d{9}X|\\d{10})$")) return -22;
 
-        if (cleanIsbn.length() == 13 && cleanIsbn.matches("^97[89]\\d{10}$")) {
-            return 0;
+        // Validar ISBN-13
+        if (cleanIsbn.length() == 13) {
+            if (cleanIsbn.matches("^97[89]\\d{10}$")) {
+                return 0;  // ISBN-13 válido
+            } else {
+                return -22;  // ISBN-13 inválido
+            }
         }
-        if (cleanIsbn.length() == 10 && cleanIsbn.matches("^(?:\\d{9}X|\\d{10})$")) {
-            return 0;
+
+        // Validar ISBN-10
+        if (cleanIsbn.length() == 10) {
+            if (cleanIsbn.matches("^(?:\\d{9}X|\\d{10})$")) {
+                return 0;  // ISBN-10 válido
+            } else {
+                return -22;  // ISBN-10 inválido
+            }
         }
-        return resultado;
+
+        return -22; // Si no es ni ISBN-10 ni ISBN-13
     }
 
     public static int checkMobilePhone(String n) {

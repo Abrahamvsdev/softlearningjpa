@@ -20,7 +20,7 @@ public class BooksTest {
             "true",
             "30-04-2025",
             "willingli",
-            "123456789X",
+            "9784567890",
             "cover1",
             10,
             "genre",
@@ -40,11 +40,8 @@ public class BooksTest {
 
         Books bcopy = BooksMapper.booksFromDTO(bdto);
         System.out.println("Mapper Book: " + bcopy.getDetails());
-    
-
-
-
     }
+    
 }
 /* 
  * 
