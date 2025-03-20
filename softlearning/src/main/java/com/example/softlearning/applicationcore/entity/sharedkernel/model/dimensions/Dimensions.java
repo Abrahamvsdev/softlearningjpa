@@ -1,11 +1,11 @@
 // Version: 1.0
 package com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions;
 
-
 import com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.Check;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 
 public class Dimensions {
+
     protected double weight = 0.0;
     protected double height = 0.0;
     protected double width = 0.0;
@@ -15,14 +15,16 @@ public class Dimensions {
 
     public Dimensions() {
 
-    };
+    }
+
+    ;
 
     public static Dimensions getInstanceDimensions(
-        double weight, 
-        double height, 
-        double width, 
-        boolean fragile,
-        double length) throws BuildException {
+            double weight,
+            double height,
+            double width,
+            boolean fragile,
+            double length) throws BuildException {
         StringBuilder errors = new StringBuilder();
 
         Dimensions d = new Dimensions();
@@ -77,16 +79,14 @@ public class Dimensions {
         return this.width * this.height * this.length;
     }
 
-    
     public String getDimensionstoString() {
-        return "Height: " + this.getHeight() + " cm\n" +
-                "Weight: " + this.getWeight() + " kg\n" +
-                "Width: " + this.getWidth() + " cm\n" +
-                "Fragile: " + this.getFragile() + "\n" +
-                "Length: " + this.getLength() + " cm\n" +
-                "Volume: " + this.getVolume() + " cubic cm";
+        return "Weight: " + this.getWeight() + " kg\n"
+                + "Height: " + this.getHeight() + " cm\n"
+                + "Width: " + this.getWidth() + " cm\n"
+                + "Fragile: " + this.getFragile() + "\n"
+                + "Length: " + this.getLength() + " cm\n"
+                + "Volume: " + this.getVolume() + " cubic cm";
     }
-
 
     public int setWeight(double weight) {
         int errorWeight = Check.range(weight);
