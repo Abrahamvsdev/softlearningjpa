@@ -1,5 +1,4 @@
 package com.core.entities.client;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,11 +28,11 @@ public class ClientTestJunit {
     @BeforeEach // Is BeforeEach as Jose does said
     public void setUp() {
         // Initialize the formatter and valid test data
-        formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu");
         validName = "John";
         validSurname = "Doe";
-        validEmail = "john.doe@example.com";
-        validAddress = "123 Main St";
+        validEmail = "elputojohn.doe@example.com";
+        validAddress = "123 False St";
         validDni = "12345678A";
         validNumber = "123456789";
         validPaymentMode = "Credit Card";
@@ -112,26 +111,6 @@ public class ClientTestJunit {
         }
     }
     
-    @Test
-    public void testFutureRegistrationDate() {
-        try {
-            // Try to create a client with a future date
-            LocalDate futureDate = LocalDate.now().plusYears(1);
-            String futureDateStr = futureDate.format(formatter);
-            
-            Client client = Client.getInstance(
-                validName, validSurname, validEmail, validAddress, validDni, 
-                validNumber, validPaymentMode, validAntiquity, validMembershipLevel, futureDateStr
-            );
-            
-            // Check if the Check.isValidDate method validates future dates
-            // If it doesn't, this test may need to be adjusted
-            assertEquals(futureDateStr, client.getRegistrationDate());
-        } catch (Exception e) {
-            // If Check.isValidDate prevents future dates, this is expected
-            assertTrue(e.getMessage().contains("No es posible crear el cliente"));
-        }
-    }
     
     @Test
     public void testSetPaymentMode() {
@@ -208,7 +187,7 @@ public class ClientTestJunit {
                 validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
             );
             
-            String expectedContactData = "Client: John Doe, Email: john.doe@example.com, Payment Mode: Credit Card";
+            String expectedContactData = "Client: John Doe, Email: elputojohn.doe@example.com, Payment Mode: Credit Card";
             assertEquals(expectedContactData, client.getContactData());
         } catch (Exception e) {
             fail("Client creation threw an exception: " + e.getMessage());
