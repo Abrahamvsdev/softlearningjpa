@@ -1,6 +1,7 @@
 TestSerializerOrder.class
 TestSerializerBook.class
 TestOrder.class
+com\example\softlearning\applicationcore\entity\sharedkernel\domainservices\validations\CheckTest.class
 TestOrderDTO.class
 TestOrderGrande.class
 com\core\entities\books\BooksTest.class
