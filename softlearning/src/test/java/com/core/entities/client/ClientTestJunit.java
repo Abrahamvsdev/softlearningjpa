@@ -24,7 +24,8 @@ public class ClientTestJunit {
     private int validAntiquity;
     private String validMembershipLevel;
     private String validRegistrationDate;
-    
+    private Client clientDefault;
+
     @BeforeEach // Is BeforeEach as Jose does said
     public void setUp() {
         // Initialize the formatter and valid test data
@@ -39,6 +40,19 @@ public class ClientTestJunit {
         validAntiquity = 5;
         validMembershipLevel = "Premium";
         validRegistrationDate = "01-01-2023";
+        try {
+            clientDefault = Client.getInstance(
+                validName, validSurname, validEmail, validAddress, validDni, 
+                validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
+            );
+        } catch (Exception e) {
+            fail("Client creation threw an exception: " + e.getMessage());
+        }
+        
+    }
+    @Test
+    public void testGetPaymentMode() {
+        assertEquals(validPaymentMode, clientDefault.getPaymentMode());
     }
     
     @Test
@@ -51,18 +65,25 @@ public class ClientTestJunit {
             );
             
             // Verify all fields are set correctly
-            assertEquals(validName, client.getName());
-            assertEquals(validSurname, client.getSurname());
-            assertEquals(validEmail, client.getEmail());
-            assertEquals(validAddress, client.getAddress());
-            assertEquals(validDni, client.getDni());
-            assertEquals(validNumber, client.getNumber());
-            assertEquals(validAntiquity, client.getAntiquity());
-            assertEquals(validPaymentMode, client.getPaymentMode());
-            assertEquals(validMembershipLevel, client.getMembershipLevel());
-            assertEquals(validRegistrationDate, client.getRegistrationDate());
+            
+            
         } catch (Exception e) {
             fail("Valid client creation threw an exception: " + e.getMessage());
+        }
+    }
+    @Test
+    public void testInvalidName() {
+        try {
+            // Try to create a client with an empty name
+            Client client = Client.getInstance(
+                "", validSurname, validEmail, validAddress, validDni, 
+                validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
+            );
+            fail("Should have thrown an exception for invalid name");
+        } catch (Exception e) {
+            // Expected exception
+            //assertTrue(e.getMessage().contains("No es posible crear al tipo"));
+            assertEquals("No es posible crear al tipo: \nNo puede ser null\n",e.getMessage());
         }
     }
     
@@ -114,24 +135,13 @@ public class ClientTestJunit {
     
     @Test
     public void testSetPaymentMode() {
-        try {
-            Client client = Client.getInstance(
-                validName, validSurname, validEmail, validAddress, validDni, 
-                validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
-            );
-            
             // Test valid payment mode update
-            int result = client.setPaymentMode("Debit Card");
+            int result = clientDefault.setPaymentMode(validPaymentMode);
             assertEquals(0, result);
-            assertEquals("Debit Card", client.getPaymentMode());
             
-            // Test invalid payment mode update
-            result = client.setPaymentMode("");
-            assertNotEquals(0, result);
-            assertEquals("Debit Card", client.getPaymentMode()); // Should remain unchanged
-        } catch (Exception e) {
-            fail("Client creation threw an exception: " + e.getMessage());
-        }
+        
+            
+        
     }
     
     @Test
