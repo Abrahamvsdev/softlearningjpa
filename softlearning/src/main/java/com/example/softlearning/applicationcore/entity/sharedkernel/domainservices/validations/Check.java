@@ -173,21 +173,21 @@ public static int isValidDateComplete(String date) {
         }
 
         if (date.length() > 0) {
-            Pattern pattern = Pattern.compile("^(\\d{4})/(\\d{2})/(\\d{2})-(\\d{2}):(\\d{2}):(\\d{2})$");
-            Matcher matcher = pattern.matcher(date);
-            if (matcher.matches()) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm:ss");//.withResolverStyle(ResolverStyle.STRICT);
+            // Pattern pattern = Pattern.compile("^(\\d{4})/(\\d{2})/(\\d{2})-(\\d{2}):(\\d{2}):(\\d{2})$");
+            // Matcher matcher = pattern.matcher(date);
+            //if (matcher.matches()) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu/MM/dd-HH:mm:ss");//.withResolverStyle(ResolverStyle.STRICT);
                 try {
                     LocalDateTime.parse(date, formatter);
                     return 0;
                 } catch (DateTimeParseException e) {
                     return -14;  // Formato correcto pero fecha inválida
                 }
-            } else {
-                return -4;  // Formato incorrecto
-            }
+            // } else {
+            //     return -4;  // Formato incorrecto
+            // }
         }
-        return 0;  // Fecha nula
+        return -1;  // Fecha nula
     }
 
     // public static int isValidDate(String stringdate) {

@@ -1,251 +1,323 @@
 package com.core.entities.client;
+
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.example.softlearning.applicationcore.entity.client.model.Client;
 
-
 public class ClientTestJunit {
-    
-    private DateTimeFormatter formatter;
-    private String validName;
-    private String validSurname;
-    private String validEmail;
-    private String validAddress;
-    private String validDni;
-    private String validNumber;
-    private String validPaymentMode;
-    private int validAntiquity;
-    private String validMembershipLevel;
-    private String validRegistrationDate;
-    private Client clientDefault;
 
-    @BeforeEach // Is BeforeEach as Jose does said
-    public void setUp() {
-        // Initialize the formatter and valid test data
-        formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu");
-        validName = "John";
-        validSurname = "Doe";
-        validEmail = "elputojohn.doe@example.com";
-        validAddress = "123 False St";
-        validDni = "12345678A";
-        validNumber = "123456789";
-        validPaymentMode = "Credit Card";
-        validAntiquity = 5;
-        validMembershipLevel = "Premium";
-        validRegistrationDate = "01-01-2023";
-        try {
-            clientDefault = Client.getInstance(
-                validName, validSurname, validEmail, validAddress, validDni, 
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu");
+    // Valores válidos para todos los campos
+    private final String validName = "Ana";
+    private final String validSurname = "Gómez";
+    private final String validEmail = "ana.gomez@example.com";
+    private final String validAddress = "Calle Mayor 5";
+    private final String validDni = "87654321X";
+    private final String validNumber = "600123456";
+    private final int validAntiquity = 3;
+    private final String validPaymentMode = "PayPal";
+    private final String validMembershipLevel = "Premium";
+    private final String validRegistrationDate = "02-03-2025";
+
+    private Client validClient;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        validClient = Client.getInstance(
+                validName, validSurname, validEmail, validAddress, validDni,
                 validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
-            );
-        } catch (Exception e) {
-            fail("Client creation threw an exception: " + e.getMessage());
-        }
-        
+        );
     }
+
+    //--------------------- Tests para campos específicos de Client ---------------------
+    @Test
+    public void testInvalidPaymentMode_Null() {
+        try {
+            Client.getInstance(
+                    validName, validSurname, validEmail, validAddress, validDni,
+                    validNumber, null, validAntiquity, validMembershipLevel, validRegistrationDate
+            );
+            fail("Debería fallar por paymentMode nulo");
+        } catch (Exception e) {
+            assertEquals("No es posible crear el cliente: \nNo puede ser null\n", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testInvalidPaymentMode_TooShort() {
+        try {
+            Client.getInstance(
+                    validName, validSurname, validEmail, validAddress, validDni,
+                    validNumber, "A", validAntiquity, validMembershipLevel, validRegistrationDate
+            );
+            fail("Debería fallar por paymentMode demasiado corto");
+        } catch (Exception e) {
+            assertEquals("No es posible crear el cliente: \nHas introducido pocos caracteres\n", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testInvalidPaymentMode_TooLong() {
+        String longPaymentMode = "AAAaaaAAaaaAAAaaaaaaaaaaaaaaaaaa";
+        try {
+            Client.getInstance(
+                    validName, validSurname, validEmail, validAddress, validDni,
+                    validNumber, longPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
+            );
+            fail("Debería fallar por paymentMode demasiado largo");
+        } catch (Exception e) {
+            assertEquals("No es posible crear el cliente: \nHas introducido demasiados caracteres\n", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testInvalidMembershipLevel_InvalidFormat() {
+        try {
+            Client.getInstance(
+                    validName, validSurname, validEmail, validAddress, validDni,
+                    validNumber, validPaymentMode, validAntiquity, "", validRegistrationDate
+            );
+            fail("Debería fallar por membershipLevel inválido");
+        } catch (Exception e) {
+            assertEquals("No es posible crear el cliente: \nNo puede ser null\n", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testSetRegistrationDate_Valid() throws Exception {
+        Client client = Client.getInstance(validName, validSurname, validEmail, validAddress, validDni,
+                validNumber, validPaymentMode, validAntiquity, validMembershipLevel, "29-02-2024");
+        assertEquals(0, client.setRegistrationDate("29-02-2024")); // Año bisiesto
+    }
+
+    @Test
+    public void testInvalidRegistrationDate_InvalidFormat() {
+        try {
+            Client.getInstance(
+                    validName, validSurname, validEmail, validAddress, validDni,
+                    validNumber, validPaymentMode, validAntiquity, validMembershipLevel, "2025/03/02"
+            );
+            fail("Debería fallar por formato de fecha incorrecto");
+        } catch (Exception e) {
+            assertEquals("No es posible crear el cliente: \nFormato correcto pero no válida\n", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testInvalidRegistrationDate_InvalidMonth() {
+        try {
+            Client.getInstance(
+                    validName, validSurname, validEmail, validAddress, validDni,
+                    validNumber, validPaymentMode, validAntiquity, validMembershipLevel, "15-13-2025"
+            );
+            fail("Debería fallar por mes inválido");
+        } catch (Exception e) {
+            assertEquals("No es posible crear el cliente: \nFormato correcto pero no válida\n", e.getMessage());
+        }
+    }
+
+    //--------------------- Tests para campos heredados de Person ---------------------
+    @Test
+    public void testInvalidName_TooLong() {
+        String longName = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        try {
+            Client.getInstance(
+                    longName, validSurname, validEmail, validAddress, validDni,
+                    validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
+            );
+            fail("Debería fallar por nombre demasiado largo");
+        } catch (Exception e) {
+            assertEquals("No es posible crear al tipo: \nHas introducido demasiados caracteres\n", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testInvalidEmail_InvalidFormat() {
+        try {
+            Client.getInstance(
+                    validName, validSurname, "correo-invalido", validAddress, validDni,
+                    validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
+            );
+            fail("Debería fallar por email inválido");
+        } catch (Exception e) {
+            assertEquals("No es posible crear al tipo: \nFormato de email incorrecto\n", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testInvalidDni_InvalidFormat() {
+        try {
+            Client.getInstance(
+                    validName, validSurname, validEmail, validAddress, "DNI_INVALIDO",
+                    validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
+            );
+            fail("Debería fallar por DNI inválido");
+        } catch (Exception e) {
+            assertEquals("No es posible crear al tipo: \nDNI no válido\n", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testInvalidAntiquity_Negative() {
+        try {
+            Client.getInstance(
+                    validName, validSurname, validEmail, validAddress, validDni,
+                    validNumber, validPaymentMode, -1, validMembershipLevel, validRegistrationDate
+            );
+            fail("Debería fallar por antigüedad negativa");
+        } catch (Exception e) {
+            assertEquals("No es posible crear al tipo: \nHas introducido un numero negativo\n", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testInvalidSurname_TooShort() {
+        try {
+            Client.getInstance(
+                    validName, "A", validEmail, validAddress, validDni,
+                    validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
+            );
+            fail("Debería fallar por apellido demasiado corto");
+        } catch (Exception e) {
+            assertEquals("No es posible crear al tipo: \nHas introducido pocos caracteres\n", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testInvalidSurname_TooLong() {
+        String longSurname = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        try {
+            Client.getInstance(
+                    validName, longSurname, validEmail, validAddress, validDni,
+                    validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
+            );
+            fail("Debería fallar por apellido demasiado largo");
+        } catch (Exception e) {
+            assertEquals("No es posible crear al tipo: \nHas introducido demasiados caracteres\n", e.getMessage());
+        }
+    }
+
+    @Test
+public void testValidDni() throws Exception {
+    Client client = Client.getInstance(
+        validName, validSurname, validEmail, validAddress, "99999999R",
+        validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
+    );
+    assertEquals("99999999R", client.getDni());
+}
+
+    //--------------------- Tests de getters ---------------------
     @Test
     public void testGetPaymentMode() {
-        assertEquals(validPaymentMode, clientDefault.getPaymentMode());
+        assertEquals(validPaymentMode, validClient.getPaymentMode());
     }
-    
+
     @Test
-    public void testValidClientCreation() {
-        try {
-            // Create a valid client
-            Client client = Client.getInstance(
-                validName, validSurname, validEmail, validAddress, validDni, 
-                validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
-            );
-            
-            // Verify all fields are set correctly
-            
-            
-        } catch (Exception e) {
-            fail("Valid client creation threw an exception: " + e.getMessage());
-        }
+    public void testGetMembershipLevel() {
+        assertEquals(validMembershipLevel, validClient.getMembershipLevel());
     }
+
     @Test
-    public void testInvalidName() {
-        try {
-            // Try to create a client with an empty name
-            Client client = Client.getInstance(
-                "", validSurname, validEmail, validAddress, validDni, 
-                validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
-            );
-            fail("Should have thrown an exception for invalid name");
-        } catch (Exception e) {
-            // Expected exception
-            //assertTrue(e.getMessage().contains("No es posible crear al tipo"));
-            assertEquals("No es posible crear al tipo: \nNo puede ser null\n",e.getMessage());
-        }
+    public void testGetRegistrationDate() {
+        assertEquals("02-03-2025", validClient.getRegistrationDate());
     }
-    
-    @Test
-    public void testInvalidPaymentMode() {
-        try {
-            // Try to create a client with an empty payment mode
-            Client client = Client.getInstance(
-                validName, validSurname, validEmail, validAddress, validDni, 
-                validNumber, "", validAntiquity, validMembershipLevel, validRegistrationDate
-            );
-            fail("Should have thrown an exception for invalid payment mode");
-        } catch (Exception e) {
-            // Expected exception
-            assertTrue(e.getMessage().contains("No es posible crear el cliente"));
-        }
-    }
-    
-    @Test
-    public void testInvalidMembershipLevel() {
-        try {
-            // Try to create a client with an empty membership level
-            Client client = Client.getInstance(
-                validName, validSurname, validEmail, validAddress, validDni, 
-                validNumber, validPaymentMode, validAntiquity, "", validRegistrationDate
-            );
-            fail("Should have thrown an exception for invalid membership level");
-        } catch (Exception e) {
-            // Expected exception
-            assertTrue(e.getMessage().contains("No es posible crear el cliente"));
-        }
-    }
-    
-    @Test
-    public void testInvalidRegistrationDate() {
-        try {
-            // Try to create a client with an invalid date format
-            Client client = Client.getInstance(
-                validName, validSurname, validEmail, validAddress, validDni, 
-                validNumber, validPaymentMode, validAntiquity, validMembershipLevel, "2023/01/01"
-            );
-            fail("Should have thrown an exception for invalid registration date");
-        } catch (Exception e) {
-            // Expected exception
-            assertTrue(e.getMessage().contains("No es posible crear el cliente"));
-        }
-    }
-    
-    
-    @Test
-    public void testSetPaymentMode() {
-            // Test valid payment mode update
-            int result = clientDefault.setPaymentMode(validPaymentMode);
-            assertEquals(0, result);
-            
-        
-            
-        
-    }
-    
-    @Test
-    public void testSetMembershipLevel() {
-        try {
-            Client client = Client.getInstance(
-                validName, validSurname, validEmail, validAddress, validDni, 
-                validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
-            );
-            
-            // Test valid membership level update
-            int result = client.setMembershipLevel("Gold");
-            assertEquals(0, result);
-            assertEquals("Gold", client.getMembershipLevel());
-            
-            // Test invalid membership level update
-            result = client.setMembershipLevel("");
-            assertNotEquals(0, result);
-            assertEquals("Gold", client.getMembershipLevel()); // Should remain unchanged
-        } catch (Exception e) {
-            fail("Client creation threw an exception: " + e.getMessage());
-        }
-    }
-    
-    @Test
-    public void testSetRegistrationDate() {
-        try {
-            Client client = Client.getInstance(
-                validName, validSurname, validEmail, validAddress, validDni, 
-                validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
-            );
-            
-            // Test valid registration date update
-            String newDate = "15-06-2022";
-            int result = client.setRegistrationDate(newDate);
-            assertEquals(0, result);
-            assertEquals(newDate, client.getRegistrationDate());
-            
-            // Test invalid registration date update
-            result = client.setRegistrationDate("2022/06/15");
-            assertNotEquals(0, result);
-            assertEquals(newDate, client.getRegistrationDate()); // Should remain unchanged
-        } catch (Exception e) {
-            fail("Client creation threw an exception: " + e.getMessage());
-        }
-    }
-    
+
+    //--------------------- Tests de métodos heredados ---------------------
     @Test
     public void testGetContactData() {
-        try {
-            Client client = Client.getInstance(
-                validName, validSurname, validEmail, validAddress, validDni, 
-                validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
-            );
-            
-            String expectedContactData = "Client: John Doe, Email: elputojohn.doe@example.com, Payment Mode: Credit Card";
-            assertEquals(expectedContactData, client.getContactData());
-        } catch (Exception e) {
-            fail("Client creation threw an exception: " + e.getMessage());
-        }
+        String expected = "Client: Ana Gómez, Email: ana.gomez@example.com, Payment Mode: PayPal";
+        assertEquals(expected, validClient.getContactData());
     }
-    
+
     @Test
     public void testGetDetails() {
-        try {
-            Client client = Client.getInstance(
-                validName, validSurname, validEmail, validAddress, validDni, 
+        String expected = "Client Details: \n"
+                + "Name: Ana\n"
+                + "Surname: Gómez\n"
+                + "Email: ana.gomez@example.com\n"
+                + "Address: Calle Mayor 5\n"
+                + "DNI: 87654321X\n"
+                + "Number: 600123456\n"
+                + "Antiquity: 3\n"
+                + "Payment Mode: PayPal\n"
+                + "Membership Level: Premium\n"
+                + "Registration Date: 02-03-2025";
+        assertEquals(expected, validClient.getDetails());
+    }
+
+    //--------------------- Tests de setters ---------------------
+    @Test
+    public void testSetPaymentMode_Valid() throws Exception {
+        Client client = Client.getInstance(
+                validName, validSurname, validEmail, validAddress, validDni,
+                validNumber, "CreditCard", validAntiquity, validMembershipLevel, validRegistrationDate
+        );
+        assertEquals(0, client.setPaymentMode("Transfer"));
+    }
+
+    @Test
+    public void testSetRegistrationDate_Invalid() throws Exception {
+        Client client = Client.getInstance(
+                validName, validSurname, validEmail, validAddress, validDni,
                 validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
+        );
+        assertEquals(-14, client.setRegistrationDate("30-02-2025"));
+    }
+
+    @Test
+    public void testInvalidMembershipLevel_TooLong() {
+        String longMembership = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        try {
+            Client.getInstance(
+                    validName, validSurname, validEmail, validAddress, validDni,
+                    validNumber, validPaymentMode, validAntiquity, longMembership, validRegistrationDate
             );
-            
-            String details = client.getDetails();
-            
-            // Verify all fields are included in the details
-            assertTrue(details.contains("Name: " + validName));
-            assertTrue(details.contains("Surname: " + validSurname));
-            assertTrue(details.contains("Email: " + validEmail));
-            assertTrue(details.contains("Address: " + validAddress));
-            assertTrue(details.contains("DNI: " + validDni));
-            assertTrue(details.contains("Number: " + validNumber));
-            assertTrue(details.contains("Antiquity: " + validAntiquity));
-            assertTrue(details.contains("Payment Mode: " + validPaymentMode));
-            assertTrue(details.contains("Membership Level: " + validMembershipLevel));
-            assertTrue(details.contains("Registration Date: " + validRegistrationDate));
+            fail("Debería fallar por membershipLevel demasiado largo");
         } catch (Exception e) {
-            fail("Client creation threw an exception: " + e.getMessage());
+            assertEquals("No es posible crear el cliente: \nHas introducido demasiados caracteres\n", e.getMessage());
         }
     }
-    
+
     @Test
-    public void testMultipleErrors() {
+    public void testInvalidRegistrationDate_InvalidDay() {
         try {
-            // Try to create a client with multiple invalid fields
-            Client client = Client.getInstance(
-                validName, validSurname, validEmail, validAddress, validDni, 
-                validNumber, "", validAntiquity, "", "invalid-date"
+            Client.getInstance(
+                    validName, validSurname, validEmail, validAddress, validDni,
+                    validNumber, validPaymentMode, validAntiquity, validMembershipLevel, "32-01-2020"
             );
-            fail("Should have thrown an exception for multiple invalid fields");
+            fail("Debería fallar por día inválido");
         } catch (Exception e) {
-            // Expected exception
-            String errorMessage = e.getMessage();
-            assertTrue(errorMessage.contains("No es posible crear el cliente"));
-            // Check that the error message contains multiple error lines
-            int lineCount = errorMessage.split("\n").length;
-            assertTrue(lineCount > 2, "Error message should contain multiple lines: " + errorMessage);
+            assertEquals("No es posible crear el cliente: \nFormato correcto pero no válida\n", e.getMessage());
+        }
+    }
+
+// Test para setMembershipLevel
+    @Test
+    public void testSetMembershipLevel_Invalid() throws Exception {
+        Client client = Client.getInstance(
+                validName, validSurname, validEmail, validAddress, validDni,
+                validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
+        );
+        assertEquals(-7, client.setMembershipLevel("MembershipLevelTooLong"));
+    }
+
+// Test para herencia: número de teléfono inválido
+    @Test
+    public void testInvalidNumber() {
+        try {
+            Client.getInstance(
+                    validName, validSurname, validEmail, validAddress, validDni,
+                    "12", validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate
+            );
+            fail("Debería fallar");
+        } catch (Exception e) {
+            String expected = "No es posible crear al tipo: \nHas introducido pocos caracteres\n";
+            assertEquals(expected, e.getMessage());
         }
     }
 }

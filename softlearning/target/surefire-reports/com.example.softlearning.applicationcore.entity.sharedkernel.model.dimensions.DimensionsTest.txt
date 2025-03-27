@@ -1,23 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions.DimensionsTest
 -------------------------------------------------------------------------------
-Tests run: 10, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.126 s <<< FAILURE! -- in com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions.DimensionsTest
-com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions.DimensionsTest.testDimensionstoStringExactFormat -- Time elapsed: 0.031 s <<< FAILURE!
-org.opentest4j.AssertionFailedError: 
-expected: <Weight: 7.5, Height: 10.0, Width: 5.0, Length: 2.0, Fragile: true, Volume: 100.0> but was: <Height: 10.0 cm
-Weight: 7.5 kg
-Width: 5.0 cm
-Fragile: true
-Length: 2.0 cm
-Volume: 100.0 cubic cm>
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions.DimensionsTest.testDimensionstoStringExactFormat(DimensionsTest.java:162)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-
+Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.087 s -- in com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions.DimensionsTest

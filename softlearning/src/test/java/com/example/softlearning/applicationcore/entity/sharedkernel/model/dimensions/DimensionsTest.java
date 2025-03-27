@@ -1,180 +1,204 @@
 package com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 
-class DimensionsTest {
+public class DimensionsTest {
 
+    // Valores válidos por defecto
+    private static final double validWeight = 5.0;
+    private static final double validHeight = 10.0;
+    private static final double validWidth = 15.0;
+    private static final boolean validFragile = true;
+    private static final double validLength = 20.0;
+
+    private Dimensions validDimensions;
+
+    @BeforeEach
+    public void setUp() throws BuildException {
+        validDimensions = Dimensions.getInstanceDimensions(
+                validWeight, validHeight, validWidth, validFragile, validLength
+        );
+    }
+
+    //--------------------- Tests para creación inválida ---------------------
     @Test
-    void testDefaultConstructorInitializesDefaults() {
-        Dimensions dimensions = new Dimensions();
-        assertEquals(0.0, dimensions.getWeight());
-        assertEquals(0.0, dimensions.getHeight());
-        assertEquals(0.0, dimensions.getWidth());
-        assertEquals(0.0, dimensions.getLength());
-        assertFalse(dimensions.getFragile());
-        assertEquals(0.0, dimensions.getVolume());
+    public void testNegativeWeight() {
+        try {
+            Dimensions.getInstanceDimensions(
+                    -1.0, validHeight, validWidth, validFragile, validLength
+            );
+            fail("Debería fallar por peso negativo");
+        } catch (BuildException e) {
+            assertEquals(
+                    "Not possible to create the dimensions: \nHas introducido un numero negativo\n",
+                    e.getMessage()
+            );
+        }
     }
 
     @Test
-    void testGetInstanceDimensionsValidValues() throws BuildException {
-        double weight = 10.5;
-        double height = 20.0;
-        double width = 30.0;
-        boolean fragile = true;
-        double length = 40.0;
-
-        Dimensions dimensions = Dimensions.getInstanceDimensions(weight, height, width, fragile, length);
-
-        assertEquals(weight, dimensions.getWeight());
-        assertEquals(height, dimensions.getHeight());
-        assertEquals(width, dimensions.getWidth());
-        assertEquals(length, dimensions.getLength());
-        assertEquals(fragile, dimensions.getFragile());
-        // Check volume calculation (width * height * length)
-        assertEquals(width * height * length, dimensions.getVolume());
+    public void testNegativeHeight() {
+        try {
+            Dimensions.getInstanceDimensions(
+                    validWeight, -1.0, validWidth, validFragile, validLength
+            );
+            fail("Debería fallar por altura negativa");
+        } catch (BuildException e) {
+            assertEquals(
+                    "Not possible to create the dimensions: \nHas introducido un numero negativo\n",
+                    e.getMessage()
+            );
+        }
     }
 
     @Test
-    void testGetDimensionstoStringFormat() throws BuildException {
-        double weight = 5.0;
-        double height = 15.0;
-        double width = 10.0;
-        boolean fragile = false;
-        double length = 20.0;
-
-        Dimensions dimensions = Dimensions.getInstanceDimensions(weight, height, width, fragile, length);
-        String dimensionsString = dimensions.getDimensionstoString();
-
-        assertTrue(dimensionsString.contains("Height: " + height));
-        assertTrue(dimensionsString.contains("Weight: " + weight));
-        assertTrue(dimensionsString.contains("Width: " + width));
-        assertTrue(dimensionsString.contains("Fragile: " + fragile));
-        assertTrue(dimensionsString.contains("Length: " + length));
-        // Volume calculated as width * height * length
-        assertTrue(dimensionsString.contains("Volume: " + (width * height * length)));
-    }
-
-    // New test: Verify that a BuildException is thrown when an invalid (negative) value is provided.
-    @Test
-    void testGetInstanceDimensionsThrowsBuildExceptionForInvalidValues() {
-        double invalidValue = -1.0;
-        double validValue = 10.0;
-        boolean fragile = false;
-
-        Exception exception = assertThrows(BuildException.class, () -> {
-            Dimensions.getInstanceDimensions(invalidValue, validValue, validValue, fragile, validValue);
-        });
-        assertTrue(exception.getMessage().contains("Not possible to create the dimensions"));
-    }
-
-    // New test: Test individual setter methods update the properties correctly.
-    @Test
-    void testSettersIndividually() {
-        Dimensions dimensions = new Dimensions();
-        int errorWeight = dimensions.setWeight(12.3);
-        int errorHeight = dimensions.setHeight(23.4);
-        int errorWidth = dimensions.setWidth(34.5);
-        int errorLength = dimensions.setLength(45.6);
-        int errorFragile = dimensions.setFragile(true);
-
-        assertEquals(0, errorWeight);
-        assertEquals(0, errorHeight);
-        assertEquals(0, errorWidth);
-        assertEquals(0, errorLength);
-        assertEquals(0, errorFragile);
-
-        assertEquals(12.3, dimensions.getWeight());
-        assertEquals(23.4, dimensions.getHeight());
-        assertEquals(34.5, dimensions.getWidth());
-        assertEquals(45.6, dimensions.getLength());
-        assertTrue(dimensions.getFragile());
+    public void testNegativeWidth() {
+        try {
+            Dimensions.getInstanceDimensions(
+                    validWeight, validHeight, -1.0, validFragile, validLength
+            );
+            fail("Debería fallar por ancho negativo");
+        } catch (BuildException e) {
+            assertEquals(
+                    "Not possible to create the dimensions: \nHas introducido un numero negativo\n",
+                    e.getMessage()
+            );
+        }
     }
 
     @Test
-    void testVolumeCalculationAfterUpdate() {
-        Dimensions dimensions = new Dimensions();
-        dimensions.setWidth(2.0);
-        dimensions.setHeight(3.0);
-        dimensions.setLength(4.0);
-
-        double expectedVolume = 2.0 * 3.0 * 4.0;
-        assertEquals(expectedVolume, dimensions.getVolume());
+    public void testNegativeLength() {
+        try {
+            Dimensions.getInstanceDimensions(
+                    validWeight, validHeight, validWidth, validFragile, -1.0
+            );
+            fail("Debería fallar por longitud negativa");
+        } catch (BuildException e) {
+            assertEquals(
+                    "Not possible to create the dimensions: \nHas introducido un numero negativo\n",
+                    e.getMessage()
+            );
+        }
     }
 
-    // Test: Verifica que actualizar individualmente una dimensión actualiza correctamente el volumen
     @Test
-    void testVolumeRecalculationAfterMultipleUpdates() {
-        Dimensions dimensions = new Dimensions();
-        // Inicialmente se asignan valores
-        dimensions.setWidth(1.0);
-        dimensions.setHeight(2.0);
-        dimensions.setLength(3.0);
-        double initialVolume = 1.0 * 2.0 * 3.0;
-        assertEquals(initialVolume, dimensions.getVolume());
-
-        // Actualización de las dimensiones
-        dimensions.setWidth(4.0);
-        dimensions.setHeight(5.0);
-        dimensions.setLength(6.0);
-        double updatedVolume = 4.0 * 5.0 * 6.0;
-        assertEquals(updatedVolume, dimensions.getVolume());
+    public void testMultipleInvalidDimensions() {
+        try {
+            Dimensions.getInstanceDimensions(
+                    -1.0, -2.0, -3.0, validFragile, -4.0
+            );
+            fail("Debería fallar por múltiples errores");
+        } catch (BuildException e) {
+            String expectedMessage = "Not possible to create the dimensions: \n"
+                    + "Has introducido un numero negativo\n"
+                    + "Has introducido un numero negativo\n"
+                    + "Has introducido un numero negativo\n"
+                    + "Has introducido un numero negativo\n";
+            assertEquals(expectedMessage, e.getMessage());
+        }
     }
 
-    // Test: Validar la creación de Dimensions con valores límite (por ejemplo, cero)
+    //--------------------- Tests de getters ---------------------
     @Test
-    void testInstanceDimensionsWithZeroValues() throws BuildException {
-        double weight = 0.0;
-        double height = 0.0;
-        double width = 0.0;
-        double length = 0.0;
-        boolean fragile = false;
-
-        Dimensions dimensions = Dimensions.getInstanceDimensions(weight, height, width, fragile, length);
-
-        assertEquals(0.0, dimensions.getWeight());
-        assertEquals(0.0, dimensions.getHeight());
-        assertEquals(0.0, dimensions.getWidth());
-        assertEquals(0.0, dimensions.getLength());
-        assertFalse(dimensions.getFragile());
-        assertEquals(0.0, dimensions.getVolume());
+    public void testGetWeight() {
+        assertEquals(validWeight, validDimensions.getWeight(), 0.001);
     }
 
-    // Test: Verifica el método toString para un formato exacto esperado (si se conoce el formato)
     @Test
-    void testDimensionstoStringExactFormat() throws BuildException {
-        double weight = 7.5;
-        double height = 10.0;
-        double width = 5.0;
-        boolean fragile = true;
-        double length = 2.0;
-
-        Dimensions dimensions = Dimensions.getInstanceDimensions(weight, height, width, fragile, length);
-        String expectedFormat = "Weight: " + weight + " kg\n"
-                + "Height: " + height + " cm\n"
-                + "Width: " + width + " cm\n"
-                + "Fragile: " + fragile + "\n"
-                + "Length: " + length + " cm\n"
-                + "Volume: " + (width * height * length) + " cubic cm";
-
-        // Suponiendo que getDimensionstoString retorna el string con ese formato
-        assertEquals(expectedFormat, dimensions.getDimensionstoString());
+    public void testGetHeight() {
+        assertEquals(validHeight, validDimensions.getHeight(), 0.001);
     }
 
-    // Test: Verifica que no se pueda actualizar a un valor negativo mediante setters
     @Test
-    void testSettersRejectNegativeValues() {
-        Dimensions dimensions = new Dimensions();
-
-        // Asumimos que los setters devuelven un código de error distinto de 0 para valores negativos
-        assertEquals(-6, dimensions.setWeight(-10.0));
-        assertEquals(-6, dimensions.setHeight(-5.0));
-        assertEquals(-6, dimensions.setWidth(-3.0));
-        assertEquals(-6, dimensions.setLength(-7.0));
+    public void testGetWidth() {
+        assertEquals(validWidth, validDimensions.getWidth(), 0.001);
     }
+
+    @Test
+    public void testGetFragile() {
+        assertEquals(validFragile, validDimensions.getFragile());
+    }
+
+    @Test
+    public void testGetLength() {
+        assertEquals(validLength, validDimensions.getLength(), 0.001);
+    }
+
+    @Test
+    public void testGetVolume() {
+        double expectedVolume = validWidth * validHeight * validLength;
+        assertEquals(expectedVolume, validDimensions.getVolume(), 0.001);
+    }
+
+    //--------------------- Tests de representación ---------------------
+    @Test
+    public void testGetDimensionstoString() {
+        String expected = "Weight: 5.0 kg\n"
+                + "Height: 10.0 cm\n"
+                + "Width: 15.0 cm\n"
+                + "Fragile: true\n"
+                + "Length: 20.0 cm\n"
+                + "Volume: 3000.0 cubic cm";
+        assertEquals(expected, validDimensions.getDimensionstoString());
+    }
+
+    //--------------------- Tests de setters ---------------------
+    @Test
+    public void testSetWeight_Valid() {
+        assertEquals(0, validDimensions.setWeight(7.5));
+    }
+
+    @Test
+    public void testSetWeight_Invalid() {
+        assertEquals(-6, validDimensions.setWeight(-2.0));
+    }
+
+    @Test
+    public void testSetFragile() {
+        assertEquals(0, validDimensions.setFragile(false));
+    }
+
+    @Test
+    public void testSetHeight_Valid() {
+        assertEquals(0, validDimensions.setHeight(15.0));
+    }
+
+    @Test
+    public void testSetHeight_Invalid() {
+        assertEquals(-6, validDimensions.setHeight(-1.0));
+    }
+
+    @Test
+    public void testSetWidth_Valid() {
+        assertEquals(0, validDimensions.setWidth(20.0));
+    }
+
+    @Test
+    public void testSetWidth_Invalid() {
+        assertEquals(-6, validDimensions.setWidth(-1.0));
+    }
+
+    @Test
+    public void testZeroValues() throws BuildException {
+        Dimensions dim = Dimensions.getInstanceDimensions(
+                0.0, 0.0, 0.0, false, 0.0
+        );
+        assertEquals(0.0, dim.getVolume(), 0.001);
+    }
+
+    @Test
+    public void testSetLength_Valid() {
+        assertEquals(0, validDimensions.setLength(25.0));
+    }
+
+    @Test
+    public void testSetLength_Invalid() {
+        assertEquals(-6, validDimensions.setLength(-1.0));
+    }
+
 }
