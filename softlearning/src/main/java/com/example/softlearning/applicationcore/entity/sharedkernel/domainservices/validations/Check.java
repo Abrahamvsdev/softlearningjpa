@@ -36,8 +36,9 @@ public class Check {
          * Punto y dominio: Después de los caracteres permitidos, debe haber un punto (.) seguido de entre 2 y 6 letras (a-z, A-Z). Esto representa el dominio, como .com, .net, .org, etc.
          * OLE MIS COJONES
          */
-        if (email == null) {
-            return -1;
+        int isNull = Check.isNull(email);
+        if (isNull != 0) {
+            return isNull; 
         }
 
         Pattern r = Pattern.compile(pattern);
@@ -244,8 +245,9 @@ public static int isValidDateComplete(String date) {
 
     public static int checkDNI(String dni) {
         // Patron para un DNI: 8 digitos seguidos de 1 letra mayuscula
-        if(dni == null){
-            return -1;
+        int isNull = Check.isNull(dni);
+        if (isNull != 0) {
+            return isNull; 
         }
 
         String pattern = "^\\d{8}[A-Z]$";
@@ -275,8 +277,9 @@ public static int isValidDateComplete(String date) {
     }
 
     public static int checkISBN(String isbn) {
-        if (isbn == null || isbn.isEmpty()) {
-            return -1;  // Código de error para null o vacío
+        int isNull = Check.isNull(isbn);
+        if (isNull != 0) {
+            return isNull; 
         }
 
         // Eliminar guiones
@@ -317,6 +320,9 @@ public static int isValidDateComplete(String date) {
             if (n.length() != 9 || !n.matches("^[67]\\d{8}$")) {
                 return -17;
             }
+        }
+        if(n !=null && n.trim().length() == 0){
+            return -2;
         }
         return 0;
     }

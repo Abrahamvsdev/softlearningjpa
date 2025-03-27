@@ -1,6 +1,7 @@
 package com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,77 +22,78 @@ public class DimensionsTest {
     @BeforeEach
     public void setUp() throws BuildException {
         validDimensions = Dimensions.getInstanceDimensions(
-                validWeight, validHeight, validWidth, validFragile, validLength
-        );
+                validWeight, validHeight, validWidth, validFragile, validLength);
     }
 
-    //--------------------- Tests para creación inválida ---------------------
+    // --------------------- Tests getInstance ---------------------
     @Test
-    public void testNegativeWeight() {
+    public void testDimensionsGetInstanceOk() {
+        try {
+            Dimensions d = Dimensions.getInstanceDimensions(
+                    validWeight, validHeight, validWidth, validFragile, validLength);
+            assertNotNull(d);
+        } catch (Exception e) {
+            fail("No deberia fallar, todos los campos son correctos");
+        }
+    }
+
+    @Test
+    public void testDimensionsGetInstanceInvalidWeight() {
         try {
             Dimensions.getInstanceDimensions(
-                    -1.0, validHeight, validWidth, validFragile, validLength
-            );
+                    -1.0, validHeight, validWidth, validFragile, validLength);
             fail("Debería fallar por peso negativo");
         } catch (BuildException e) {
             assertEquals(
                     "Not possible to create the dimensions: \nHas introducido un numero negativo\n",
-                    e.getMessage()
-            );
+                    e.getMessage());
         }
     }
 
     @Test
-    public void testNegativeHeight() {
+    public void testDimensionsGetInstanceInvalidHeight() {
         try {
             Dimensions.getInstanceDimensions(
-                    validWeight, -1.0, validWidth, validFragile, validLength
-            );
+                    validWeight, -1.0, validWidth, validFragile, validLength);
             fail("Debería fallar por altura negativa");
         } catch (BuildException e) {
             assertEquals(
                     "Not possible to create the dimensions: \nHas introducido un numero negativo\n",
-                    e.getMessage()
-            );
+                    e.getMessage());
         }
     }
 
     @Test
-    public void testNegativeWidth() {
+    public void testDimensionsGetInstanceInvalideWidth() {
         try {
             Dimensions.getInstanceDimensions(
-                    validWeight, validHeight, -1.0, validFragile, validLength
-            );
+                    validWeight, validHeight, -1.0, validFragile, validLength);
             fail("Debería fallar por ancho negativo");
         } catch (BuildException e) {
             assertEquals(
                     "Not possible to create the dimensions: \nHas introducido un numero negativo\n",
-                    e.getMessage()
-            );
+                    e.getMessage());
         }
     }
 
     @Test
-    public void testNegativeLength() {
+    public void testDimensionsGetInstanceInvalidLength() {
         try {
             Dimensions.getInstanceDimensions(
-                    validWeight, validHeight, validWidth, validFragile, -1.0
-            );
+                    validWeight, validHeight, validWidth, validFragile, -1.0);
             fail("Debería fallar por longitud negativa");
         } catch (BuildException e) {
             assertEquals(
                     "Not possible to create the dimensions: \nHas introducido un numero negativo\n",
-                    e.getMessage()
-            );
+                    e.getMessage());
         }
     }
 
     @Test
-    public void testMultipleInvalidDimensions() {
+    public void testDimensionsGetInstanceInvalidAll() {
         try {
             Dimensions.getInstanceDimensions(
-                    -1.0, -2.0, -3.0, validFragile, -4.0
-            );
+                    -1.0, -2.0, -3.0, validFragile, -4.0);
             fail("Debería fallar por múltiples errores");
         } catch (BuildException e) {
             String expectedMessage = "Not possible to create the dimensions: \n"
@@ -103,7 +105,7 @@ public class DimensionsTest {
         }
     }
 
-    //--------------------- Tests de getters ---------------------
+    // --------------------- Tests de getters ---------------------
     @Test
     public void testGetWeight() {
         assertEquals(validWeight, validDimensions.getWeight(), 0.001);
@@ -135,7 +137,7 @@ public class DimensionsTest {
         assertEquals(expectedVolume, validDimensions.getVolume(), 0.001);
     }
 
-    //--------------------- Tests de representación ---------------------
+    // --------------------- Tests de representación ---------------------
     @Test
     public void testGetDimensionstoString() {
         String expected = "Weight: 5.0 kg\n"
@@ -147,21 +149,60 @@ public class DimensionsTest {
         assertEquals(expected, validDimensions.getDimensionstoString());
     }
 
-    //--------------------- Tests de setters ---------------------
+    // --------------------- Tests de setters ---------------------
+
+    /* SET WEIGHT */
+
     @Test
-    public void testSetWeight_Valid() {
+    public void testSetWeight() {
         assertEquals(0, validDimensions.setWeight(7.5));
     }
 
     @Test
-    public void testSetWeight_Invalid() {
-        assertEquals(-6, validDimensions.setWeight(-2.0));
+    public void testSetWeightZero() {
+        assertEquals(0, validDimensions.setWeight(0));
     }
 
     @Test
-    public void testSetFragile() {
-        assertEquals(0, validDimensions.setFragile(false));
+    public void testSetWeightNegative() {
+        assertEquals(-6, validDimensions.setWeight(-5));
     }
+
+    /* SET HEIGHT */
+
+    @Test
+    public void testSetHeight() {
+        assertEquals(0, validDimensions.setHeight(7.5));
+    }
+
+    @Test
+    public void testSetHeightZero() {
+        assertEquals(0, validDimensions.setHeight(0));
+    }
+
+    @Test
+    public void testSetHeightNegative() {
+        assertEquals(-6, validDimensions.setHeight(-5.5));
+    }
+
+    /* SET WIDTH */
+
+    @Test
+    public void testSetWidth() {
+        assertEquals(0, validDimensions.setWidth(7.5));
+    }
+
+    @Test
+    public void testSetWidthZero() {
+        assertEquals(0, validDimensions.setWidth(0));
+    }
+
+    @Test
+    public void testSetWidthNegative() {
+        assertEquals(-6, validDimensions.setWidth(-5.5));
+    }
+
+    /* SET FRAGILE */
 
     @Test
     public void testSetFragileTrue() {
@@ -169,41 +210,24 @@ public class DimensionsTest {
     }
 
     @Test
-    public void testSetHeight_Valid() {
-        assertEquals(0, validDimensions.setHeight(15.0));
+    public void testSetFragileFalse() {
+        assertEquals(0, validDimensions.setFragile(false));
+    }
+
+    /* SET LENGTH */
+
+    @Test
+    public void testSetLength() {
+        assertEquals(0, validDimensions.setLength(7.5));
     }
 
     @Test
-    public void testSetHeight_Invalid() {
-        assertEquals(-6, validDimensions.setHeight(-1.0));
+    public void testSetLengthZero() {
+        assertEquals(0, validDimensions.setLength(0));
     }
 
     @Test
-    public void testSetWidth_Valid() {
-        assertEquals(0, validDimensions.setWidth(20.0));
+    public void testSetLengthNegative() {
+        assertEquals(-6, validDimensions.setLength(-5.5));
     }
-
-    @Test
-    public void testSetWidth_Invalid() {
-        assertEquals(-6, validDimensions.setWidth(-1.0));
-    }
-
-    @Test
-    public void testZeroValues() throws BuildException {
-        Dimensions dim = Dimensions.getInstanceDimensions(
-                0.0, 0.0, 0.0, false, 0.0
-        );
-        assertEquals(0.0, dim.getVolume(), 0.001);
-    }
-
-    @Test
-    public void testSetLength_Valid() {
-        assertEquals(0, validDimensions.setLength(25.0));
-    }
-
-    @Test
-    public void testSetLength_Invalid() {
-        assertEquals(-6, validDimensions.setLength(-1.0));
-    }
-
 }

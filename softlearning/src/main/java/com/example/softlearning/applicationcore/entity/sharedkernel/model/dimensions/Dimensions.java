@@ -13,11 +13,7 @@ public class Dimensions {
     protected double length = 0.0;
     protected double volume = 0.0;
 
-    public Dimensions() {
-
-    }
-
-    ;
+    public Dimensions(){};
 
     public static Dimensions getInstanceDimensions(
             double weight,

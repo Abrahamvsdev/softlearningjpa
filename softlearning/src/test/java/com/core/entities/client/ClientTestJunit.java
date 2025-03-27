@@ -31,9 +31,6 @@ public class ClientTestJunit {
                 validNumber, validPaymentMode, validAntiquity, validMembershipLevel, validRegistrationDate);
     }
 
-    // --------------------- Tests para campos específicos de Client
-    // ---------------------
-
     /* getInstance */
 
     @Test
@@ -45,7 +42,7 @@ public class ClientTestJunit {
             
             assertNotNull(c);
         } catch (Exception e) {
-            fail("No deberia fallar ya que todos los campos son correctos");
+            fail("No deberia fallar, todos los campos son correctos");
         }
     }
 
@@ -79,7 +76,7 @@ public class ClientTestJunit {
             Client.getInstance(
                     validName, validSurname, validEmail, validAddress, validDni,
                     validNumber, validPaymentMode, validAntiquity, validMembershipLevel, "2025/03/02");
-            fail("Debería fallar por formato de fecha incorrecto");
+            fail("Debería fallar registrationDate, por formato de fecha incorrecto");
         } catch (Exception e) {
             assertEquals("No es posible crear el cliente: \nFormato correcto pero no válida\n", e.getMessage());
         }
@@ -91,7 +88,7 @@ public class ClientTestJunit {
             Client.getInstance(
                     validName, validSurname, validEmail, validAddress, validDni,
                     validNumber, "", validAntiquity, "", "");
-            fail("Debería fallar");
+            fail("Debería fallar por fallo en varios campos");
         } catch (Exception e) {
             assertEquals("No es posible crear el cliente: \nNo puede ser null\nNo puede ser null\nNo puede ser null\n", e.getMessage());
         }
