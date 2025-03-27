@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.CheckTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.053 s -- in com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.CheckTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.092 s -- in com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.CheckTest

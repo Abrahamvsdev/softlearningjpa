@@ -176,7 +176,7 @@ public static int isValidDateComplete(String date) {
             // Pattern pattern = Pattern.compile("^(\\d{4})/(\\d{2})/(\\d{2})-(\\d{2}):(\\d{2}):(\\d{2})$");
             // Matcher matcher = pattern.matcher(date);
             //if (matcher.matches()) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu/MM/dd-HH:mm:ss");//.withResolverStyle(ResolverStyle.STRICT);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu/MM/dd-HH:mm:ss").withResolverStyle(ResolverStyle.STRICT);
                 try {
                     LocalDateTime.parse(date, formatter);
                     return 0;

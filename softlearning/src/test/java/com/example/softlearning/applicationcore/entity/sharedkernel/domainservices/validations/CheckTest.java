@@ -116,7 +116,7 @@ public class CheckTest {
     public void testIsValidDate_InvalidDate() {
         assertEquals(-14, Check.isValidDate("30-02-2025"));
     }
-
+    
     // ---------------------- isValidDateComplete ----------------------
     @Test
     public void testIsValidDateComplete_Valid() {

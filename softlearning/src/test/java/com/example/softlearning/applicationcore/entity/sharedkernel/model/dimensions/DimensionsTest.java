@@ -164,6 +164,11 @@ public class DimensionsTest {
     }
 
     @Test
+    public void testSetFragileTrue() {
+        assertEquals(0, validDimensions.setFragile(true));
+    }
+
+    @Test
     public void testSetHeight_Valid() {
         assertEquals(0, validDimensions.setHeight(15.0));
     }
