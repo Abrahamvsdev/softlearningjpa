@@ -134,10 +134,11 @@ public class Check {
      */
     public static int isValidDate(String date) {
         // Expresión regular para validar el formato de la fecha (dd-MM-yyyy)
-
-        if (date == null) {
-            return -1;  // Código de error para null
+        int isNull = Check.isNull(date);
+        if (isNull != 0) {
+            return isNull;  // Código de error para null
         }
+        
         // String datePattern = "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-(19|20)\\d\\d$";
 
         // // Compila
@@ -168,9 +169,10 @@ public class Check {
 
 
 public static int isValidDateComplete(String date) {
-        if (date == null) {
-            return -1;
-        }
+    int isNull = Check.isNull(date);
+    if (isNull != 0) {
+        return isNull;  // Código de error para null
+    }
 
         if (date.length() > 0) {
             // Pattern pattern = Pattern.compile("^(\\d{4})/(\\d{2})/(\\d{2})-(\\d{2}):(\\d{2}):(\\d{2})$");
