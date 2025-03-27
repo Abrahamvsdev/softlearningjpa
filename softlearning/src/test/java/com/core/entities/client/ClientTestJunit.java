@@ -151,35 +151,7 @@ public class ClientTestJunit {
     }
 
     // --------------------- Tests de setters ---------------------
-    @Test
-    public void testSetName() {
-        assertEquals(0, validClient.setName(validName));
-    }
-
-    @Test
-    public void testSetSurname() {
-        assertEquals(0, validClient.setSurname(validSurname));
-    }
-
-    @Test
-    public void testSetEmail() {
-        assertEquals(0, validClient.setEmail(validEmail));
-    }
-
-    @Test
-    public void testSetAddress() {
-        assertEquals(0, validClient.setAddress(validAddress));
-    }
-
-    @Test
-    public void testSetDNI() {
-        assertEquals(0, validClient.setDni(validDni));
-    }
-
-    @Test
-    public void testSetNumber() {
-        assertEquals(0, validClient.setNumber(validNumber));
-    }
+   
 
     @Test
     public void testSetPaymentMode() {

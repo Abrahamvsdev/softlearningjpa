@@ -26,6 +26,7 @@ public class PersonObjectTest {
     public void setUp() throws Exception {
         validPerson = new PersonObject();
         validPerson.person(validName, validSurname, validEmail, validAddress, validDni, validNumber, validAntiquity);
+        
     }
 
     // ==================== VALIDACIÓN EN CREACIÓN ====================
@@ -165,7 +166,12 @@ public class PersonObjectTest {
     // ---------------------- setNumber ----------------------
     @Test
     public void testSetNumber_Invalid() {
-        assertEquals(-3, validPerson.setNumber("AB")); // Caracteres no numéricos
+        assertEquals(-3, validPerson.setNumber("AB")); 
+        assertEquals(validNumber, validPerson.getNumber());
+    }
+    @Test
+    public void testSetNumber_empty() {
+        assertEquals(-1, validPerson.setNumber("  ")); 
         assertEquals(validNumber, validPerson.getNumber());
     }
 
