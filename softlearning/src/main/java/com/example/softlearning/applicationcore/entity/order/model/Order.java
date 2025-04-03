@@ -199,7 +199,7 @@ public class Order extends Operation {
 
     public int setReceiverAddress(String receiverAddress) {
         // aqui habra que preguntar primero si
-        int errorReceiverAddress = Check.minMaxLength(receiverAddress);
+        int errorReceiverAddress = Check.minMaxLength(receiverAddress, 3, 50);
         if (errorReceiverAddress == 0) {
             this.receiverAddress = receiverAddress;
 
@@ -208,7 +208,7 @@ public class Order extends Operation {
     }
 
     public int setReceiverPerson(String receiverPerson) {
-        int errorReceiverPerson = Check.minMaxLength(receiverPerson);
+        int errorReceiverPerson = Check.minMaxLength(receiverPerson, 3, 10);
         if (errorReceiverPerson == 0) {
             this.receiverPerson = receiverPerson;
         }
@@ -241,7 +241,7 @@ public class Order extends Operation {
     }
 
     public int setIdClient(String idClient) {
-        int errorIdClient = Check.minMaxLength(idClient);
+        int errorIdClient = Check.minMaxLength(idClient, 3, 10);
         if (errorIdClient == 0) {
             this.idClient = idClient;
         }
@@ -453,7 +453,7 @@ public class Order extends Operation {
         if (this.status == OrderStatus.CONFIRMED) {
             throw new ServiceException("No se puede modificar un detalle de una orden ya pagada");
         }
-        int errorCode = Check.isNull(ref);
+        int errorCode = Check.isEmpty(ref);
         if (errorCode != 0) {
             throw new ServiceException("Error en ref: " + Check.getErrorMessage(errorCode));
         }

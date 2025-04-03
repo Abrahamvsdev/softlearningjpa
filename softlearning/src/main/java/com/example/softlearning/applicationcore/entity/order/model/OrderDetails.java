@@ -102,7 +102,7 @@ public class OrderDetails {
     }
 
     public int setDetailRef(String detailRef) {
-        int errorDetailRef = Check.minMaxLength(detailRef);
+        int errorDetailRef = Check.minMaxLength(detailRef, 1, 10); // Range de String
         if (errorDetailRef != 0) {
             return errorDetailRef;
         }

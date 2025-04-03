@@ -111,7 +111,7 @@ public abstract class Product implements Marketable {
     }
 
     public int setType(String type) {
-        int errorType= Check.minMaxLength(type);
+        int errorType= Check.minMaxLength(type, 3, 20);
         if(errorType== 0){
             this.type = type;
         }
@@ -119,7 +119,7 @@ public abstract class Product implements Marketable {
     }
 
     public int setPayMethod(String payMethod) {
-        int errorPayMethod = Check.minMaxLength(payMethod);
+        int errorPayMethod = Check.minMaxLength(payMethod, 3, 20);
         if(errorPayMethod == 0){
             this.payMethod = payMethod;
         }
@@ -127,7 +127,7 @@ public abstract class Product implements Marketable {
     }
 
     public int setIdent(String ident) {
-        int errorIdent = Check.minLength(ident);
+        int errorIdent = Check.minLength(ident, 3);
         if (errorIdent == 0) {
             this.ident = ident;
         }

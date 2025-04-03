@@ -58,7 +58,7 @@ public class Employee extends Person {
     // setters
     public int setIdEmployee(String idEmployee) {
         
-        int errorCode = Check.minMaxLength(idEmployee);
+        int errorCode = Check.minMaxLength(idEmployee,  3, 20);
         if (errorCode == 0) {
             this.idEmployee = idEmployee;
         }
@@ -66,7 +66,7 @@ public class Employee extends Person {
     }
 
     public int setPosition(String position) {
-        int errorCode = Check.minMaxLength(position);
+        int errorCode = Check.minMaxLength(position, 3, 20);
         if (errorCode == 0) {
             this.position = position;
         }

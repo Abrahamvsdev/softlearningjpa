@@ -26,7 +26,7 @@ public class Client extends Person {
         client.person(name, surname, email, address, dni, number, antiquity);
 
         if ((errorCode = client.setPaymentMode(paymentMode)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Payment Mode:" + Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = client.setMembershipLevel(membershipLevel)) != 0) {
             errors.append(Check.getErrorMessage(errorCode)).append("\n");
@@ -57,7 +57,7 @@ public class Client extends Person {
 
     // setters
     public int setPaymentMode(String paymentMode) {
-        int errorCode = Check.minMaxLength(paymentMode);
+        int errorCode = Check.minMaxLength(paymentMode, 3, 20);
         if (errorCode == 0) {
             this.paymentMode = paymentMode;
         }
@@ -65,7 +65,7 @@ public class Client extends Person {
     }
 
     public int setMembershipLevel(String membershipLevel) {
-        int errorCode = Check.minMaxLength(membershipLevel);
+        int errorCode = Check.minMaxLength(membershipLevel, 3, 20);
         if (errorCode == 0) {
             this.membershipLevel = membershipLevel;
         }

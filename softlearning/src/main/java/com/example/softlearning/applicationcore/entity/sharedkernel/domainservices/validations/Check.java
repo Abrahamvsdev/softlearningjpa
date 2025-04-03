@@ -16,13 +16,25 @@ public class Check {
             //si hacemos trim a un null dara un error
             return -1;
         }
-        s = s.trim(); // Ahora aplicamos trim() solo si s no es null para que no de el error
-        if (s.length() == 0 ) { // Luego verificamos si está vacío
-            return -1;
-        } else {
-            // Si no es nulo ni vacío, devolvemos 0
+
             return 0;
+        
+    }
+
+    public static int isEmpty(String s) {
+        // Esta función comprueba si el string es nulo o vacío
+        int e = isNull(s);
+        if (e != 0) {
+            return e; // Si es null, devuelve -1
         }
+        
+        if (s.trim().length() == 0) { // Verificamos primero si s es null, porque 
+            //si hacemos trim a un null dara un error
+            return -2;
+        }
+
+            return 0;
+        
     }
 
     public static int checkEmail(String email) {
@@ -36,7 +48,7 @@ public class Check {
          * Punto y dominio: Después de los caracteres permitidos, debe haber un punto (.) seguido de entre 2 y 6 letras (a-z, A-Z). Esto representa el dominio, como .com, .net, .org, etc.
          * OLE MIS COJONES
          */
-        int isNull = Check.isNull(email);
+        int isNull = Check.isEmpty(email);
         if (isNull != 0) {
             return isNull; 
         }
@@ -51,20 +63,21 @@ public class Check {
         }
     }
 
-    public static int minLength(String s) {
+    public static int minLength(String s, int min) {
         //esta funcion comprueba si el string no esta vacio
         // y si ademas es mas largo que 3 caracteres
 
         //en java no hace falta poner los "::", si quiero llamar a un metodo seria 
         //Check.isnull(s)
-        if (Check.isNull(s) == 0) {
-            if (s.length() < 3) {
+        int e = Check.isEmpty(s);
+        if (e == 0) {
+            if (s.length() < min) {
                 return -3;
             } else {
                 return 0;
             }
         } else {
-            return -1;
+            return e;
         }
 
     }
@@ -77,55 +90,39 @@ public class Check {
         return 0;
     }
 
-    public static int maxLength(String s) {
+    public static int maxLength(String s, int max) {
         //esta funcion comprueba si el string no esta vacio
         // y si ademas es mas largo que 15 caracteres
         //en java no hace falta poner los "::", si quiero llamar a un metodo seria
-        if (Check.isNull(s) == 0) {
-
-            if (s.length() > 15) {
+        int e = Check.isEmpty(s);
+        if (e == 0) {
+            if (s.length() > max) {
                 return -7;
             } else {
                 return 0;
             }
         } else {
-            return -1;
+            return e;
         }
 
     }
 
-    public static int minMaxLength(String s) {
+    public static int minMaxLength(String s, int min, int max) {
+        //esta funcion comprueba si el string no esta vacio y nullo
         //esta funcion comprueba si el length es mayor de 3 y menos de 15
-        int resultado = Check.isNull(s);
-        if (resultado == 0) {
-            if (s.length() < 3) {
-                return -3;
-            }
-            if (s.length() > 15) {
+        int e = Check.minLength(s, min);
+        if (e == 0) {
+            if (s.length() > max) {
                 return -7;
             }
+            return 0;
+        }else {
+            return e;
         }
-        return resultado;
+
+
     }
 
-    // public static int minMaxLength(String s, int min, int max){  
-    //     // Esto se llama parametrizar, hacerlas reusables entrando por parametro de donde a donde quiero medir
-    //     int resultado = Check.isNull(s);
-    //     s = s.trim();
-    //     if(resultado==0){
-    //         if(s.length()<min)
-    //             return -3;
-    //         if (s.length()>max)
-    //             return -7;
-    //     }
-    //     return resultado;
-    // }
-    // a pasos:
-    //se declara el patron
-    // se compila
-    //se usa el matcher
-    // si es correcto local date con el "formatter of pattern"
-    //
     /**
      * Valida si una cadena representa una fecha válida en formato dd-MM-yyyy.
      *
@@ -135,7 +132,7 @@ public class Check {
      */
     public static int isValidDate(String date) {
         // Expresión regular para validar el formato de la fecha (dd-MM-yyyy)
-        int isNull = Check.isNull(date);
+        int isNull = Check.isEmpty(date);
         if (isNull != 0) {
             return isNull;  // Código de error para null
         }
@@ -172,13 +169,10 @@ public class Check {
 public static int isValidDateComplete(String date) {
     int isNull = Check.isNull(date);
     if (isNull != 0) {
-        return isNull;  // Código de error para null
+        return isNull; 
     }
 
         if (date.length() > 0) {
-            // Pattern pattern = Pattern.compile("^(\\d{4})/(\\d{2})/(\\d{2})-(\\d{2}):(\\d{2}):(\\d{2})$");
-            // Matcher matcher = pattern.matcher(date);
-            //if (matcher.matches()) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu/MM/dd-HH:mm:ss").withResolverStyle(ResolverStyle.STRICT);
                 try {
                     LocalDateTime.parse(date, formatter);
@@ -186,31 +180,10 @@ public static int isValidDateComplete(String date) {
                 } catch (DateTimeParseException e) {
                     return -14;  // Formato correcto pero fecha inválida
                 }
-            // } else {
-            //     return -4;  // Formato incorrecto
-            // }
         }
         return -1;  // Fecha nula
     }
 
-    // public static int isValidDate(String stringdate) {
-    //     // string del chat gpt que no me convence
-    //     String datePattern = "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-(19|20)\\d\\d$";
-    //     // se compila
-    //     Pattern pattern = Pattern.compile(datePattern);
-    //     // comprobamos si es un null, pero al comenzar por mayus es un objeto y no se si puede ser null, preguntar jose
-    //     if (isNull(stringdate) != 0) {
-    //         return -1;
-    //     }
-    //     // el matcher
-    //     Matcher matcher = pattern.matcher(stringdate);
-    //     // y si hace match
-    //     if(matcher.matches()){
-    //         return 0;
-    //     }else{
-    //         return -4;
-    //     }
-    // }
     //RANGE PARA DOBLE
     public static int range(double e) {
         //esta funcion coprueba si el double es nulo o positivo

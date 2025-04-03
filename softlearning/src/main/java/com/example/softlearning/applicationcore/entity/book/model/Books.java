@@ -161,7 +161,7 @@ public class Books extends Product implements Storable {
 
     // setter
     public int setAuthor(String author) {
-        int errorAuthor = Check.minMaxLength(author);
+        int errorAuthor = Check.minMaxLength(author, 3, 20); // Usamos minMaxLength para validar
         if (errorAuthor == 0) {
             this.author = author;
         }
@@ -199,7 +199,7 @@ public class Books extends Product implements Storable {
     }
 
     public int setCover(String cover) {
-        int errorCover = Check.minMaxLength(cover);
+        int errorCover = Check.minMaxLength(cover, 3, 10); // Usamos minMaxLength para validar
         if (errorCover == 0) {
             this.cover = cover;
         }
@@ -215,7 +215,7 @@ public class Books extends Product implements Storable {
     }
 
     public int setGenre(String genre) {
-        int errorGenre = Check.minLength(genre);
+        int errorGenre = Check.minLength(genre, 3); // Usamos minLength para validar
         if (errorGenre == 0) {
             this.genre = genre;
         }
@@ -223,7 +223,7 @@ public class Books extends Product implements Storable {
     }
 
     public int setEditorial(String editorial) {
-        int errorEditorial = Check.minLength(editorial);
+        int errorEditorial = Check.minLength(editorial, 3); // Usamos minLength para validar
         if (errorEditorial == 0) {
             this.editorial = editorial;
         }

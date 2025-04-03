@@ -18,7 +18,7 @@ public class ClientTest {
             "Calle falsa 123", 
             "12345678A", 
             "123456789", 
-            "Targeta", 
+            "12", 
             12, 
             "asd", 
             "30-02-1990");
