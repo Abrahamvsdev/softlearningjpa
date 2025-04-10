@@ -27,22 +27,22 @@ public class Dimensions {
         int errorCode;
 
         if ((errorCode = d.setWeight(weight)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Weight:" + Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if ((errorCode = d.setHeight(height)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Height:" + Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if ((errorCode = d.setWidth(width)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Width:" + Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = d.setFragile(fragile)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Fragile:" + Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if ((errorCode = d.setLength(length)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Length:" + Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if (errors.length() > 0) {
@@ -85,7 +85,7 @@ public class Dimensions {
     }
 
     public int setWeight(double weight) {
-        int errorWeight = Check.range(weight);
+        int errorWeight = Check.range(weight, 0.50, 5);
         if (errorWeight == 0) {
             this.weight = weight;
         }
@@ -93,7 +93,7 @@ public class Dimensions {
     }
 
     public int setHeight(double height) {
-        int errorHeight = Check.range(height);
+        int errorHeight = Check.range(height, 10,30 );
         if (errorHeight == 0) {
             this.height = height;
         }
@@ -101,7 +101,7 @@ public class Dimensions {
     }
 
     public int setWidth(double width) {
-        int errorWidth = Check.range(width);
+        int errorWidth = Check.range(width,5, 10);
         if (errorWidth == 0) {
             this.width = width;
         }
@@ -109,7 +109,7 @@ public class Dimensions {
     }
 
     public int setLength(double length) {
-        int errorLength = Check.range(length);
+        int errorLength = Check.range(length,15,30);
         if (errorLength == 0) {
             this.length = length;
         }

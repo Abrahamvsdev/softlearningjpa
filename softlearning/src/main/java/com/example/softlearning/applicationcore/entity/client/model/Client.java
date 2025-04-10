@@ -29,10 +29,10 @@ public class Client extends Person {
             errors.append("Bad Payment Mode:" + Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = client.setMembershipLevel(membershipLevel)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Membership:" + Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = client.setRegistrationDate(registrationDate)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Registration:" + Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if (errors.length() > 0) {

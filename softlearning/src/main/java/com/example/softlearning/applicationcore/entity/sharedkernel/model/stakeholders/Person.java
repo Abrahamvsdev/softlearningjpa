@@ -21,25 +21,25 @@ public abstract class Person {
         
         
         if ((errorCode = this.setName(name)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Name: " + Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setSurname(surname)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Surname: " + Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setEmail(email)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Email: " + Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setAddress(address)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Address: " + Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setDni(dni)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad DNI: " + Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setNumber(number)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Phone Number: " + Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setAntiquity(antiquity)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Antiquity: " + Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if (errors.length() > 0) {
