@@ -114,12 +114,17 @@ public class Check {
         }
     }
 
-    //esto checkea si es verdadero -12 que si, 0 que no
-    public static int checkBoolean(boolean b) {
-        if (b == true) {
-            return -12;
+    /**
+     //esto checkea si es verdadero -12 que si, 0 que no
+     * Esta función comprueba si el booleano es verdadero o falso.
+     * @param Boolean b
+     * @return
+     */
+    public static int isTrue(boolean b) {
+        if (b == true ) {
+            return 0;
         }
-        return 0;
+        return -12;
     }
 
     /**
@@ -166,7 +171,7 @@ public static int isValidDateComplete(String date) {
 
     //RANGE PARA DOBLE
     public static int range(double num, double min, double max) {
-        //esta funcion coprueba si el double es nulo o positivo
+        //esta funcion coprueba si el double es menor que el minimo o mayor que el maximo
         if (num < min) {
             return -23;
         }
@@ -264,7 +269,7 @@ public static int isValidDateComplete(String date) {
     public static int checkMobilePhone(String n) {
         //esta funcion comprueba si el string es un numero valido de 9 cifras
         if (Check.isNull(n) != 0) 
-            return 0;
+            return -1;
 
         if (n.trim().length() == 0) 
             return -2;
@@ -274,6 +279,8 @@ public static int isValidDateComplete(String date) {
         
         return 0;
     }
+
+    
 
     public static String getErrorMessage(int e) {
         return switch (e) {

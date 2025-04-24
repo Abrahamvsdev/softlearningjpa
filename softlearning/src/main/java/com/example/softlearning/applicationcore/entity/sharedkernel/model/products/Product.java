@@ -94,7 +94,7 @@ public abstract class Product implements Marketable {
     
     //setters
     public int setDelayPay(boolean delayPay) {
-        int errordelayPay = Check.checkBoolean(delayPay);
+        int errordelayPay = Check.istrue(delayPay);
         if (errordelayPay == 0) {
             this.delayPay = delayPay;
         }

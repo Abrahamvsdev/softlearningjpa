@@ -36,7 +36,7 @@ public abstract class Person {
             errors.append("Bad DNI: " + Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setNumber(number)) != 0) {
-            errors.append("Bad Phone Number: " + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad Number: " + Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setAntiquity(antiquity)) != 0) {
             errors.append("Bad Antiquity: " + Check.getErrorMessage(errorCode)).append("\n");
@@ -127,7 +127,7 @@ public abstract class Person {
 
     public int setAntiquity(int antiquity){
         //check range de int
-        int errorAntiquity = Check.range(antiquity);
+        int errorAntiquity = Check.range(antiquity,0,50);
         if (errorAntiquity == 0) {
             this.antiquity = antiquity;
         }

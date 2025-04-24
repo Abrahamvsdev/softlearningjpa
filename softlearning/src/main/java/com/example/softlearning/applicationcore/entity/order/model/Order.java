@@ -436,7 +436,7 @@ public class Order extends Operation {
             throw new ServiceException("Error en pos: Posición inválida");
         }
 
-        int errorCode = Check.range(amount);
+        int errorCode = Check.range(amount,1,5);
         if (errorCode != 0) {
             throw new ServiceException("Error en amount: " + Check.getErrorMessage(errorCode));
         }
@@ -458,7 +458,7 @@ public class Order extends Operation {
             throw new ServiceException("Error en ref: " + Check.getErrorMessage(errorCode));
         }
 
-        errorCode = Check.range(amount);
+        errorCode = Check.range(amount,0,5);
         if (errorCode != 0) {
             throw new ServiceException("Error en amount: " + Check.getErrorMessage(errorCode));
         }

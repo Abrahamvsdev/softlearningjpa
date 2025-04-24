@@ -106,13 +106,13 @@ public class CheckTest {
 
     /* TEST CHECK BOOLEAN */
     @Test
-    void testCheckBooleanTrue() {
-        assertEquals(-12, Check.checkBoolean(true));
+    void testisBooleanTrue() {
+        assertEquals(-12, Check.isBoolean(true));
     }
 
     @Test
-    void testCheckBooleanFalse() {
-        assertEquals(0, Check.checkBoolean(false));
+    void testisBooleanFalse() {
+        assertEquals(0, Check.isBoolean(false));
     }
 
     /* TEST MAX LENGTH */

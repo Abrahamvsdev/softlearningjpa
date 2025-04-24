@@ -73,8 +73,14 @@ public class Employee extends Person {
         return errorCode;
     }
 
+    /**
+     * * Set the salary of the employee. The salary must be greater than 0.
+     * If the salary is less than 0, it will return an error code.
+     * @param salary
+     * @return
+     */
     public int setSalary(double salary) {
-        int errorSalary = Check.range(salary);
+        int errorSalary = Check.range(salary,0,50000);
         if (errorSalary == 0) {
             this.salary = salary;
         }
