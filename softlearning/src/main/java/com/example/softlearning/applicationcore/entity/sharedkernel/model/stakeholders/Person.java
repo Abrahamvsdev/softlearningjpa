@@ -78,7 +78,7 @@ public abstract class Person {
 
     //setter
     public int setName(String name) {
-        int errorName = Check.minMaxLength(name, 3, 20);
+        int errorName = Check.checkLength(name, 3, 20);
         if (errorName == 0) {
             this.name = name;
         }
@@ -86,7 +86,7 @@ public abstract class Person {
     }
 
     public int setSurname(String surname) {
-        int errorSurname = Check.minMaxLength(surname, 3, 20);
+        int errorSurname = Check.checkLength(surname, 3, 20);
         if (errorSurname == 0) {
             this.surname = surname;
         }
@@ -102,7 +102,7 @@ public abstract class Person {
     }
 
     public int setAddress(String address) {
-        int errorAddress = Check.minMaxLength(address, 10, 50);
+        int errorAddress = Check.checkLength(address, 10, 50);
         if (errorAddress == 0) {
             this.address = address;
         }
@@ -118,7 +118,7 @@ public abstract class Person {
     }
 
     public int setNumber(String number) {
-        int errorNumber = Check.minMaxLength(number, 7, 15);
+        int errorNumber = Check.checkLength(number, 7, 15);
         if (errorNumber == 0) {
             this.number = number;
         }

@@ -24,13 +24,13 @@ public class Employee extends Person {
         employee.person(name, surname, email, address, dni, number, antiquity);
 
         if ((errorCode = employee.setIdEmployee(idEmployee)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad idEmployee: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = employee.setPosition(position)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad position: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = employee.setSalary(salary)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad salary: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if (errors.length() > 0) {
@@ -53,12 +53,9 @@ public class Employee extends Person {
         return salary;
     }
 
-
-
     // setters
     public int setIdEmployee(String idEmployee) {
-        
-        int errorCode = Check.minMaxLength(idEmployee,  3, 20);
+        int errorCode = Check.checkLength(idEmployee, 3, 20);
         if (errorCode == 0) {
             this.idEmployee = idEmployee;
         }
@@ -66,7 +63,7 @@ public class Employee extends Person {
     }
 
     public int setPosition(String position) {
-        int errorCode = Check.minMaxLength(position, 3, 20);
+        int errorCode = Check.checkLength(position, 3, 20);
         if (errorCode == 0) {
             this.position = position;
         }
@@ -80,7 +77,7 @@ public class Employee extends Person {
      * @return
      */
     public int setSalary(double salary) {
-        int errorSalary = Check.range(salary,0,50000);
+        int errorSalary = Check.range(salary, 0, 50000);
         if (errorSalary == 0) {
             this.salary = salary;
         }

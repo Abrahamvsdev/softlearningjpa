@@ -1,6 +1,5 @@
 package com.example.softlearning.applicationcore.entity.order.model;
 
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,8 +10,6 @@ import com.example.softlearning.applicationcore.entity.sharedkernel.model.dimens
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.operations.Operation;
-
-
 
 public class Order extends Operation {
 
@@ -45,19 +42,19 @@ public class Order extends Operation {
         int errorCode;
 
         if ((errorCode = o.setReceiverAddress(receiverAddress)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad receiverAddress: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if ((errorCode = o.setReceiverPerson(receiverPerson)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad receiverPerson: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if ((errorCode = o.setIdClient(idClient)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad idClient: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if ((errorCode = o.setPhoneContact(phoneContact)) != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad phoneContact: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if (errors.length() > 0) {
@@ -91,17 +88,16 @@ public class Order extends Operation {
             String shopCart) throws BuildException, ServiceException {
         StringBuilder errors = new StringBuilder();
         int errorCode;
-        
 
         Order o = new Order();
         // los otros campos que se validan aqui
 
         try {
             o.operation(
-                reference,
-                description,
-                initDate,
-                null
+                    reference,
+                    description,
+                    initDate,
+                    null
             );
         } catch (BuildException e) {
             throw new BuildException("Error en la operación(try operation): " + e.getMessage());
@@ -112,7 +108,7 @@ public class Order extends Operation {
         } catch (BuildException e) {
             throw new BuildException("Error en las dimensiones(try dimensiones): " + e.getMessage());
         }
-        
+
         if (shopCart != null && !shopCart.isEmpty()) {
             if (o.setShopCartDetails(shopCart) != 0) {
                 throw new BuildException("Error al establecer los detalles del carrito");
@@ -121,22 +117,21 @@ public class Order extends Operation {
 
         if (paymentDate != null) {
             if ((errorCode = o.setPaymentDate(paymentDate)) != 0) {
-                errors.append(Check.getErrorMessage(errorCode)).append("\n");
+                errors.append("Bad paymentDate: ").append(Check.getErrorMessage(errorCode)).append("\n");
             }
         }
 
         if (deliveryDate != null) {
             if ((errorCode = o.setDeliveryDate(deliveryDate)) != 0) {
-                errors.append(Check.getErrorMessage(errorCode)).append("\n");
+                errors.append("Bad deliveryDate: ").append(Check.getErrorMessage(errorCode)).append("\n");
             }
         }
 
         if (finishDate != null) {
             if ((errorCode = o.setOrderFinishDate(finishDate)) != 0) {
-                errors.append(Check.getErrorMessage(errorCode)).append("\n");
+                errors.append("Bad finishDate: ").append(Check.getErrorMessage(errorCode)).append("\n");
             }
         }
-
 
         if (errors.length() > 0) {
             throw new BuildException("No es posible crear la compra en el grande: \n" + errors.toString());
@@ -154,7 +149,7 @@ public class Order extends Operation {
         for (OrderDetails detail : shopCart) {
             result += detail.getDetailstoString() + "\n";
         }
-    
+
         return result;
     }
 
@@ -196,19 +191,16 @@ public class Order extends Operation {
     }
 
     // setter
-
     public int setReceiverAddress(String receiverAddress) {
-        // aqui habra que preguntar primero si
-        int errorReceiverAddress = Check.minMaxLength(receiverAddress, 3, 50);
+        int errorReceiverAddress = Check.checkLength(receiverAddress, 3, 50);
         if (errorReceiverAddress == 0) {
             this.receiverAddress = receiverAddress;
-
         }
         return errorReceiverAddress;
     }
 
     public int setReceiverPerson(String receiverPerson) {
-        int errorReceiverPerson = Check.minMaxLength(receiverPerson, 3, 10);
+        int errorReceiverPerson = Check.checkLength(receiverPerson, 3, 10);
         if (errorReceiverPerson == 0) {
             this.receiverPerson = receiverPerson;
         }
@@ -241,7 +233,7 @@ public class Order extends Operation {
     }
 
     public int setIdClient(String idClient) {
-        int errorIdClient = Check.minMaxLength(idClient, 3, 10);
+        int errorIdClient = Check.checkLength(idClient, 1, 1000);
         if (errorIdClient == 0) {
             this.idClient = idClient;
         }
@@ -252,7 +244,7 @@ public class Order extends Operation {
         int errorPhoneContact = Check.checkMobilePhone(Phone); // de momento solo checkeo si tiene 9 digitos, nada mas
         if (errorPhoneContact == 0) {
             phoneContact.add(Phone);// el propio metodo set los separa automaticamente, solo tengo que añadirlo en
-                                    // los test
+            // los test
         }
         return errorPhoneContact;
     }
@@ -261,48 +253,52 @@ public class Order extends Operation {
     public int setOrderPackage(String oP) throws BuildException {
 
         if (this.status == OrderStatus.CONFIRMED) {
-        
-        // importante setear los parametros a 0, para que se puedan crear
-        double weight = 0;
-        double height = 0;
-        double width = 0;
-        boolean fragile = false;
-        double length = 0;
 
-        // ejemploString packageDetails = "h:202.20,w:202.20,W:202.20,f:true,d:202.20";
+            // importante setear los parametros a 0, para que se puedan crear
+            double weight = 0;
+            double height = 0;
+            double width = 0;
+            boolean fragile = false;
+            double length = 0;
 
-        // Dividimos el string por comas
-        String[] details = oP.split(",");
+            // ejemploString packageDetails = "h:202.20,w:202.20,W:202.20,f:true,d:202.20";
+            // Dividimos el string por comas
+            String[] details = oP.split(",");
 
-        // dividimos cada parte del string por los puntos y usamos un switch para
-        // asignar con los setters, keyvalue[0] es la letra y keyvalue[1] son los
-        // numeros
-        // el getinstace tiene que crear un order package
-        for (String detail : details) {
-            String[] keyValue = detail.split(":");
+            // dividimos cada parte del string por los puntos y usamos un switch para
+            // asignar con los setters, keyvalue[0] es la letra y keyvalue[1] son los
+            // numeros
+            // el getinstace tiene que crear un order package
+            for (String detail : details) {
+                String[] keyValue = detail.split(":");
 
-            switch (keyValue[0]) {
-                case "h" -> height = (Double.parseDouble(keyValue[1])); // se setea así
-                case "w" -> width = (Double.parseDouble(keyValue[1]));
-                case "W" -> weight = (Double.parseDouble(keyValue[1]));
-                case "f" -> fragile = (Boolean.parseBoolean(keyValue[1]));
-                case "d" -> length = (Double.parseDouble(keyValue[1]));
-                default -> {
-                    throw new BuildException("Parametro desconocido: " + keyValue[0]);
+                switch (keyValue[0]) {
+                    case "h" ->
+                        height = (Double.parseDouble(keyValue[1])); // se setea así
+                    case "w" ->
+                        width = (Double.parseDouble(keyValue[1]));
+                    case "W" ->
+                        weight = (Double.parseDouble(keyValue[1]));
+                    case "f" ->
+                        fragile = (Boolean.parseBoolean(keyValue[1]));
+                    case "d" ->
+                        length = (Double.parseDouble(keyValue[1]));
+                    default -> {
+                        throw new BuildException("Parametro desconocido: " + keyValue[0]);
+                    }
+                }
+                // se prueban las dimensions para ver si se pueden crear, si no, que pete
+                try {
+                    this.orderPackage = Dimensions.getInstanceDimensions(weight, height, width, fragile, length);
+                    this.status = OrderStatus.FORTHCOMMING;
+                } catch (BuildException e) {
+                    throw new BuildException("Error en las dimensiones: " + e.getMessage());
                 }
             }
-            // se prueban las dimensions para ver si se pueden crear, si no, que pete
-            try {
-                this.orderPackage = Dimensions.getInstanceDimensions(weight, height, width, fragile, length);
-                this.status = OrderStatus.FORTHCOMMING;
-            } catch (BuildException e) {
-                throw new BuildException("Error en las dimensiones: " + e.getMessage());
-            }
+            return 0;
         }
-        return 0;
+        throw new BuildException("No se puede añadir un paquete a una orden no pagada set order package");
     }
-    throw new BuildException("No se puede añadir un paquete a una orden no pagada set order package");
-}
 
     public int setDeliveryDate(String deliveryDate) throws BuildException {
         if (deliveryDate != null) {
@@ -328,7 +324,6 @@ public class Order extends Operation {
 
         // Ejemplo de detailsString:
         // "amount:2,ref:REF001,price:10.0,discount:5.0;amount:1,ref:REF002,price:20.0,discount:0.0"
-
         // Separar cada detalle por punto y coma
         String[] detailsArray = detailsString.split(";");
 
@@ -344,11 +339,16 @@ public class Order extends Operation {
             for (String attribute : attributes) {
                 String[] keyValue = attribute.split(":");
                 switch (keyValue[0]) {
-                    case "amount" -> amount = Integer.parseInt(keyValue[1]);
-                    case "ref" -> detailRef = keyValue[1];
-                    case "price" -> price = Double.parseDouble(keyValue[1]);
-                    case "discount" -> discount = Double.parseDouble(keyValue[1]);
-                    default -> throw new ServiceException("Parámetro desconocido: " + keyValue[0]);
+                    case "amount" ->
+                        amount = Integer.parseInt(keyValue[1]);
+                    case "ref" ->
+                        detailRef = keyValue[1];
+                    case "price" ->
+                        price = Double.parseDouble(keyValue[1]);
+                    case "discount" ->
+                        discount = Double.parseDouble(keyValue[1]);
+                    default ->
+                        throw new ServiceException("Parámetro desconocido: " + keyValue[0]);
                 }
             }
 
@@ -381,7 +381,6 @@ public class Order extends Operation {
     // *************************************************************************
     // SET DETAIL
     // *************************************************************************
-
     public String setDetail(int amount, String detailRef, double price, double discount) throws ServiceException {
         if (this.status != OrderStatus.CREATED) {
             throw new ServiceException("No se puede añadir un detalle a una orden ya pagada");
@@ -412,7 +411,7 @@ public class Order extends Operation {
 
     // detalle por REFERENCIA
     public String getRefDetail(String ref) { // cambiar nombre porque esto liará
-        if(this.shopCart == null) {
+        if (this.shopCart == null) {
             return "No se puede mostrar el detalle de una orden sin detalles";
         }
         for (OrderDetails detail : shopCart) {
@@ -436,7 +435,7 @@ public class Order extends Operation {
             throw new ServiceException("Error en pos: Posición inválida");
         }
 
-        int errorCode = Check.range(amount,1,5);
+        int errorCode = Check.range(amount, 1, 5);
         if (errorCode != 0) {
             throw new ServiceException("Error en amount: " + Check.getErrorMessage(errorCode));
         }
@@ -458,7 +457,7 @@ public class Order extends Operation {
             throw new ServiceException("Error en ref: " + Check.getErrorMessage(errorCode));
         }
 
-        errorCode = Check.range(amount,0,5);
+        errorCode = Check.range(amount, 0, 5);
         if (errorCode != 0) {
             throw new ServiceException("Error en amount: " + Check.getErrorMessage(errorCode));
         }
@@ -472,7 +471,6 @@ public class Order extends Operation {
         }
         return errorCode;
     }
-    
 
     // detalle por posicion
     public void deleteDetail(int pos) throws ServiceException {
@@ -509,13 +507,12 @@ public class Order extends Operation {
     public double getPrice() {
         double total = 0.0;
         for (OrderDetails detalle : shopCart) {
-            total += (detalle.getPrice() - detalle.getDiscount() )* detalle.getAmount();
+            total += (detalle.getPrice() - detalle.getDiscount()) * detalle.getAmount();
         }
         return total;
     }
 
     // metodo para mostrar los detalles de la compra
-
     public String getOrderDetails() {
 
         sb.setLength(0); // sb a 0 para que no se repitan ordenes anteriores
@@ -543,13 +540,13 @@ public class Order extends Operation {
         sb.append("Phone Contact: ").append(getPhoneContact()).append("\n");
         sb.append("Init Date: ").append(this.getInitDate()).append("\n");
         sb.append("Payment Date: ").append(this.getPaymentDate()).append("\n");
-        sb.append("Dimensions: ").append(getOrderPackage().getDimensionstoString()).append("\n");
+        sb.append("Dimensions: ").append(getOrderPackage() != null ? getOrderPackage().getDimensionstoString() : "").append("\n");
         sb.append("Delivery Date: ").append(this.getDeliveryDate()).append("\n");
         sb.append("Finish Date: ").append(getFinishDate()).append("\n");
         sb.append("Status: ").append(this.getStatus()).append("\n\n");
         sb.append("Shop Cart: \n");
         sb.append(getShopCart()).append("\n");
-        // for (OrderDetails detail : shopCart) {
+// for (OrderDetails detail : shopCart) {
         //     sb.append("-----------------------------------------------------------------------------------").append("\n");
         //     sb.append(detail.getDetailstoString()).append("\n\n");
         // }
@@ -559,9 +556,3 @@ public class Order extends Operation {
     }
 
 }
-
-
-
-// implementaciones de storable
-// borradas las implementaciones de storable, no se usan en ningun momento, ya
-// dirá jose cuando usarlas

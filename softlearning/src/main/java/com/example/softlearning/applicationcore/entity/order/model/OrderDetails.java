@@ -31,19 +31,19 @@ public class OrderDetails {
         
 
         if((errorCode=od.setAmount(amount))!=0){
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad amount: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         
         if((errorCode=od.setDetailRef(detailRef))!=0){
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad detailRef: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         
         if((errorCode=od.setPrice(price))!=0){
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad price: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         
         if((errorCode=od.setDiscount(discount))!=0){
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad discount: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         
         
@@ -93,7 +93,7 @@ public class OrderDetails {
     // Setters
 
     public int setAmount(int amount) {
-        int errorAmount = Check.range(amount);
+        int errorAmount = Check.range(amount, 1, 1000);
         if (errorAmount != 0) {
             return errorAmount;
         }
@@ -102,7 +102,7 @@ public class OrderDetails {
     }
 
     public int setDetailRef(String detailRef) {
-        int errorDetailRef = Check.minMaxLength(detailRef, 1, 10); // Range de String
+        int errorDetailRef = Check.checkLength(detailRef, 1, 10);
         if (errorDetailRef != 0) {
             return errorDetailRef;
         }
@@ -111,7 +111,7 @@ public class OrderDetails {
     }
 
     public int setPrice(double price) {
-        int errorPrice = Check.range(price);// Range de double
+        int errorPrice = Check.range(price, 0, 100000);
         if (errorPrice != 0) {
             return errorPrice;
         }

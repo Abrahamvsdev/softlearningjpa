@@ -13,12 +13,12 @@ public class CheckTest {
 
     @Test
     void testIsNullEmpty() {
-        assertEquals(-1, Check.isNull(""));
+        assertEquals(0, Check.isNull(""));
     }
 
     @Test
     void testIsNullSpace() {
-        assertEquals(-1, Check.isNull("  "));
+        assertEquals(0, Check.isNull("  "));
     }
 
     @Test
@@ -77,105 +77,49 @@ public class CheckTest {
         assertEquals(-10, Check.checkEmail("user!@example.com"));
     }
 
-    /* TEST MIN LENGTH */
-
+    /* TEST CHECK LENGTH */
     @Test
-    void testMinLength() {
-        assertEquals(0, Check.minLength("abc"));
+    void testCheckLengthValid() {
+        assertEquals(0, Check.checkLength("abc", 3, 10));
     }
 
     @Test
-    void testMinLengthLessThanThree() {
-        assertEquals(-3, Check.minLength("ab"));
+    void testCheckLengthLessThanMin() {
+        assertEquals(-3, Check.checkLength("ab", 3, 10));
     }
 
     @Test
-    void testMinLengthEmptyString() {
-        assertEquals(-1, Check.minLength(""));
+    void testCheckLengthMoreThanMax() {
+        assertEquals(-7, Check.checkLength("abcdefghijklmno", 3, 10));
     }
 
     @Test
-    void testMinLengthSpaceString() {
-        assertEquals(-1, Check.minLength("   "));
+    void testCheckLengthEmptyString() {
+        assertEquals(-2, Check.checkLength("", 3, 10));
     }
 
     @Test
-    void testMinLengthNullString() {
-        assertEquals(-1, Check.minLength(null));
-    }
-
-    /* TEST CHECK BOOLEAN */
-    @Test
-    void testisBooleanTrue() {
-        assertEquals(-12, Check.isBoolean(true));
+    void testCheckLengthSpaceString() {
+        assertEquals(-2, Check.checkLength("   ", 3, 10));
     }
 
     @Test
-    void testisBooleanFalse() {
-        assertEquals(0, Check.isBoolean(false));
+    void testCheckLengthNullString() {
+        assertEquals(-1, Check.checkLength(null, 3, 10));
     }
 
-    /* TEST MAX LENGTH */
-
+    /* TEST IS TRUE */
     @Test
-    void testMaxLengthValid() {
-        assertEquals(0, Check.maxLength("123456789012345"));
-    }
-
-    @Test
-    void testMaxLengthMoreCharacters() {
-        assertEquals(-7, Check.maxLength("123-4567890123-456"));
+    void testIsTrueTrue() {
+        assertEquals(0, Check.isTrue(true));
     }
 
     @Test
-    void testMaxLengthEmptyString() {
-        assertEquals(-1, Check.maxLength(""));
-    }
-
-    @Test
-    void testMaxLengthSpaceString() {
-        assertEquals(-1, Check.maxLength("           "));
-    }
-
-    @Test
-    void testMaxLengthNullString() {
-        assertEquals(-1, Check.maxLength(null));
-    }
-
-    /* TEST MIN MAX LENGTH */
-
-    @Test
-    void testMinMaxLengthValid() {
-        assertEquals(0, Check.minMaxLength("validLength"));
-    }
-
-    @Test
-    void testMinMaxLengthShort() {
-        assertEquals(-3, Check.minMaxLength("ab"));
-    }
-
-    @Test
-    void testMinMaxLengthLong() {
-        assertEquals(-7, Check.minMaxLength("123-4567890123-456"));
-    }
-
-    @Test
-    void testMinMaxLengthEmptyString() {
-        assertEquals(-1, Check.minMaxLength(""));
-    }
-
-    @Test
-    void testMinMaxLengthSpaceString() {
-        assertEquals(-1, Check.minMaxLength("           "));
-    }
-
-    @Test
-    void testMinMaxLengthNullString() {
-        assertEquals(-1, Check.minMaxLength(null));
+    void testIsTrueFalse() {
+        assertEquals(-12, Check.isTrue(false));
     }
 
     /* TEST IS VALID DATE */
-
     @Test
     void testIsValidDateCorrectFormatValidDate() {
         assertEquals(0, Check.isValidDate("15-08-2023"));
@@ -255,7 +199,7 @@ public class CheckTest {
     @Test
     void testIsValidDateCompleteIncorrectFormat() {
         assertEquals(-14, Check.isValidDateComplete("15-08-2023 12:30:45")); // Formato incorrecto (dd-MM-yyyy HH:mm:ss
-                                                                             // en vez de yyyy/MM/dd-HH:mm:ss)
+        // en vez de yyyy/MM/dd-HH:mm:ss)
     }
 
     @Test
@@ -324,57 +268,64 @@ public class CheckTest {
     }
 
     /* TEST RANGE DOUBLE */
-
     @Test
     void testRangePositiveNumber() {
-        assertEquals(0, Check.range(10.5)); // Número positivo
+        assertEquals(0, Check.range(10.5, 0, 100));
     }
 
     @Test
     void testRangeZero() {
-        assertEquals(0, Check.range(0)); // Cero debería ser válido
+        assertEquals(0, Check.range(0, 0, 100));
     }
 
     @Test
     void testRangeNegativeNumber() {
-        assertEquals(-6, Check.range(-5.3)); // Número negativo
+        assertEquals(-23, Check.range(-5.3, 0, 100));
     }
 
     /* TEST RANGE DISCOUNT */
-
     @Test
     void testRangeDiscountValidLowerBound() {
-        assertEquals(0, Check.rangeDiscount(0.00)); // Límite inferior válido
+        assertEquals(0, Check.rangeDiscount(0.00));
     }
 
     @Test
     void testRangeDiscountValidUpperBound() {
-        assertEquals(0, Check.rangeDiscount(50.00)); // Límite superior válido
+        assertEquals(0, Check.rangeDiscount(50.00));
     }
 
     @Test
     void testRangeDiscountWithinRange() {
-        assertEquals(0, Check.rangeDiscount(25.5)); // Valor dentro del rango permitido
+        assertEquals(0, Check.rangeDiscount(25.5));
+    }
+
+    @Test
+    void testRangeDiscountAboveRange() {
+        assertEquals(-20, Check.rangeDiscount(51));
+    }
+
+    @Test
+    void testRangeDiscountBelowRange() {
+        assertEquals(-23, Check.rangeDiscount(-1));
     }
 
     /* TEST RANGE INT */
     @Test
     void testRangeIntPositiveNumber() {
-        assertEquals(0, Check.range(10)); // Número positivo
+        assertEquals(0, Check.range(10, 0, 100));
     }
 
     @Test
     void testRangeIntZero() {
-        assertEquals(0, Check.range(0)); // Cero debería ser válido
+        assertEquals(0, Check.range(0, 0, 100));
     }
 
     @Test
     void testRangeIntNegativeNumber() {
-        assertEquals(-6, Check.range(-5)); // Número negativo
+        assertEquals(-23, Check.range(-5, 0, 100));
     }
 
     /* TEST CHECK DNI */
-
     @Test
     void testCheckDNIValid() {
         assertEquals(0, Check.checkDNI("12345678A")); // DNI válido
@@ -412,32 +363,15 @@ public class CheckTest {
 
     @Test
     void testCheckDNIEmpty() {
-        assertEquals(-1, Check.checkDNI("")); // Vacio
+        assertEquals(-2, Check.checkDNI("")); // Vacio
     }
 
     @Test
     void testCheckDNIWhitSpace() {
-        assertEquals(-1, Check.checkDNI("   ")); // Espcacios
-    }
-
-    /* TEST VALIDATE */
-    @Test
-    void testValidatePositivePrice() {
-        assertEquals(0, Check.validate(10.99)); // Precio positivo
-    }
-
-    @Test
-    void testValidateZeroPrice() {
-        assertEquals(0, Check.validate(0.00)); // Cero debe ser válido
-    }
-
-    @Test
-    void testValidateNegativePrice() {
-        assertEquals(-6, Check.validate(-5.50)); // Precio negativo
+        assertEquals(-2, Check.checkDNI("   ")); // Espcacios
     }
 
     /* TEST CHECK ISBN */
-
     @Test
     void testCheckISBNValid() {
         assertEquals(0, Check.checkISBN("978-3-16-148410-0")); // ISBN válido con guiones
@@ -460,7 +394,7 @@ public class CheckTest {
 
     @Test
     void testCheckISBNTooLong() {
-        assertEquals(-8, Check.checkISBN("978-3-16-148410-0123")); // ISBN con más de 13 caracteres
+        assertEquals(-7, Check.checkISBN("978-3-16-148410-0123")); // ISBN con más de 13 caracteres
     }
 
     @Test
@@ -470,16 +404,15 @@ public class CheckTest {
 
     @Test
     void testCheckISBNEmpty() {
-        assertEquals(-1, Check.checkISBN("")); // ISBN vacío
+        assertEquals(-2, Check.checkISBN("")); // ISBN vacío
     }
 
     @Test
     void testCheckISBNWithSpaces() {
-        assertEquals(-1, Check.checkISBN("  ")); // ISBN con espacios
+        assertEquals(-2, Check.checkISBN("  ")); // ISBN con espacios
     }
 
     /* TEST CHECK MOBILE PHONE */
-
     @Test
     void testCheckMobilePhoneValid() {
         assertEquals(0, Check.checkMobilePhone("623456789")); // Número válido de 9 cifras
@@ -497,7 +430,7 @@ public class CheckTest {
 
     @Test
     void testCheckMobilePhoneNull() {
-        assertEquals(0, Check.checkMobilePhone(null)); // Caso nulo
+        assertEquals(-1, Check.checkMobilePhone(null)); // Caso nulo
     }
 
     @Test
@@ -521,7 +454,6 @@ public class CheckTest {
     }
 
     /* TEST GET ERROR MESSAGE */
-
     @Test
     void testGetErrorMessageNoError() {
         assertEquals("", Check.getErrorMessage(0));
@@ -534,7 +466,7 @@ public class CheckTest {
 
     @Test
     void testGetErrorMessageEmptyValue() {
-        assertEquals("No puede estar vacio", Check.getErrorMessage(-2));
+        assertEquals("No puede estar vacío", Check.getErrorMessage(-2));
     }
 
     @Test
@@ -554,17 +486,12 @@ public class CheckTest {
 
     @Test
     void testGetErrorMessageNegativeNumber() {
-        assertEquals("Has introducido un numero negativo", Check.getErrorMessage(-6));
+        assertEquals("Has introducido un número negativo", Check.getErrorMessage(-6));
     }
 
     @Test
     void testGetErrorMessageTooManyCharacters() {
         assertEquals("Has introducido demasiados caracteres", Check.getErrorMessage(-7));
-    }
-
-    @Test
-    void testGetErrorMessageInvalidISBN() {
-        assertEquals("Isbn no valido, introduce una cifra de 13 dígitos válido", Check.getErrorMessage(-8));
     }
 
     @Test
@@ -579,22 +506,22 @@ public class CheckTest {
 
     @Test
     void testGetErrorMessageInvalidSoftwareFormat() {
-        assertEquals("Formato de Software incorrecto", Check.getErrorMessage(-11));
+        assertEquals("Formato de software incorrecto", Check.getErrorMessage(-11));
     }
 
     @Test
     void testGetErrorMessageLatePayment() {
-        assertEquals("El pago está atrasado", Check.getErrorMessage(-12));
+        assertEquals("El valor es falso", Check.getErrorMessage(-12));
     }
 
     @Test
     void testGetErrorMessageCorrectPayment() {
-        assertEquals("El pago está correctamente", Check.getErrorMessage(-13));
+        assertEquals("El valor es verdadero", Check.getErrorMessage(-13));
     }
 
     @Test
     void testGetErrorMessageCorrectFormatButInvalidDate() {
-        assertEquals("Formato correcto pero no válida", Check.getErrorMessage(-14));
+        assertEquals("Formato de fecha incorrecto", Check.getErrorMessage(-14));
     }
 
     @Test
@@ -609,7 +536,7 @@ public class CheckTest {
 
     @Test
     void testGetErrorMessageInvalidPhoneNumber() {
-        assertEquals("el numero de teléfono debe ser un numero valido de 9 cifras", Check.getErrorMessage(-17));
+        assertEquals("El número de teléfono debe ser un número válido de 9 cifras", Check.getErrorMessage(-17));
     }
 
     @Test
@@ -619,17 +546,32 @@ public class CheckTest {
 
     @Test
     void testGetErrorMessageUnsetOrderId() {
-        assertEquals("el Id del Orden no ha sido seteado", Check.getErrorMessage(-19));
+        assertEquals("El Id del orden no ha sido seteado", Check.getErrorMessage(-19));
     }
 
     @Test
     void testGetErrorMessageDiscountTooHigh() {
-        assertEquals("El descuento no puede ser mayor al 50% ", Check.getErrorMessage(-20));
+        assertEquals("El descuento no puede ser mayor al 50%", Check.getErrorMessage(-20));
     }
 
     @Test
     void testGetErrorMessageNoDetail() {
         assertEquals("No hay detalle", Check.getErrorMessage(-21));
+    }
+
+    @Test
+    void testGetErrorMessageInvalidISBN() {
+        assertEquals("El ISBN no está formado correctamente", Check.getErrorMessage(-22));
+    }
+
+    @Test
+    void testGetErrorMessageNumberTooSmall() {
+        assertEquals("El número es más pequeño de lo esperado", Check.getErrorMessage(-23));
+    }
+
+    @Test
+    void testGetErrorMessageNumberTooLarge() {
+        assertEquals("El número es más grande de lo esperado", Check.getErrorMessage(-24));
     }
 
     @Test
