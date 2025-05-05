@@ -26,32 +26,32 @@ public abstract class Product implements Marketable {
         
         errorCode = setIdent(ident);
         if (errorCode != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad ident: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         errorCode = setPrice(price);
         if (errorCode != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad price: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         errorCode = setDelayPay(delayPay);
         if (errorCode != 0 ) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad delayPay: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         errorCode = setDiscount(discount);
         if (errorCode != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad discount: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         errorCode = setPayMethod(payMethod);
         if (errorCode != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad payMethod: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         errorCode = setType(type);
         if (errorCode != 0) {
-            errors.append(Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad type: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         
         
@@ -94,7 +94,7 @@ public abstract class Product implements Marketable {
     
     //setters
     public int setDelayPay(boolean delayPay) {
-        int errordelayPay = Check.istrue(delayPay);
+        int errordelayPay = Check.isTrue(delayPay);
         if (errordelayPay == 0) {
             this.delayPay = delayPay;
         }
@@ -102,8 +102,8 @@ public abstract class Product implements Marketable {
     }
 
     public int setDiscount(double discount) {
-        int errorDiscount =Check.range(price);
-        if(errorDiscount==0){
+        int errorDiscount = Check.rangeDiscount(discount);
+        if(errorDiscount == 0){
             this.discount = discount;
 
         }
@@ -111,15 +111,15 @@ public abstract class Product implements Marketable {
     }
 
     public int setType(String type) {
-        int errorType= Check.minMaxLength(type, 3, 20);
-        if(errorType== 0){
+        int errorType = Check.checkLength(type, 3, 20);
+        if(errorType == 0){
             this.type = type;
         }
         return errorType;
     }
 
     public int setPayMethod(String payMethod) {
-        int errorPayMethod = Check.minMaxLength(payMethod, 3, 20);
+        int errorPayMethod = Check.checkLength(payMethod, 3, 20);
         if(errorPayMethod == 0){
             this.payMethod = payMethod;
         }
@@ -127,7 +127,7 @@ public abstract class Product implements Marketable {
     }
 
     public int setIdent(String ident) {
-        int errorIdent = Check.minLength(ident, 3);
+        int errorIdent = Check.checkLength(ident, 3, 20);
         if (errorIdent == 0) {
             this.ident = ident;
         }
@@ -135,7 +135,7 @@ public abstract class Product implements Marketable {
     }
 
     public int setPrice(double price) {
-        int errorPrice = Check.range(price);
+        int errorPrice = Check.range(price, 0, 100000);
         if (errorPrice == 0) {
             this.price = price;
         }
