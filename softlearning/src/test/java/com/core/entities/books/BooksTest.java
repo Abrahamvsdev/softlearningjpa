@@ -20,16 +20,16 @@ public class BooksTest {
             "true",
             "30-04-2025",
             "willingli",
-            "9783161484100123",
+            "978-3-16-148410-0",
             "cover1",
             10,
             "genre",
             "editorial",
-            10.0,
-            10.0,
-            10.0,
+            3.0,
+            3.0,
+            3.0,
             false,
-            10.0
+            3.0
              // TODO esto es el volumen, que lo estoy dejando así hardcodeado para pruebas
         );
         System.out.println(b.getDetails());

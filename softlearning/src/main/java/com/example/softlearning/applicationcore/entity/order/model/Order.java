@@ -28,8 +28,7 @@ public class Order extends Operation {
         this.status = OrderStatus.CREATED;
     }
 
-    // ********* ORDER BUILDERS*********/ (quiere decir que hay mas) ademas, hay que
-    // jose tiene en el get instance pequeño (ref,
+    // ********* ORDER BUILDERS*********
     // ESTE ES EL GET INSTANCE PEQUEÑO
     public static Order getInstance(
             String receiverAddress,
@@ -76,7 +75,7 @@ public class Order extends Operation {
             String receiverPerson,
             String phoneContact,
             String idClient,
-            // campos del grande dice jose que deberian ser mas de 3
+
             String paymentDate,
             String deliveryDate,
             String finishDate,
@@ -90,7 +89,6 @@ public class Order extends Operation {
         int errorCode;
 
         Order o = new Order();
-        // los otros campos que se validan aqui
 
         try {
             o.operation(
@@ -185,7 +183,7 @@ public class Order extends Operation {
         return this.status;
     }
 
-    // metodo para obtener el num de detalles en el carrito de compras
+
     public int getNumDetails() {
         return this.shopCart.size();
     }
@@ -241,10 +239,9 @@ public class Order extends Operation {
     }
 
     public int setPhoneContact(String Phone) {
-        int errorPhoneContact = Check.checkMobilePhone(Phone); // de momento solo checkeo si tiene 9 digitos, nada mas
+        int errorPhoneContact = Check.checkMobilePhone(Phone);
         if (errorPhoneContact == 0) {
-            phoneContact.add(Phone);// el propio metodo set los separa automaticamente, solo tengo que añadirlo en
-            // los test
+            phoneContact.add(Phone);
         }
         return errorPhoneContact;
     }
@@ -255,19 +252,16 @@ public class Order extends Operation {
         if (this.status == OrderStatus.CONFIRMED) {
 
             // importante setear los parametros a 0, para que se puedan crear
-            double weight = 0;
-            double height = 0;
-            double width = 0;
+            double weight = 1;
+            double height = 1;
+            double width = 1;
             boolean fragile = false;
-            double length = 0;
+            double length = 1;
 
             // ejemploString packageDetails = "h:202.20,w:202.20,W:202.20,f:true,d:202.20";
-            // Dividimos el string por comas
             String[] details = oP.split(",");
 
-            // dividimos cada parte del string por los puntos y usamos un switch para
-            // asignar con los setters, keyvalue[0] es la letra y keyvalue[1] son los
-            // numeros
+            
             // el getinstace tiene que crear un order package
             for (String detail : details) {
                 String[] keyValue = detail.split(":");
@@ -287,7 +281,7 @@ public class Order extends Operation {
                         throw new BuildException("Parametro desconocido: " + keyValue[0]);
                     }
                 }
-                // se prueban las dimensions para ver si se pueden crear, si no, que pete
+                
                 try {
                     this.orderPackage = Dimensions.getInstanceDimensions(weight, height, width, fragile, length);
                     this.status = OrderStatus.FORTHCOMMING;
@@ -324,7 +318,6 @@ public class Order extends Operation {
 
         // Ejemplo de detailsString:
         // "amount:2,ref:REF001,price:10.0,discount:5.0;amount:1,ref:REF002,price:20.0,discount:0.0"
-        // Separar cada detalle por punto y coma
         String[] detailsArray = detailsString.split(";");
 
         for (String detailString : detailsArray) {
@@ -515,7 +508,7 @@ public class Order extends Operation {
     // metodo para mostrar los detalles de la compra
     public String getOrderDetails() {
 
-        sb.setLength(0); // sb a 0 para que no se repitan ordenes anteriores
+        sb.setLength(0);
         sb.append("Order Details: \n");
         sb.append("Receiver Address: ").append(this.receiverAddress).append("\n");
         sb.append("Receiver Person: ").append(this.receiverPerson).append("\n");
@@ -530,7 +523,7 @@ public class Order extends Operation {
 
     public String getCompleteOrderDetails() {
 
-        sb.setLength(0); // sb a 0 para que no se repitan ordenes anteriores
+        sb.setLength(0);
         sb.append("Complete Order Details: \n");
         sb.append("Receiver Address: ").append(this.receiverAddress).append("\n");
         sb.append("Reference: ").append(this.reference).append("\n");

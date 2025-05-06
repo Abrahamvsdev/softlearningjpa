@@ -18,10 +18,10 @@ public class ClientTest {
             "Calle falsa 123", 
             "12345678A", 
             "123456789", 
-            "12", 
+            "credit card", 
             12, 
             "asd", 
-            "30-02-1990");
+            "29-02-1990");
             //System.out.println(c.getDetails());
 
             //Mapper

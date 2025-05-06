@@ -65,6 +65,20 @@ public class Check {
         return -12; // -12: Es false
     }
 
+    public static int isFalse(boolean b) {
+        if (b == false) {
+            return 0; // 0: Es false
+        }
+        return -13; // -12: Es true
+    }
+
+    public static int checkBoolean(boolean b) {
+        if (b == true || b == false) {
+            return 0; // 0: Está bien
+        }
+        return 0; // Sea lo que sea que retorne 0
+    }
+
     public static int isValidDate(String date) {
         int isEmpty = Check.isEmpty(date);
         if (isEmpty != 0) {

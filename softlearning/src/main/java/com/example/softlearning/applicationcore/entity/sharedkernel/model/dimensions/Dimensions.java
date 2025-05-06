@@ -6,11 +6,11 @@ import com.example.softlearning.applicationcore.entity.sharedkernel.model.except
 
 public class Dimensions {
 
-    protected double weight = 0.0;
-    protected double height = 0.0;
-    protected double width = 0.0;
+    protected double weight = 1.0;
+    protected double height = 1.0;
+    protected double width = 1.0;
     protected boolean fragile = false;
-    protected double length = 0.0;
+    protected double length = 1.0;
     protected double volume = 0.0;
 
     public Dimensions(){};
@@ -27,22 +27,22 @@ public class Dimensions {
         int errorCode;
 
         if ((errorCode = d.setWeight(weight)) != 0) {
-            errors.append("Bad Weight:" + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad weight: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if ((errorCode = d.setHeight(height)) != 0) {
-            errors.append("Bad Height:" + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad height: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if ((errorCode = d.setWidth(width)) != 0) {
-            errors.append("Bad Width:" + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad width: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = d.setFragile(fragile)) != 0) {
-            errors.append("Bad Fragile:" + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad fragile: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if ((errorCode = d.setLength(length)) != 0) {
-            errors.append("Bad Length:" + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad length: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
 
         if (errors.length() > 0) {
@@ -85,7 +85,7 @@ public class Dimensions {
     }
 
     public int setWeight(double weight) {
-        int errorWeight = Check.range(weight, 0.50, 5);
+        int errorWeight = Check.range(weight, 1, 5);
         if (errorWeight == 0) {
             this.weight = weight;
         }
@@ -93,7 +93,7 @@ public class Dimensions {
     }
 
     public int setHeight(double height) {
-        int errorHeight = Check.range(height, 10,30 );
+        int errorHeight = Check.range(height, 1, 30);
         if (errorHeight == 0) {
             this.height = height;
         }
@@ -101,7 +101,7 @@ public class Dimensions {
     }
 
     public int setWidth(double width) {
-        int errorWidth = Check.range(width,5, 10);
+        int errorWidth = Check.range(width, 1, 10);
         if (errorWidth == 0) {
             this.width = width;
         }
@@ -109,7 +109,7 @@ public class Dimensions {
     }
 
     public int setLength(double length) {
-        int errorLength = Check.range(length,15,30);
+        int errorLength = Check.range(length, 1, 30);
         if (errorLength == 0) {
             this.length = length;
         }

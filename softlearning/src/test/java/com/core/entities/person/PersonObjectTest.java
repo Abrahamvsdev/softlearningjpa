@@ -49,7 +49,7 @@ public class PersonObjectTest {
             p.person(null, validSurname, validEmail, validAddress, validDni, validNumber, validAntiquity);
             fail("Debería fallar por nombre nulo");
         } catch (Exception e) {
-            assertEquals("No es posible crear al tipo: \nNo puede ser null\n", e.getMessage());
+            assertEquals("No es posible crear al tipo: \nBad name: No puede ser null\n", e.getMessage());
         }
     }
 
@@ -60,7 +60,7 @@ public class PersonObjectTest {
             p.person(validName, null, validEmail, validAddress, validDni, validNumber, validAntiquity);
             fail("Debería fallar por apellido nulo");
         } catch (Exception e) {
-            assertEquals("No es posible crear al tipo: \nNo puede ser null\n", e.getMessage());
+            assertEquals("No es posible crear al tipo: \nBad surname: No puede ser null\n", e.getMessage());
         }
     }
 
@@ -71,7 +71,7 @@ public class PersonObjectTest {
             p.person(validName, validSurname, "email-invalido", validAddress, validDni, validNumber, validAntiquity);
             fail("Debería fallar por email inválido");
         } catch (Exception e) {
-            assertEquals("No es posible crear al tipo: \nFormato de email incorrecto\n", e.getMessage());
+            assertEquals("No es posible crear al tipo: \nBad email: Formato de email incorrecto\n", e.getMessage());
         }
     }
 
@@ -82,7 +82,7 @@ public class PersonObjectTest {
             p.person(validName, validSurname, validEmail, "", validDni, validNumber, validAntiquity);
             fail("Debería fallar por dirección vacía");
         } catch (Exception e) {
-            assertEquals("No es posible crear al tipo: \nNo puede ser null\n", e.getMessage());
+            assertEquals("No es posible crear al tipo: \nBad address: No puede ser null\n", e.getMessage());
         }
     }
 
@@ -93,7 +93,7 @@ public class PersonObjectTest {
             p.person(validName, validSurname, validEmail, validAddress, "DNI_INVALIDO", validNumber, validAntiquity);
             fail("Debería fallar por DNI inválido");
         } catch (Exception e) {
-            assertEquals("No es posible crear al tipo: \nDNI no válido\n", e.getMessage());
+            assertEquals("No es posible crear al tipo: \nBad dni: DNI no válido\n", e.getMessage());
         }
     }
 
@@ -104,7 +104,7 @@ public class PersonObjectTest {
             p.person(validName, validSurname, validEmail, validAddress, validDni, "12", validAntiquity);
             fail("Debería fallar por número corto");
         } catch (Exception e) {
-            assertEquals("No es posible crear al tipo: \nHas introducido pocos caracteres\n", e.getMessage());
+            assertEquals("No es posible crear al tipo: \nBad number: Has introducido pocos caracteres\n", e.getMessage());
         }
     }
 
@@ -115,7 +115,7 @@ public class PersonObjectTest {
             p.person(validName, validSurname, validEmail, validAddress, validDni, validNumber, -5);
             fail("Debería fallar por antigüedad negativa");
         } catch (Exception e) {
-            assertEquals("No es posible crear al tipo: \nHas introducido un numero negativo\n", e.getMessage());
+            assertEquals("No es posible crear al tipo: \nBad antiquity: Has introducido un número negativo\n", e.getMessage());
         }
     }
 
@@ -127,13 +127,13 @@ public class PersonObjectTest {
             fail("Debería fallar por múltiples errores");
         } catch (Exception e) {
             String expected = "No es posible crear al tipo: \n" +
-                "No puede ser null\n" +
-                "Has introducido pocos caracteres\n" +
-                "Formato de email incorrecto\n" +
-                "No puede ser null\n" +
-                "DNI no válido\n" +
-                "Has introducido pocos caracteres\n" +
-                "Has introducido un numero negativo\n";
+                "Bad name: No puede ser null\n" +
+                "Bad surname: Has introducido pocos caracteres\n" +
+                "Bad email: Formato de email incorrecto\n" +
+                "Bad address: No puede ser null\n" +
+                "Bad dni: DNI no válido\n" +
+                "Bad number: Has introducido pocos caracteres\n" +
+                "Bad antiquity: Has introducido un número negativo\n";
             assertEquals(expected, e.getMessage());
         }
     }
@@ -418,5 +418,5 @@ public class PersonObjectTest {
     }
 
 
-    
+
 }

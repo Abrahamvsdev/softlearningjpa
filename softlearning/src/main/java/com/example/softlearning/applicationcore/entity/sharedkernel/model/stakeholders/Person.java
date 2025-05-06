@@ -19,29 +19,27 @@ public abstract class Person {
         StringBuilder errors = new StringBuilder();
         int errorCode;
         
-        
         if ((errorCode = this.setName(name)) != 0) {
-            errors.append("Bad Name: " + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad name: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setSurname(surname)) != 0) {
-            errors.append("Bad Surname: " + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad surname: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setEmail(email)) != 0) {
-            errors.append("Bad Email: " + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad email: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setAddress(address)) != 0) {
-            errors.append("Bad Address: " + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad address: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setDni(dni)) != 0) {
-            errors.append("Bad DNI: " + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad dni: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setNumber(number)) != 0) {
-            errors.append("Bad Number: " + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad number: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
         if ((errorCode = this.setAntiquity(antiquity)) != 0) {
-            errors.append("Bad Antiquity: " + Check.getErrorMessage(errorCode)).append("\n");
+            errors.append("Bad antiquity: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
-
         if (errors.length() > 0) {
             throw new Exception("No es posible crear al tipo: \n" + errors.toString());
         }
@@ -102,7 +100,7 @@ public abstract class Person {
     }
 
     public int setAddress(String address) {
-        int errorAddress = Check.checkLength(address, 10, 50);
+        int errorAddress = Check.checkLength(address, 5, 50);
         if (errorAddress == 0) {
             this.address = address;
         }

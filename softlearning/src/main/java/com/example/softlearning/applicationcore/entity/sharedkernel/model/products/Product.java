@@ -4,65 +4,47 @@ import com.example.softlearning.applicationcore.entity.sharedkernel.domainservic
 import com.example.softlearning.applicationcore.entity.sharedkernel.marketable.Marketable;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 
-public abstract class Product implements Marketable {  
+public abstract class Product implements Marketable {
 
     protected String ident;
     protected double price;
-    
 
-    // //estos son de marketable
+    //estos son de marketable
     protected boolean delayPay;
     protected double discount;
     protected String type;
     protected String payMethod;
 
-    protected Product(){//ESTO SERVIRA PARA MAS ADELANTE
+    protected Product() {
 
     }
-        //Las clases abstractas no pueden ser static, esta es la que se usa para chekear cuando se crea el libro
-        public void product(String ident, double price, boolean delayPay, double discount, String type, String payMethod) throws BuildException {
+
+    public void product(String ident, double price, boolean delayPay, double discount, String type, String payMethod) throws BuildException {
         StringBuilder errors = new StringBuilder();
         int errorCode;
-        
-        errorCode = setIdent(ident);
-        if (errorCode != 0) {
+
+        if ((errorCode = setIdent(ident)) != 0) {
             errors.append("Bad ident: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
-
-        errorCode = setPrice(price);
-        if (errorCode != 0) {
+        if ((errorCode = setPrice(price)) != 0) {
             errors.append("Bad price: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
-
-        errorCode = setDelayPay(delayPay);
-        if (errorCode != 0 ) {
+        if ((errorCode = setDelayPay(delayPay)) != 0) {
             errors.append("Bad delayPay: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
-
-        errorCode = setDiscount(discount);
-        if (errorCode != 0) {
+        if ((errorCode = setDiscount(discount)) != 0) {
             errors.append("Bad discount: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
-
-        errorCode = setPayMethod(payMethod);
-        if (errorCode != 0) {
+        if ((errorCode = setPayMethod(payMethod)) != 0) {
             errors.append("Bad payMethod: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
-
-        errorCode = setType(type);
-        if (errorCode != 0) {
+        if ((errorCode = setType(type)) != 0) {
             errors.append("Bad type: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
-        
-        
         if (errors.length() > 0) {
             throw new BuildException("Not possible to create the product: \n" + errors.toString());
         }
     }
-
-        
-        
-    
 
     public String getIdent() {
         return this.ident;
@@ -72,8 +54,6 @@ public abstract class Product implements Marketable {
         return this.price;
     }
 
-    
-    //son override porque son del Marketable
     @Override
     public boolean getDelayPay() {
         return delayPay;
@@ -83,27 +63,29 @@ public abstract class Product implements Marketable {
     public double getDiscount() {
         return discount;
     }
+
     @Override
     public String getType() {
         return type;
     }
+
     @Override
     public String getPayMethod() {
         return payMethod;
     }
-    
+
     //setters
     public int setDelayPay(boolean delayPay) {
-        int errordelayPay = Check.isTrue(delayPay);
+        int errordelayPay = Check.checkBoolean(delayPay);
         if (errordelayPay == 0) {
             this.delayPay = delayPay;
         }
-        return errordelayPay;
+        return errordelayPay; // Aquí no debería entrar nunca
     }
 
     public int setDiscount(double discount) {
         int errorDiscount = Check.rangeDiscount(discount);
-        if(errorDiscount == 0){
+        if (errorDiscount == 0) {
             this.discount = discount;
 
         }
@@ -112,7 +94,7 @@ public abstract class Product implements Marketable {
 
     public int setType(String type) {
         int errorType = Check.checkLength(type, 3, 20);
-        if(errorType == 0){
+        if (errorType == 0) {
             this.type = type;
         }
         return errorType;
@@ -120,7 +102,7 @@ public abstract class Product implements Marketable {
 
     public int setPayMethod(String payMethod) {
         int errorPayMethod = Check.checkLength(payMethod, 3, 20);
-        if(errorPayMethod == 0){
+        if (errorPayMethod == 0) {
             this.payMethod = payMethod;
         }
         return errorPayMethod;
