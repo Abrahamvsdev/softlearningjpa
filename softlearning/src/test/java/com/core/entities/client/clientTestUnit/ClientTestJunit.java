@@ -54,7 +54,7 @@ public class ClientTestJunit {
                     validNumber, null, validAntiquity, validMembershipLevel, validRegistrationDate);
             fail("Debería fallar por paymentMode nulo");
         } catch (Exception e) {
-            assertEquals("No es posible crear el cliente: \nNo puede ser null\n", e.getMessage());
+            assertEquals("No es posible crear el cliente: \nBad paymentMode: No puede ser null\n", e.getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ public class ClientTestJunit {
                     validNumber, validPaymentMode, validAntiquity, "", validRegistrationDate);
             fail("Debería fallar por membershipLevel inválido");
         } catch (Exception e) {
-            assertEquals("No es posible crear el cliente: \nNo puede ser null\n", e.getMessage());
+            assertEquals("No es posible crear el cliente: \nBad membershipLevel: No puede estar vacío\n", e.getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ public class ClientTestJunit {
                     validNumber, validPaymentMode, validAntiquity, validMembershipLevel, "2025/03/02");
             fail("Debería fallar registrationDate, por formato de fecha incorrecto");
         } catch (Exception e) {
-            assertEquals("No es posible crear el cliente: \nFormato correcto pero no válida\n", e.getMessage());
+            assertEquals("No es posible crear el cliente: \nBad registrationDate: Formato de fecha incorrecto\n", e.getMessage());
         }
     }
 
@@ -90,7 +90,11 @@ public class ClientTestJunit {
                     validNumber, "", validAntiquity, "", "");
             fail("Debería fallar por fallo en varios campos");
         } catch (Exception e) {
-            assertEquals("No es posible crear el cliente: \nNo puede ser null\nNo puede ser null\nNo puede ser null\n", e.getMessage());
+            String expected = "No es posible crear el cliente: \n" +
+                "Bad paymentMode: No puede estar vacío\n" +
+                "Bad membershipLevel: No puede estar vacío\n" +
+                "Bad registrationDate: No puede estar vacío\n";
+            assertEquals(expected, e.getMessage());
         }
     }
 
@@ -162,7 +166,7 @@ public class ClientTestJunit {
 
     @Test
     public void testSetPaymentModeLong() {
-        assertEquals(-7, validClient.setPaymentMode("1234567890123456"));
+        assertEquals(-7, validClient.setPaymentMode("1234567890123456123123123123123123123123"));
     }
 
     @Test
@@ -172,12 +176,12 @@ public class ClientTestJunit {
 
     @Test
     public void testSetPaymentModeEmpty() {
-        assertEquals(-1, validClient.setPaymentMode(""));
+        assertEquals(-2, validClient.setPaymentMode(""));
     }
 
     @Test
     public void testSetPaymentModeSpaceString() {
-        assertEquals(-1, validClient.setPaymentMode("   "));
+        assertEquals(-2, validClient.setPaymentMode("   "));
     }
 
     @Test
@@ -197,7 +201,7 @@ public class ClientTestJunit {
 
     @Test
     public void testSetMembershipLevelLong() {
-        assertEquals(-7, validClient.setMembershipLevel("1234567890123456"));
+        assertEquals(-7, validClient.setMembershipLevel("membershipleveldemasiadolargosounmontondelargo"));
     }
 
     @Test
@@ -207,12 +211,12 @@ public class ClientTestJunit {
 
     @Test
     public void testSetMembershipLevelEmpty() {
-        assertEquals(-1, validClient.setMembershipLevel(""));
+        assertEquals(-2, validClient.setMembershipLevel(""));
     }
 
     @Test
     public void testSetMembershipLevelString() {
-        assertEquals(-1, validClient.setMembershipLevel("   "));
+        assertEquals(-2, validClient.setMembershipLevel("   "));
     }
 
     @Test
@@ -247,12 +251,12 @@ public class ClientTestJunit {
 
     @Test
     public void testSetRegistrationDateEmpty() {
-        assertEquals(-1, validClient.setRegistrationDate(""));
+        assertEquals(-2, validClient.setRegistrationDate(""));
     }
 
     @Test
     public void testSetRegistrationDateWithSpace() {
-        assertEquals(-1, validClient.setRegistrationDate("    "));
+        assertEquals(-2, validClient.setRegistrationDate("    "));
     }
 
     // --------------------- Tests de métodos heredados ---------------------

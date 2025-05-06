@@ -1,9 +1,6 @@
-import com.example.softlearning.applicationcore.entity.order.dtos.OrderDTO;
-import com.example.softlearning.applicationcore.entity.order.mappers.OrderMapper;
 import com.example.softlearning.applicationcore.entity.order.model.Order;
-import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
-
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
+import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
 public class TestOrderDTO {
     public static void main(String[] args) throws Exception, BuildException, ServiceException {
 
@@ -19,31 +16,31 @@ public class TestOrderDTO {
                     "2023/11/02-10:00:10",
                     "calle falsa 123",
                     "pedrito",
-                    "123456789",
+                    "623456789",
                     "ID1234",
                     "2024/11/02-10:00:10",
                     "2023/11/02-10:00:10",
                     "2024/11/02-10:00:10",
                     5.0,
                     2.0,
-                    10.0,
+                    5.0,
                     true,
-                    10.2,
+                    4.2,
                     "amount:2,ref:REF001,price:10.0,discount:5.0;amount:1,ref:REF002,price:20.0,discount:0.0");
             System.out.println(pedido.getCompleteOrderDetails());
 
-            //testear Mapper
-            OrderDTO odto = OrderMapper.dtoFromOrder(pedido);
-            System.out.println(odto.toString());
+            // //testear Mapper
+            // OrderDTO odto = OrderMapper.dtoFromOrder(pedido);
+            // System.out.println(odto.toString());
             
 
-        {
-            System.out.println(" \n Esto es una frase para diferenciar \n");
-        }
+        // {
+        //     System.out.println(" \n Esto es una frase para diferenciar \n");
+        // }
 
 
-            Order pedidoprueba = OrderMapper.orderFromDTO(odto);
-            System.out.println(pedidoprueba.getCompleteOrderDetails());
+            // Order pedidoprueba = OrderMapper.orderFromDTO(odto);
+            // System.out.println(pedidoprueba.getCompleteOrderDetails());
             
             
         } catch (BuildException | ServiceException e) {

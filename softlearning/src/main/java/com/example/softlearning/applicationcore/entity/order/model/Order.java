@@ -107,6 +107,19 @@ public class Order extends Operation {
             throw new BuildException("Error en las dimensiones(try dimensiones): " + e.getMessage());
         }
 
+        if ((errorCode = o.setReceiverAddress(receiverAddress)) != 0) {
+            errors.append("Bad receiverAddress: ").append(Check.getErrorMessage(errorCode)).append("\n");
+        }
+        if ((errorCode = o.setReceiverPerson(receiverPerson)) != 0) {
+            errors.append("Bad receiverPerson: ").append(Check.getErrorMessage(errorCode)).append("\n");
+        }
+        if ((errorCode = o.setIdClient(idClient)) != 0) {
+            errors.append("Bad idClient: ").append(Check.getErrorMessage(errorCode)).append("\n");
+        }
+        if ((errorCode = o.setPhoneContact(phoneContact)) != 0) {
+            errors.append("Bad phoneContact: ").append(Check.getErrorMessage(errorCode)).append("\n");
+        }
+
         if (shopCart != null && !shopCart.isEmpty()) {
             if (o.setShopCartDetails(shopCart) != 0) {
                 throw new BuildException("Error al establecer los detalles del carrito");

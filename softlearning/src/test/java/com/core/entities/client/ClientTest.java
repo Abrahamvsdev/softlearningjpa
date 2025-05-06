@@ -21,7 +21,7 @@ public class ClientTest {
             "credit card", 
             12, 
             "asd", 
-            "29-02-1990");
+            "02-03-1990");
             //System.out.println(c.getDetails());
 
             //Mapper

@@ -1,6 +1,6 @@
 
-import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 import com.example.softlearning.applicationcore.entity.order.model.Order;
+import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
 
 public class TestOrderGrande {
@@ -17,17 +17,17 @@ public class TestOrderGrande {
                 "description",
                 "2023/11/02-10:00:10",
                 "calle falsa 123",
-                "Pedro Medario",
-                "123456789",
+                "Pedro",
+                "623456789",
                 "ID1234",
                 "2024/11/02-10:00:10",
                 "2023/11/02-10:00:10",
                 "2024/11/02-10:00:10",
                 11.0,
-                10.0,
-                10.0,
+                5.0,
+                5.0,
                 true,
-                10.0,
+                5.0,
                 "amount:2,ref:REF001,price:10.0,discount:5.0;amount:1,ref:REF002,price:20.0,discount:0.0");
             System.out.println(order.getCompleteOrderDetails());
             

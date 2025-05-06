@@ -152,7 +152,7 @@ public class CheckTest {
 
     @Test
     void testIsValidDateEmptyString() {
-        assertEquals(-1, Check.isValidDate("")); // Cadena vacía no es válida
+        assertEquals(-2, Check.isValidDate("")); // Cadena vacía no es válida
     }
 
     @Test
@@ -219,7 +219,7 @@ public class CheckTest {
 
     @Test
     void testIsValidDateCompleteEmptyString() {
-        assertEquals(-1, Check.isValidDateComplete("")); // Cadena vacía no es válida
+        assertEquals(-14, Check.isValidDateComplete("")); // Cadena vacía no es válida
     }
 
     @Test

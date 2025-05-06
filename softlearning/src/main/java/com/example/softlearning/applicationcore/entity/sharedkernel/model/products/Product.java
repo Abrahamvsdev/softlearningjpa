@@ -9,7 +9,6 @@ public abstract class Product implements Marketable {
     protected String ident;
     protected double price;
 
-    //estos son de marketable
     protected boolean delayPay;
     protected double discount;
     protected String type;

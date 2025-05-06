@@ -13,7 +13,7 @@ public class DimensionsTest {
     // Valores válidos por defecto
     private static final double validWeight = 5.0;
     private static final double validHeight = 10.0;
-    private static final double validWidth = 15.0;
+    private static final double validWidth = 10.0;
     private static final boolean validFragile = true;
     private static final double validLength = 20.0;
 
@@ -45,7 +45,7 @@ public class DimensionsTest {
             fail("Debería fallar por peso negativo");
         } catch (BuildException e) {
             assertEquals(
-                    "Not possible to create the dimensions: \nHas introducido un numero negativo\n",
+                    "Not possible to create the dimensions: \nBad weight: El número es más pequeño de lo esperado\n",
                     e.getMessage());
         }
     }
@@ -58,7 +58,7 @@ public class DimensionsTest {
             fail("Debería fallar por altura negativa");
         } catch (BuildException e) {
             assertEquals(
-                    "Not possible to create the dimensions: \nHas introducido un numero negativo\n",
+                    "Not possible to create the dimensions: \nBad height: El número es más pequeño de lo esperado\n",
                     e.getMessage());
         }
     }
@@ -71,7 +71,7 @@ public class DimensionsTest {
             fail("Debería fallar por ancho negativo");
         } catch (BuildException e) {
             assertEquals(
-                    "Not possible to create the dimensions: \nHas introducido un numero negativo\n",
+                    "Not possible to create the dimensions: \nBad width: El número es más pequeño de lo esperado\n",
                     e.getMessage());
         }
     }
@@ -84,7 +84,7 @@ public class DimensionsTest {
             fail("Debería fallar por longitud negativa");
         } catch (BuildException e) {
             assertEquals(
-                    "Not possible to create the dimensions: \nHas introducido un numero negativo\n",
+                    "Not possible to create the dimensions: \nBad length: El número es más pequeño de lo esperado\n",
                     e.getMessage());
         }
     }
@@ -97,10 +97,10 @@ public class DimensionsTest {
             fail("Debería fallar por múltiples errores");
         } catch (BuildException e) {
             String expectedMessage = "Not possible to create the dimensions: \n"
-                    + "Has introducido un numero negativo\n"
-                    + "Has introducido un numero negativo\n"
-                    + "Has introducido un numero negativo\n"
-                    + "Has introducido un numero negativo\n";
+                    + "Bad weight: El número es más pequeño de lo esperado\n"
+                    + "Bad height: El número es más pequeño de lo esperado\n"
+                    + "Bad width: El número es más pequeño de lo esperado\n"
+                    + "Bad length: El número es más pequeño de lo esperado\n";
             assertEquals(expectedMessage, e.getMessage());
         }
     }
@@ -142,10 +142,10 @@ public class DimensionsTest {
     public void testGetDimensionstoString() {
         String expected = "Weight: 5.0 kg\n"
                 + "Height: 10.0 cm\n"
-                + "Width: 15.0 cm\n"
+                + "Width: 10.0 cm\n"
                 + "Fragile: true\n"
                 + "Length: 20.0 cm\n"
-                + "Volume: 3000.0 cubic cm";
+                + "Volume: 2000.0 cubic cm";
         assertEquals(expected, validDimensions.getDimensionstoString());
     }
 
@@ -155,17 +155,17 @@ public class DimensionsTest {
 
     @Test
     public void testSetWeight() {
-        assertEquals(0, validDimensions.setWeight(7.5));
+        assertEquals(0, validDimensions.setWeight(5.0));
     }
 
     @Test
     public void testSetWeightZero() {
-        assertEquals(0, validDimensions.setWeight(0));
+        assertEquals(-23, validDimensions.setWeight(0));
     }
 
     @Test
     public void testSetWeightNegative() {
-        assertEquals(-6, validDimensions.setWeight(-5));
+        assertEquals(-23, validDimensions.setWeight(-5));
     }
 
     /* SET HEIGHT */
@@ -177,12 +177,12 @@ public class DimensionsTest {
 
     @Test
     public void testSetHeightZero() {
-        assertEquals(0, validDimensions.setHeight(0));
+        assertEquals(-23, validDimensions.setHeight(0));
     }
 
     @Test
     public void testSetHeightNegative() {
-        assertEquals(-6, validDimensions.setHeight(-5.5));
+        assertEquals(-23, validDimensions.setHeight(-5.5));
     }
 
     /* SET WIDTH */
@@ -194,12 +194,12 @@ public class DimensionsTest {
 
     @Test
     public void testSetWidthZero() {
-        assertEquals(0, validDimensions.setWidth(0));
+        assertEquals(-23, validDimensions.setWidth(0));
     }
 
     @Test
     public void testSetWidthNegative() {
-        assertEquals(-6, validDimensions.setWidth(-5.5));
+        assertEquals(-23, validDimensions.setWidth(-5.5));
     }
 
     /* SET FRAGILE */
@@ -223,11 +223,11 @@ public class DimensionsTest {
 
     @Test
     public void testSetLengthZero() {
-        assertEquals(0, validDimensions.setLength(0));
+        assertEquals(-23, validDimensions.setLength(0));
     }
 
     @Test
     public void testSetLengthNegative() {
-        assertEquals(-6, validDimensions.setLength(-5.5));
+        assertEquals(-23, validDimensions.setLength(-5.5));
     }
 }

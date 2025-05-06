@@ -82,7 +82,7 @@ public class PersonObjectTest {
             p.person(validName, validSurname, validEmail, "", validDni, validNumber, validAntiquity);
             fail("Debería fallar por dirección vacía");
         } catch (Exception e) {
-            assertEquals("No es posible crear al tipo: \nBad address: No puede ser null\n", e.getMessage());
+            assertEquals("No es posible crear al tipo: \nBad address: No puede estar vacío\n", e.getMessage());
         }
     }
 
@@ -115,7 +115,7 @@ public class PersonObjectTest {
             p.person(validName, validSurname, validEmail, validAddress, validDni, validNumber, -5);
             fail("Debería fallar por antigüedad negativa");
         } catch (Exception e) {
-            assertEquals("No es posible crear al tipo: \nBad antiquity: Has introducido un número negativo\n", e.getMessage());
+            assertEquals("No es posible crear al tipo: \nBad antiquity: El número es más pequeño de lo esperado\n", e.getMessage());
         }
     }
 
@@ -127,13 +127,13 @@ public class PersonObjectTest {
             fail("Debería fallar por múltiples errores");
         } catch (Exception e) {
             String expected = "No es posible crear al tipo: \n" +
-                "Bad name: No puede ser null\n" +
+                "Bad name: No puede estar vacío\n" +
                 "Bad surname: Has introducido pocos caracteres\n" +
                 "Bad email: Formato de email incorrecto\n" +
-                "Bad address: No puede ser null\n" +
+                "Bad address: No puede estar vacío\n" +
                 "Bad dni: DNI no válido\n" +
                 "Bad number: Has introducido pocos caracteres\n" +
-                "Bad antiquity: Has introducido un número negativo\n";
+                "Bad antiquity: El número es más pequeño de lo esperado\n";
             assertEquals(expected, e.getMessage());
         }
     }
@@ -153,7 +153,7 @@ public class PersonObjectTest {
 
     @Test
     public void testSetNameLong() {
-        assertEquals(-7, validPerson.setName("SDGGSDGDSGSDGSGESG"));
+        assertEquals(-7, validPerson.setName("nombredemasiadolargounmontondelargoso"));
     }
 
     @Test
@@ -163,12 +163,12 @@ public class PersonObjectTest {
 
     @Test
     public void testSetNameEmpty() {
-        assertEquals(-1, validPerson.setName(""));
+        assertEquals(-2, validPerson.setName(""));
     }
 
     @Test
     public void testSetNameSpaceString() {
-        assertEquals(-1, validPerson.setName("   "));
+        assertEquals(-2, validPerson.setName("   "));
     }
 
     /* SET SURNAME */
@@ -186,7 +186,7 @@ public class PersonObjectTest {
 
     @Test
     public void testSetSurnameLong() {
-        assertEquals(-7, validPerson.setSurname("SDGEDSRGERSGERGSSG"));
+        assertEquals(-7, validPerson.setSurname("apellidodemasiadolargounmontondelargoso"));
     }
 
     @Test
@@ -196,12 +196,12 @@ public class PersonObjectTest {
 
     @Test
     public void testSetSurnameEmpty() {
-        assertEquals(-1, validPerson.setSurname(""));
+        assertEquals(-2, validPerson.setSurname(""));
     }
 
     @Test
     public void testSetSurnameSpaceString() {
-        assertEquals(-1, validPerson.setSurname("   "));
+        assertEquals(-2, validPerson.setSurname("   "));
     }
 
     /* SET EMAIL */
@@ -238,12 +238,12 @@ public class PersonObjectTest {
 
     @Test
     public void testSetEmailEmpty() {
-        assertEquals(-1, validPerson.setEmail(""));
+        assertEquals(-2, validPerson.setEmail(""));
     }
 
     @Test
     public void testSetEmailSpace() {
-        assertEquals(-1, validPerson.setEmail("    "));
+        assertEquals(-2, validPerson.setEmail("    "));
     }
 
     /* SET ADDRESS */
@@ -260,7 +260,7 @@ public class PersonObjectTest {
 
     @Test
     public void testSetAddressLong() {
-        assertEquals(-7, validPerson.setAddress("SDGEDSRGERSGERGSSG"));
+        assertEquals(-7, validPerson.setAddress("direccióndemasiadolargaunmontondelargosa"));
     }
 
     @Test
@@ -270,12 +270,12 @@ public class PersonObjectTest {
 
     @Test
     public void testSetAddressEmpty() {
-        assertEquals(-1, validPerson.setAddress(""));
+        assertEquals(-2, validPerson.setAddress(""));
     }
 
     @Test
     public void testSetAddressSpaceString() {
-        assertEquals(-1, validPerson.setAddress("   "));
+        assertEquals(-2, validPerson.setAddress("   "));
     }
 
     /* SET DNI */
@@ -317,12 +317,12 @@ public class PersonObjectTest {
 
     @Test
     public void testSetDniEmpty() {
-        assertEquals(-1, validPerson.setDni(""));
+        assertEquals(-2, validPerson.setDni(""));
     }
 
     @Test
     public void testSetDniSpaceString() {
-        assertEquals(-1, validPerson.setDni("   "));
+        assertEquals(-2, validPerson.setDni("   "));
     }
     /* SET NUMBER */
 
@@ -348,12 +348,12 @@ public class PersonObjectTest {
 
     @Test
     public void testSetNumberEmpty() {
-        assertEquals(-1, validPerson.setNumber(""));
+        assertEquals(-2, validPerson.setNumber(""));
     }
 
     @Test
     public void testSetNumberSpaceString() {
-        assertEquals(-1, validPerson.setNumber("   "));
+        assertEquals(-2, validPerson.setNumber("   "));
     }
 
     /* SET ANTIQUITY */
@@ -370,7 +370,7 @@ public class PersonObjectTest {
 
     @Test
     public void testSetAntiquityNegative() {
-        assertEquals(-6, validPerson.setAntiquity(-5));
+        assertEquals(-23, validPerson.setAntiquity(-5));
     }
 
     // ==================== TESTS DE GETTERS ====================

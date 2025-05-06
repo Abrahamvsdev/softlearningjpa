@@ -100,7 +100,7 @@ public abstract class Person {
     }
 
     public int setAddress(String address) {
-        int errorAddress = Check.checkLength(address, 5, 50);
+        int errorAddress = Check.checkLength(address, 5, 20);
         if (errorAddress == 0) {
             this.address = address;
         }
