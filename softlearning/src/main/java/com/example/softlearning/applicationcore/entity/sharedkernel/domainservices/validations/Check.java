@@ -125,8 +125,8 @@ public class Check {
         if (e != 0) {
             if (e == -24) {
                 return -20; // -20: Descuento mayor al 50%
-
-                        }return e; // -23: menor que 0
+            }
+            return e; // -23: menor que 0
         }
         return 0; // 0: Descuento válido
     }
@@ -186,13 +186,16 @@ public class Check {
         if (Check.isNull(n) != 0) {
             return -1; // -1: null
 
-                }if (n.trim().length() == 0) {
+        }
+        if (n.trim().length() == 0) {
             return -2; // -2: vacío
 
-                }if (!n.matches("^[67]\\d{8}$")) {
+        }
+        if (!n.matches("^[67]\\d{8}$")) {
             return -17; // -17: No es un móvil válido español
 
-                }return 0; // 0: Móvil válido
+        }
+        return 0; // 0: Móvil válido
     }
 
     public static String getErrorMessage(int e) {

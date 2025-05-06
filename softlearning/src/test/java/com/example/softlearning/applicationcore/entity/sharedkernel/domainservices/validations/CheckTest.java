@@ -26,6 +26,27 @@ public class CheckTest {
         assertEquals(-1, Check.isNull(null));
     }
 
+    /* TEST IS EMPTY */
+    @Test
+    void testIsEmptyNotEmpty() {
+        assertEquals(0, Check.isEmpty("solomillo"));
+    }
+
+    @Test
+    void testIsEmpty() {
+        assertEquals(-2, Check.isEmpty(""));
+    }
+
+    @Test
+    void testIsEmptySpace() {
+        assertEquals(-2, Check.isEmpty("  "));
+    }
+
+    @Test
+    void testIsEmptyNull() {
+        assertEquals(-1, Check.isEmpty(null));
+    }
+
     /* TEST CHECK EMAIL */
     @Test
     void testCheckEmail() {
