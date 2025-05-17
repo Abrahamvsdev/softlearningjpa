@@ -1,4 +1,4 @@
-package com.core.entities.client.clientTestUnit;
+package com.core.entities.client;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

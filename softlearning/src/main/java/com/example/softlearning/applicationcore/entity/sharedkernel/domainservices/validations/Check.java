@@ -10,7 +10,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 public class Check {
-
+    //*Si es null retorna -1 */
     public static int isNull(String s) {
         if (s == null) {
             return -1; // -1: El valor es null

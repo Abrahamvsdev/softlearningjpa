@@ -1,3 +1,4 @@
+package com.example;
 import com.example.softlearning.applicationcore.entity.order.dtos.JapaneseOrderDTO;
 import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.Serializer;
 import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.Serializers;

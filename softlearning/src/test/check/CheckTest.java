@@ -1,7 +1,9 @@
-package com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations;
+package com.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+
+import com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.Check;
 
 public class CheckTest {
 
