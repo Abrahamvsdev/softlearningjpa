@@ -75,7 +75,6 @@ public class Order extends Operation {
             String receiverPerson,
             String phoneContact,
             String idClient,
-
             String paymentDate,
             String deliveryDate,
             String finishDate,
@@ -196,7 +195,6 @@ public class Order extends Operation {
         return this.status;
     }
 
-
     public int getNumDetails() {
         return this.shopCart.size();
     }
@@ -274,7 +272,6 @@ public class Order extends Operation {
             // ejemploString packageDetails = "h:202.20,w:202.20,W:202.20,f:true,d:202.20";
             String[] details = oP.split(",");
 
-            
             // el getinstace tiene que crear un order package
             for (String detail : details) {
                 String[] keyValue = detail.split(":");
@@ -294,7 +291,7 @@ public class Order extends Operation {
                         throw new BuildException("Parametro desconocido: " + keyValue[0]);
                     }
                 }
-                
+
                 try {
                     this.orderPackage = Dimensions.getInstanceDimensions(weight, height, width, fragile, length);
                     this.status = OrderStatus.FORTHCOMMING;

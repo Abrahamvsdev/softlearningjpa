@@ -239,7 +239,7 @@ public class Books extends Product implements Storable {
 
     @Override
     public boolean isFlexible() {
-        return false; // TODO Cambiar esto.
+        return false; 
     }
 
     @Override

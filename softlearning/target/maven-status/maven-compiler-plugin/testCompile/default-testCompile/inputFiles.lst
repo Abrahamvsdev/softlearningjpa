@@ -1,6 +1,8 @@
+C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entities\book\BooksTest.java
 C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entities\check\CheckTest.java
 C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entities\client\ClientTestJunit.java
 C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entities\dimensions\DimensionsTest.java
+C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entities\employee\EmployeeTest.java
 C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entities\functional\books\BooksTest.java
 C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entities\functional\client\ClientTest.java
 C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entities\functional\order\TestOrder.java
@@ -11,3 +13,4 @@ C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entit
 C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entities\functional\services\TestSerializerOrder.java
 C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entities\person\PersonObject.java
 C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entities\person\PersonObjectTest.java
+C:\Users\abran\Desktop\softlearningjpa\softlearning\src\test\java\com\core\entities\products\ProductTest.java

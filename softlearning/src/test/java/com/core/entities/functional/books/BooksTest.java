@@ -30,7 +30,6 @@ public class BooksTest {
             3.0,
             false,
             3.0
-             // TODO esto es el volumen, que lo estoy dejando así hardcodeado para pruebas
         );
         System.out.println(b.getDetails());
 
