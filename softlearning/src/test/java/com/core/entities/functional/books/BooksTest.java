@@ -1,4 +1,4 @@
-package com.core.entities.books;
+package com.core.entities.functional.books;
 
 import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
 import com.example.softlearning.applicationcore.entity.book.mappers.BooksMapper;

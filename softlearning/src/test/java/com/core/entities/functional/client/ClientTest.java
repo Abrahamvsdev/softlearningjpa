@@ -1,4 +1,4 @@
-package com.core.entities.client;
+package com.core.entities.functional.client;
 
 
 import com.example.softlearning.applicationcore.entity.client.dtos.ClientDTO;

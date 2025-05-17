@@ -1,4 +1,4 @@
-package com.core.entities.person;
+package 
 
 
 // Clase concreta para testing
@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+// Import the PersonObject class (adjust the package if needed)
 
 
 public class PersonObjectTest {

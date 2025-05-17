@@ -1,4 +1,4 @@
-package com.example;
+package com.core.entities.functional.services;
 import com.example.softlearning.applicationcore.entity.client.dtos.JapaneseClientDTO;
 import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.Serializer;
 import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.Serializers;
