@@ -11,7 +11,7 @@ public class OrderMapper {
 
     public static Order orderFromDTO(OrderDTO odto) throws BuildException, ServiceException {
 
-        Order order = Order.getInstance(
+       Order order = Order.getInstance(
             odto.getRef(),
             odto.getDescription(),
             odto.getInitDate(),
@@ -28,6 +28,7 @@ public class OrderMapper {
             odto.isFragile(),
             odto.getLength(),
             odto.getShopCart()
+            
             );
         return order;
     }

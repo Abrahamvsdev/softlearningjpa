@@ -29,7 +29,7 @@ public class TestOrderGrande {
                 5.0,
                 true,
                 5.0,
-                "amount:2,ref:REF001,price:10.0,discount:5.0;amount:1,ref:REF002,price:20.0,discount:0.0");
+                "amount:2,ref:REF001,price:10.0,discount:5;amount:1,ref:REF002,price:20.0,discount:0");
             System.out.println(order.getCompleteOrderDetails());
             
         } catch (BuildException | ServiceException e) {

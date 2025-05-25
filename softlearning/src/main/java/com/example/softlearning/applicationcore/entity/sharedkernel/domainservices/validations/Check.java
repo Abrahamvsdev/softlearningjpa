@@ -97,7 +97,7 @@ public class Check {
     }
 
     public static int isValidDateComplete(String date) {
-        int isEmpty = Check.isNull(date);
+        int isEmpty = Check.isEmpty(date);
         if (isEmpty != 0) {
             return isEmpty; // -1: null
         }
@@ -183,13 +183,9 @@ public class Check {
     }
 
     public static int checkMobilePhone(String n) {
-        if (Check.isNull(n) != 0) {
-            return -1; // -1: null
-
-        }
-        if (n.trim().length() == 0) {
-            return -2; // -2: vacío
-
+        int isEmpty = Check.isEmpty(n);
+        if (isEmpty != 0) {
+            return isEmpty; 
         }
         if (!n.matches("^[67]\\d{8}$")) {
             return -17; // -17: No es un móvil válido español
@@ -217,7 +213,7 @@ public class Check {
             case -7 ->
                 "Has introducido demasiados caracteres";
             case -8 ->
-                "Este es el menos 8";
+                "La fecha de fin no puede ser menor a la fecha de inicio";
             case -9 ->
                 "DNI no válido";
             case -10 ->
@@ -250,6 +246,8 @@ public class Check {
                 "El número es más pequeño de lo esperado";
             case -24 ->
                 "El número es más grande de lo esperado";
+            case -25 ->
+                "No puedes introducir fecha de fin sin fecha de inicio";
             default ->
                 "No reconocible";
         };

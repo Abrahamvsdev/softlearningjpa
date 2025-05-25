@@ -8,11 +8,10 @@ public class OrderDetails {
     protected int amount;
     protected String detailRef;
     protected double price;
-    protected double discount;
-    protected double subtotal;
+    protected int discount;
 
     //string ref, int amount, double price, double discount, asi los tiene jose
-    public static OrderDetails getInstance(int amount, String detailRef, double price, double discount) throws ServiceException {
+    public static OrderDetails getInstance(int amount, String detailRef, double price, int discount) throws ServiceException {
 
         OrderDetails od = new OrderDetails();
         StringBuilder errors = new StringBuilder();
@@ -38,14 +37,12 @@ public class OrderDetails {
             throw new ServiceException(errors.toString());
         }
 
-        od.subtotal = od.calculateSubtotal(); //preguntar jose si tiene sentido aqui o en el getter
         return od;
     }
 
-    // getters
+    // getters 
     public double calculateSubtotal() {
-        subtotal = (price - discount) * amount;
-        return subtotal;
+        return price * (1 - discount / 100.0) * amount; 
     }
 
     public int getAmount() {
@@ -65,12 +62,9 @@ public class OrderDetails {
         return discount;
     }
 
-    public double getSubtotal() {
-        return subtotal;
-    }
 
     // Setters
-    public int setAmount(int amount) {
+    protected  int setAmount(int amount) {
         int errorAmount = Check.range(amount, 1, 1000);
         if (errorAmount != 0) {
             return errorAmount;
@@ -79,7 +73,7 @@ public class OrderDetails {
         return 0;
     }
 
-    public int setDetailRef(String detailRef) {
+    protected int setDetailRef(String detailRef) {
         int errorDetailRef = Check.checkLength(detailRef, 1, 10);
         if (errorDetailRef != 0) {
             return errorDetailRef;
@@ -88,8 +82,8 @@ public class OrderDetails {
         return 0;
     }
 
-    public int setPrice(double price) {
-        int errorPrice = Check.range(price, 0, 100000);
+    protected int setPrice(double price) {
+        int errorPrice = Check.range(price, 1, 100000);
         if (errorPrice != 0) {
             return errorPrice;
         }
@@ -97,13 +91,10 @@ public class OrderDetails {
         return 0;
     }
 
-    public int setDiscount(double discount) {
+    protected int setDiscount(int discount) {
         int errorDiscount = Check.rangeDiscount(discount);
         if (errorDiscount != 0) {
             return errorDiscount;
-        }
-        if (discount >= price) {
-            return -20;
         }
         this.discount = discount;
         return 0;
@@ -111,11 +102,11 @@ public class OrderDetails {
 
     //agregar metodo toString
     public String getDetailstoString() {
-        return "amount:" + amount
-                + ", detailRef:" + detailRef
-                + ", price:" + price
-                + ", discount:" + discount
-                + ", subtotal:" + subtotal;
+        return "amount:" + this.amount
+                + ", detailRef:" + this.detailRef
+                + ", price:" + this.price
+                + ", discount:" + this.discount
+                + ", subtotal:" + this.calculateSubtotal();
     }
 
 }

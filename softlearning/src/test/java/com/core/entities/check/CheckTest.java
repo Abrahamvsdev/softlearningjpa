@@ -242,7 +242,7 @@ public class CheckTest {
 
     @Test
     void testIsValidDateCompleteEmptyString() {
-        assertEquals(-14, Check.isValidDateComplete("")); // Cadena vacía no es válida
+        assertEquals(-2, Check.isValidDateComplete("")); // Cadena vacía no es válida
     }
 
     @Test
@@ -518,6 +518,11 @@ public class CheckTest {
     }
 
     @Test
+    void testGetErrorMessageFinishBeforeInit() {
+        assertEquals("La fecha de fin no puede ser menor a la fecha de inicio", Check.getErrorMessage(-8));
+    }
+
+    @Test
     void testGetErrorMessageInvalidDNI() {
         assertEquals("DNI no válido", Check.getErrorMessage(-9));
     }
@@ -595,6 +600,11 @@ public class CheckTest {
     @Test
     void testGetErrorMessageNumberTooLarge() {
         assertEquals("El número es más grande de lo esperado", Check.getErrorMessage(-24));
+    }
+
+    @Test
+    void testGetErrorMessageBadDate() {
+        assertEquals("No puedes introducir fecha de fin sin fecha de inicio", Check.getErrorMessage(-25));
     }
 
     @Test

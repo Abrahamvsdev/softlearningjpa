@@ -23,19 +23,22 @@ public class TestOrder {
 
             order.getOrderDetails();
 
-            order.setDetail(1, "REF123", 10.00, 0.0);
+            order.setDetail(1, "REF123", 10.00, 0);
+  
             // Añadir un contacto de teléfono sin que sea un string(No bypass)
             order.setPhoneContact("655555555");
             order.setPhoneContact("644444444");
 
             /////////////////////////// AQUI ESTOY AÑADIENDO OBJETOS ----------------->
             // Añadir un detalle al carrito
-            order.setDetail(1, "REF124", 10.00, 0.0);
-            order.setDetail(1, "REF125", 10.00, 0.0);
+            order.setDetail(1, "REF124", 10.00, 0);
+            order.setDetail(1, "REF125", 10.00, 0);
             // Actualizar un detalle del carrito
             order.updateDetail("REF123", 3);
+
             // Eliminar un detalle del carrito
-            order.deleteDetail(0);
+           order.deleteDetail(0);
+           
             /////////////////////////// AQUI ESTOY AÑADIENDO OBJETOS <-----------------
             // Mostrar el detalle del carrito
             System.out.println(order.getOrderDetails());
@@ -46,7 +49,7 @@ public class TestOrder {
             System.out.println(order.getStatus());
 
             //el
-            order.setDetail(1, "REF127", 10.00, 0.0);
+            order.setDetail(1, "REF127", 10.00, 0);
             order.setPaymentDate("2023/11/02-09:00:10");
             System.out.println(order.getShopCart());
             System.out.println(order.getStatus());

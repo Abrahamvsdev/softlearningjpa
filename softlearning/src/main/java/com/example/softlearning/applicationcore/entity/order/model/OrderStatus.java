@@ -7,5 +7,4 @@ public enum OrderStatus {
     FORTHCOMMING, //PAQUETE PREPARADO
     DELIVERED,
     FINISHED
-
 }

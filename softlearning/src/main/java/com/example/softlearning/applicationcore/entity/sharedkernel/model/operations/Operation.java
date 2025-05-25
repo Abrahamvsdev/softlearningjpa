@@ -16,14 +16,9 @@ public abstract class Operation {
     protected Operation() {
     }
 
-    ;// Constructor vacio;
 
-    public void operation(
-            int reference,
-            String description,
-            String initDate,
-            String finishDate
-    ) throws BuildException {
+    public void operation(int reference, String description,String initDate) throws BuildException 
+    {
         StringBuilder errors = new StringBuilder();
         int errorCode;
 
@@ -34,22 +29,14 @@ public abstract class Operation {
         if ((errorCode = this.setInitDate(initDate)) != 0) {
             errors.append("Bad initDate: ").append(Check.getErrorMessage(errorCode)).append("\n");
         }
-        if (finishDate != null) {
-            if ((errorCode = this.setFinishDate(finishDate)) != 0) {
-                errors.append("Bad finishDate: ").append(Check.getErrorMessage(errorCode)).append("\n");
-            }
-        }
         if (errors.length() > 0) {
             throw new BuildException("No es posible crear la operación: \n" + errors.toString());
         }
     }
 
-    // getter
+    
     public String getInitDate() {
-        if (this.initDate != null) {
-            return this.initDate.format(formatter);
-        }
-        return "";
+        return this.initDate.format(formatter);
     }
 
     public String getFinishDate() {
@@ -66,28 +53,25 @@ public abstract class Operation {
     public int getRef() {
         return reference;
     }
-
-    // setter
+    
     public int setInitDate(String initDate) {
-        if (initDate != null) {
-            int errorCode = Check.isValidDateComplete(initDate);
-            if (errorCode == 0) {
-                this.initDate = LocalDateTime.parse(initDate, formatter);
-            }
-            return errorCode;
+        int errorCode = Check.isValidDateComplete(initDate);
+        if (errorCode == 0) {
+            this.initDate = LocalDateTime.parse(initDate, formatter);
         }
-        return -15;
+        return errorCode;
     }
 
-    public int setFinishDate(String finishDate) throws BuildException {
-        if (finishDate != null) {
-            int errorCode = Check.isValidDateComplete(finishDate);
-            if (errorCode == 0) {
-                this.finishDate = LocalDateTime.parse(finishDate, formatter);
+    public int setFinishDate(String finishDate) {
+        int errorCode = Check.isValidDateComplete(finishDate);
+        if (errorCode == 0) {
+            LocalDateTime parsedFinishDate = LocalDateTime.parse(finishDate, formatter);
+            if (this.initDate != null && parsedFinishDate.isBefore(this.initDate)) {
+                return -8; // La fecha final no puede ser anterior a la inicial
             }
-            return errorCode;
+            this.finishDate = parsedFinishDate;
         }
-        return -15;
+        return errorCode;
     }
 
     public int setDescription(String description) {
@@ -96,12 +80,13 @@ public abstract class Operation {
     }
 
     public int setRef(int ref) {
-        if (ref < 1000) {
-            return -15;
-        }
-        if (ref > 1000 && ref < 10000) {
-            this.reference = ref;
-        }
+        if (ref < 1000) 
+            return -15;  
+
+        if (ref > 10000) 
+            return -16;
+        
+        this.reference = ref;
         return 0;
     }
 
