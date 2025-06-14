@@ -1,0 +1,11 @@
+com\example\softlearning\SoftlearningApplication.class
+com\example\softlearning\applicationcore\entity\book\dtos\JapaneseBookDTO.class
+com\example\softlearning\applicationcore\entity\book\mappers\BooksMapper.class
+com\example\softlearning\ServletInitializer.class
+com\example\softlearning\applicationcore\entity\book\appservices\BookServices.class
+com\example\softlearning\applicationcore\entity\book\dtos\BooksDTO.class
+com\example\softlearning\applicationcore\entity\sharedkernel\model\exceptions\ServiceException.class
+com\example\softlearning\applicationcore\entity\book\appservices\BookServicesImpl.class
+com\example\softlearning\applicationcore\entity\book\dtos\EspanolBookDTO.class
+com\example\softlearning\applicationcore\entity\sharedkernel\appservices\serializers\Serializer.class
+com\example\softlearning\applicationcore\entity\book\persistence\BookRepository.class

@@ -1,3 +1,13 @@
+# Tecnologías utilizadas
+
+- **Java 17+**: Lenguaje principal del backend.
+- **Spring Boot 3+**: Framework para desarrollo rápido de aplicaciones Java.
+- **Spring Data JPA**: Abstracción para la persistencia y acceso a datos.
+- **Maven**: Gestión de dependencias y ciclo de vida del proyecto.
+- **MySQL**: Base de datos relacional utilizada en el proyecto.
+- **JUnit**: Pruebas unitarias y de integración.
+- **REST**: Exposición de servicios web en formato JSON y XML.
+
 # 🌱 Spring JPA - Gestión de Persistencia
 
 Este proyecto demuestra el uso de **Spring JPA** para gestionar la persistencia de datos con una arquitectura limpia y modular.
@@ -6,54 +16,90 @@ Este proyecto demuestra el uso de **Spring JPA** para gestionar la persistencia 
 
 ## 📌 Características Principales
 
-- [Características Principales](#-características-principales)
-- [Estructura del Proyecto](#-estructura-del-proyecto)
-- [Endpoints Principales](#-endpoints-principales)
-  - [Añadir un Libro](#-añadir-un-libro)
-  - [Borrar un Libro](#-borrar-un-libro)
-  - [Obtener un Libro](#-actualizar-un-libro)
-  - [Actualizar un Libro](#-actualizar-un-libro)
-- [Requisitos Previos](#-requisitos-previos)
-- [Instalación y Ejecución](#-instalación-y-ejecución)
-- [Contacto](#-contacto)
-
 - ✅ **Arquitectura modular** con separación por entidades y capas.
 - ✅ **Conexión sencilla** a MySQL mediante `application.properties`.
 - ✅ **Consultas eficientes**: nativas, personalizadas y de modificación.
 - ✅ **Mapeo flexible** entre entidades Java y tablas de la base de datos.
 - ✅ Ejemplos **SQL en `/resources/static`** para facilitar la creación de tablas.
 - ✅ **Soporte para JSON y XML** en los servicios REST.
+- ✅ **.gitignore** actualizado para evitar archivos generados y temporales en el repositorio.
 
 ---
 
 ## 📂 Estructura del Proyecto
 
 ```
-example/
-└── softlearning/
-    ├── applicationcore/
-    │   ├── entity/
-    │   │   ├── book/
-    │   │   │   ├── appservices/
-    │   │   │   ├── dtos/
-    │   │   │   ├── mappers/
-    │   │   │   ├── model/
-    │   │   │   └── persistence/
-    │   │   ├── client/
-    │   │   ├── employee/
-    │   │   ├── order/
-    │   │   └── sharedkernel/
-    │   │       ├── appservices/serializers/
-    │   │       ├── domainservices/validations/
-    │   │       ├── marketable/
-    │   │       └── model/
-    │   │           ├── dimensions/
-    │   │           ├── exceptions/
-    │   │           ├── operations/
-    │   │           ├── products/
-    │   │           └── stakeholders/
-    ├── infrastruture/persistence/jpa/
-    └── presentation/api/rest/
+softlearningjpa/
+├── .gitignore
+├── README.md
+├── softlearning/
+│   ├── HELP.md
+│   ├── mvnw / mvnw.cmd
+│   ├── pom.xml
+│   ├── .mvn/
+│   │   └── wrapper/
+│   │       ├── maven-wrapper.jar
+│   │       ├── maven-wrapper.properties
+│   │       └── MavenWrapperDownloader.java
+│   ├── src/
+│   │   ├── assets/
+│   │   │   └── EleccionDelTIpo.png
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   │   └── com/
+│   │   │   │       └── example/
+│   │   │   │           └── softlearning/
+│   │   │   │               ├── ServletInitializer.java
+│   │   │   │               ├── SoftlearningApplication.java
+│   │   │   │               ├── applicationcore/
+│   │   │   │               │   └── entity/
+│   │   │   │               │       ├── book/
+│   │   │   │               │       │   ├── appservices/
+│   │   │   │               │       │   ├── dtos/
+│   │   │   │               │       │   ├── mappers/
+│   │   │   │               │       │   ├── model/
+│   │   │   │               │       │   └── persistence/
+│   │   │   │               │       ├── client/
+│   │   │   │               │       ├── employee/
+│   │   │   │               │       ├── order/
+│   │   │   │               │       └── sharedkernel/
+│   │   │   │               │           ├── appservices/serializers/
+│   │   │   │               │           ├── domainservices/validations/
+│   │   │   │               │           ├── marketable/
+│   │   │   │               │           └── model/
+│   │   │   │               │               ├── dimensions/
+│   │   │   │               │               ├── exceptions/
+│   │   │   │               │               ├── operations/
+│   │   │   │               │               ├── products/
+│   │   │   │               │               └── stakeholders/
+│   │   │   │               ├── infrastruture/
+│   │   │   │               │   └── persistence/jpa/
+│   │   │   │               └── presentation/
+│   │   │   │                   └── api/rest/
+│   │   │   └── resources/
+│   │   │       ├── application.properties
+│   │   │       └── static/
+│   │   │           └── ddldml.sql
+│   │   └── test/
+│   │       └── java/
+│   │           └── com/
+│   │               └── core/
+│   │                   └── entities/
+│   │                       ├── book/
+│   │                       ├── check/
+│   │                       ├── client/
+│   │                       ├── dimensions/
+│   │                       ├── employee/
+│   │                       ├── functional/
+│   │                       │   ├── books/
+│   │                       │   ├── client/
+│   │                       │   ├── order/
+│   │                       │   └── services/
+│   │                       ├── operations/
+│   │                       ├── order/
+│   │                       ├── person/
+│   │                       └── products/
+│   └── target/ (ignorado por git)
 ```
 
 ---
@@ -116,21 +162,21 @@ example/
 
 ### 🗑️ Borrar un Libro
 - **Método**: `DELETE`
-- **URL**: `http://localhost:8080/softlearning/books/B003`
+- **URL**: `*.../softlearning/books/B003`
 
 ### 🔍 Obtener un Libro
 - **Método**: `GET`
-- **URL**: `http://localhost:8080/softlearning/books/B003`
+- **URL**: `.../softlearning/books/B003`
 - **Respuesta**: JSON con los detalles del libro.
 
 ### ✏️ Actualizar un Libro
 - **Método**: `PUT`
-- **URL**: `http://localhost:8080/softlearning/books/B003`
+- **URL**: `.../softlearning/books/B003`
 - **Ejemplo de Body:**
 
 ```json
 {
-  "ident": "B010",
+  "ident": "B001",
   "price": 30.50,
   "delayPay": true,
   "discount": 10.0,
