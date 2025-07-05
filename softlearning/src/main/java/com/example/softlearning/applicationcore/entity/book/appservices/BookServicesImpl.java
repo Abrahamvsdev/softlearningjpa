@@ -20,23 +20,9 @@ public class BookServicesImpl implements BookServices {
     private Serializer<BooksDTO> serializer;
 
 
-    // public Optional<BooksDTO> findByIdent(String ident);
-
-    // public List<BooksDTO> findByTitle(String title);
-
-    // public List<BooksDTO> findByPartialIdent(String title);
-
-    // public Integer countByPartialTitle(String title);
-
-    // public BooksDTO save(BooksDTO book);
-
-    // public void deleteByIdent(String ident);
-
-    // public List<BooksDTO> findAll();
-
     
     protected BooksDTO getDTO(String ident) { 
-        return bookRepository.findByIdent(ident).orElse(null); // El Optional está definido en el "BookRepository", que está instanciado arriba
+        return bookRepository.findByIdent(ident).orElse(null);
     }
 
 
@@ -132,15 +118,5 @@ public class BookServicesImpl implements BookServices {
             throw e;
         }
     }
-
-    // @Override
-    // public List<BooksDTO> findAll() throws ServiceException {
-    //     try {
-    //         return bookRepository.findAll();
-    //     } catch (Exception e) {
-    //         throw new ServiceException("Error obtaining the book list " + e.getMessage());
-    //     }
-    // }
-
     
 }

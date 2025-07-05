@@ -38,22 +38,6 @@ public class SerializersCatalog {
         // EspañolOrder
         catalog.put(Serializers.JSON_ESPA_ORDER,new JacksonSerializer<JapaneseBookDTO>());
         catalog.put(Serializers.XML_ESPA_ORDER,new JacksonXmlSerializer<JapaneseBookDTO>());
-
-        // JapaneseCourseDTO
-        // catalog.put(Serializers.JSON_COURSES,new JacksonSerializer<JapaneseCoursesDTO>());
-        // catalog.put(Serializers.XML_COURSES,new JacksonXmlSerializer<JapaneseCoursesDTO>());
-
-        // // EspañolCourseDTO
-        // catalog.put(Serializers.JSON_ESPA_COURSES, new JacksonSerializer<EspanolCoursesDTO>());
-        // catalog.put(Serializers.XML_ESPA_COURSES, new JacksonXmlSerializer<EspanolCoursesDTO>());
-
-        // // EspañolEmployeeDTO
-        // catalog.put(Serializers.JSON_EMPLOYEE,new JacksonSerializer<JapaneseEmployeeDTO>());
-        // catalog.put(Serializers.XML_EMPLOYEE, new JacksonXmlSerializer<JapaneseEmployeeDTO>());
-
-        // // EspñaolEmployeeDTO
-        // catalog.put(Serializers.JSON_ESPA_EMPLOYEE, new JacksonSerializer<EspanolaEmployeeDTO>());
-        // catalog.put(Serializers.XML_ESPA_EMPLOYEE, new JacksonXmlSerializer<EspanolEmployeeDTO>());
     }
     public static Serializer getInstance(Serializers type){
         if(catalog.isEmpty()){

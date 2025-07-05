@@ -1,7 +1,6 @@
 package com.example.softlearning.applicationcore.entity.client.appservices;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import com.example.softlearning.applicationcore.entity.client.dtos.ClientDTO;
@@ -21,23 +20,9 @@ public class ClientServicesImpl implements ClientServices {
     private Serializer<ClientDTO> serializer;
 
 
-    // public Optional<ClientDTO> fiendById(String ident);
-
-    // public List<ClientDTO> findByTitle(String title);
-
-    // public List<ClientDTO> findByPartialIdent(String title);
-
-    // public Integer countByPartialTitle(String title);
-
-    // public ClientDTO save(ClientDTO book);
-
-    // public void deleteByIdent(String ident);
-
-    // public List<ClientDTO> findAll();
-
     
     protected ClientDTO getDTO(String dni) { 
-        return clientRepository.findByDni(dni).orElse(null); // El Optional está definido en el "ClientRepository", que está instanciado arriba
+        return clientRepository.findByDni(dni).orElse(null); 
     }
 
 
@@ -133,6 +118,5 @@ public class ClientServicesImpl implements ClientServices {
             throw e;
         }
     }
-
     
 }

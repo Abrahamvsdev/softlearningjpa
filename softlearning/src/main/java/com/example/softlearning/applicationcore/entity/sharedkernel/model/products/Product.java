@@ -79,7 +79,7 @@ public abstract class Product implements Marketable {
         if (errordelayPay == 0) {
             this.delayPay = delayPay;
         }
-        return errordelayPay; // Aquí no debería entrar nunca
+        return errordelayPay;
     }
 
     public int setDiscount(double discount) {

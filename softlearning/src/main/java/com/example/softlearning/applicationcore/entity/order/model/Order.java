@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-
 import com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations.Check;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.dimensions.Dimensions;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.BuildException;
@@ -31,7 +30,7 @@ public class Order extends Operation {
     }
 
     // ********* ORDER BUILDERS*********
-    // ESTE ES EL GET INSTANCE PEQUEÑO
+    
     public static Order getInstance(
             String receiverAddress,
             String receiverPerson,

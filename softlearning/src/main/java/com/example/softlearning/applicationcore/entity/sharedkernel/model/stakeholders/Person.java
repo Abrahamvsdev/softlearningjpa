@@ -13,8 +13,17 @@ public abstract class Person {
     protected String number; // de telefono
     protected int antiquity; //cuando nacio
     protected Person(){};
-
-    // Constructor el metodo tiene que ser void a la fuerza porque es abstracto y no retorna nada
+    /**
+     * Constructor para crear una persona con todos sus atributos.
+     * @param name Nombre de la persona.
+     * @param surname Apellido de la persona.
+     * @param email Correo electrónico de la persona.
+     * @param address Dirección de la persona.
+     * @param dni Documento Nacional de Identidad de la persona.
+     * @param number Número de teléfono de la persona.
+     * @param antiquity Antigüedad o fecha de nacimiento de la persona.
+     * @throws Exception Si alguno de los atributos no es válido.
+     */
     public void person(String name, String surname, String email, String address, String dni, String number, int antiquity) throws Exception {
         StringBuilder errors = new StringBuilder();
         int errorCode;

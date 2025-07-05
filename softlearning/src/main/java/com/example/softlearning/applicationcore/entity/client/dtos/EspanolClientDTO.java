@@ -129,11 +129,4 @@ public class EspanolClientDTO {
         this.antiquity = antiquity;
     }
 
-    // @Override
-    // public String toString() {
-    //     return "ClientDTO [address=" + address + ", antiquity=" + antiquity + ", dni=" + dni + ", email=" + email
-    //             + ", membershipLevel=" + membershipLevel + ", name=" + name + ", number=" + number + ", paymentMode="
-    //             + paymentMode + ", registrationDate=" + registrationDate + ", surname=" + surname + "]";
-    // }
-
 }

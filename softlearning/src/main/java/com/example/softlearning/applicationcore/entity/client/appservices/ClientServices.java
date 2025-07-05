@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
 
 @Service
-//Trato como ID el DNI, que es la clave primaria de la tabla
 public interface ClientServices {
     public String getByIdToJson (String dni) throws ServiceException;
     public String getByIdToXml (String dni) throws ServiceException;

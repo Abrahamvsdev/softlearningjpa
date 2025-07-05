@@ -20,9 +20,6 @@ public interface BookRepository {
     public BooksDTO save(BooksDTO book);
 
     public void deleteById(String id);
-
-    //public List<BooksDTO> findAll();
-
     
 	}
 

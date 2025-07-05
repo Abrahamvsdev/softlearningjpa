@@ -13,5 +13,4 @@ public interface BookServices {
     public String updateOneFromJson(String book) throws ServiceException;
     public String updateOneFromXml(String book) throws ServiceException;
     public void deleteByIdent(String ident) throws ServiceException;
-    //public String findAll() throws ServiceException;
 }

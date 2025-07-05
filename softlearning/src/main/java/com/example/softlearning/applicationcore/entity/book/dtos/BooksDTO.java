@@ -12,7 +12,7 @@ public class BooksDTO {
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ident")
     private String ident;
-    @Column(name = "title") //el type será el title, esto le dice al JPA que el campo title de la tabla books se corresponde con el atributo type de la clase BooksDTO, pero las funciones dentro del codigo deberán llamarse como las defino en el propio
+    @Column(name = "title") //el type será el title
     private String type;
     @Column(name = "paymethod") 
     private String payMethod; 

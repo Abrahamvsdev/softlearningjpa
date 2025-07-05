@@ -1,6 +1,5 @@
 package com.example.softlearning.presentation.api.rest;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.softlearning.applicationcore.entity.book.appservices.BookServices;
-import com.example.softlearning.applicationcore.entity.book.dtos.BooksDTO;
-import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.Serializers;
-import com.example.softlearning.applicationcore.entity.sharedkernel.appservices.serializers.SerializersCatalog;
 import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
 
 @RestController
@@ -92,21 +88,10 @@ public class RestBookController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable(value = "id") String id) {
         try {
-            bookServices.deleteByIdent(id);//Que no será ID, si no ident
+            bookServices.deleteByIdent(id);
             return ResponseEntity.ok().build();
         } catch (ServiceException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
     }
-
-//     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-// public ResponseEntity<String> findAll() { ///No se si es necesario el try catch, no busco algo en concreto, sino una lista, puede fallar si está vacia
-//     try {
-//         List<BooksDTO> books = bookServices.findAll();
-//         String json = SerializersCatalog.getInstance(Serializers.JSON_BOOK).serialize(books);
-//         return ResponseEntity.ok(json);
-//     } catch (ServiceException e) {
-//         return ResponseEntity.status(400).body(e.getMessage());
-//     }
-// }
 }

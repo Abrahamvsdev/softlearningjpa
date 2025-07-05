@@ -10,7 +10,6 @@ public class OrderDetails {
     protected double price;
     protected int discount;
 
-    //string ref, int amount, double price, double discount, asi los tiene jose
     public static OrderDetails getInstance(int amount, String detailRef, double price, int discount) throws ServiceException {
 
         OrderDetails od = new OrderDetails();

@@ -124,8 +124,4 @@ public class OrderDTO {
         return shopCart;
     }
 
-    // public double getTotalPrice() {
-    //     return totalPrice;
-    // }
-
 }
